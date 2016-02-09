@@ -1,8 +1,6 @@
 HubbleStack: Compliance for DevOps
 ==================================
 
-Contents:
-
 .. toctree::
    :maxdepth: 2
 

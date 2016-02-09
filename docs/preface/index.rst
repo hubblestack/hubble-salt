@@ -1,7 +1,5 @@
-HubbleStack: Compliance for DevOps
-==================================
-
-Contents:
+Preface
+=======
 
 .. toctree::
    :maxdepth: 1
