@@ -9,12 +9,12 @@ own!
 Current Modules
 ----------------
 
-CIS - CentOS 6/7
+ * CIS - CentOS 6/7
 
 
 Planned Modules
 ---------------
 
-Full CIS support (all distros)
-ISO27001
+ * Full CIS support (all distros)
+ * ISO27001
 

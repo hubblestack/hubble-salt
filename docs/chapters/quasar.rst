@@ -9,14 +9,14 @@ modules, or write your own.
 Current Modules
 ---------------
 
-existing returners
+ * existing returners
 
 
 Planned Modules
 ---------------
 
-logstash
-logrythm
-`Wikipedia (SIM/SEM)`_
+ * logstash
+ * logrythm
+ * `Wikipedia (SIM/SEM)`_
 
 .. _Wikipedia (SIM/SEM): https://en.wikipedia.org/wiki/Security_information_management

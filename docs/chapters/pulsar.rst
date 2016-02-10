@@ -8,11 +8,11 @@ possible to load in any set of existing FIM modules, or write your own!
 Current Modules
 ---------------
 
-checksum validation
+ * checksum validation
 
 
 Planned Modules
 ---------------
 
-system driven (auditd)
-beacon driven (inotify)
+ * system driven (auditd)
+ * beacon driven (inotify)

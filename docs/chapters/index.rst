@@ -4,7 +4,7 @@ Chapters
 .. toctree::
    :maxdepth: 1
 
-   components
+   overview
    hubble
    nova
    nebula

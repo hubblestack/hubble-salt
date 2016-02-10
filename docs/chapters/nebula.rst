@@ -8,10 +8,10 @@ to load in any set of existing modules, or write your own.
 Current Modules
 ---------------
 
-osquery
+ * osquery
 
 
 Planned Modules
 ---------------
 
-WQL
+ * WQL
