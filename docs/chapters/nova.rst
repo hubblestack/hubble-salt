@@ -17,4 +17,5 @@ Planned Modules
 
  * Full CIS support (all distros)
  * ISO27001
+ * ossec
 

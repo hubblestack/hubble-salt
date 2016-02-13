@@ -5,6 +5,7 @@ Chapters
    :maxdepth: 1
 
    overview
+   installation
    hubble
    nova
    nebula

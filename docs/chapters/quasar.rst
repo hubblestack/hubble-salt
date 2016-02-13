@@ -15,7 +15,10 @@ Current Modules
 Planned Modules
 ---------------
 
- * logstash
+ * Sumo Logic
+ * ELK stack
+ * fluentd
+ * greylog
  * logrythm
  * `Wikipedia (SIM/SEM)`_
 
