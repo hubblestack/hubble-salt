@@ -15,3 +15,19 @@ The hope here is that integration with SaltStack (upstream) will be as simple
 as dropping in a custom execution module. After that the loader will do the
 heavy lifting and modules can be developed separately.
 
+Under the Hood
+--------------
+
+The Hubble loader system scans for plugins in four different places, each under
+the top-level directory of `/_hubble/`.
+
+.. code-block:: shell
+
+    _hubble
+    ├── nebula
+    ├── nova
+    ├── pulsar
+    └── quasar
+
+This directory structure can be found at your `file_roots`, or it can be
+remotely requested by way of ext_pillar.
