@@ -19,15 +19,22 @@ Under the Hood
 --------------
 
 The Hubble loader system scans for plugins in four different places, each under
-the top-level directory of `/_hubble/`.
+the top-level `file_roots/_hubble`.
 
-.. code-block:: shell
+.. code-block:: diff
 
-    _hubble
-    ├── nebula
-    ├── nova
-    ├── pulsar
-    └── quasar
+     salt
+     └── _beacons
+     └── _modules
+     └── _grains
+     └── _renderers
+     └── _returners
+     └── _states
+     └── _output
+     └── _utils
+   + └── _hubble
+   +     ├── nebula
+   +     ├── nova
+   +     ├── pulsar
+   +     └── quasar
 
-This directory structure can be found at your `file_roots`, or it can be
-remotely requested by way of ext_pillar.
