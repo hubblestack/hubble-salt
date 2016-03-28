@@ -19,11 +19,6 @@ a little too interested in taking ownership of my systems than others. In any
 case I didn't like the solution and was frustrated to be stuck with it. It was
 during this phase that I set out to build a replacement.
 
-I mentioned my frustration with my fiance (who just happens to work for a
-different Security Team) and talked about what I could do about it. I credit
-her for her insight and inception of this project. Also for helping me realize
-how important a project like this could be.
-
 The Modules
 -----------
 
