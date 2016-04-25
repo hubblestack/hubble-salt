@@ -20,16 +20,16 @@ Installation
 **Step 1:**
 -----------
 
-Checkout the latest version of Hubble from GitHub:
+Checkout the latest version of Hubble Nova from GitHub:
 
 .. code-block:: shell
 
-    git clone https://github.com/HubbleStack/Hubble.git
+    git clone https://github.com/HubbleStack/Nova.git
 
 **Step 2:**
 -----------
 
-Copy `hubble.py` into your SaltStack installation at `salt/_modules/`.
+Copy `_modules/hubble.py` into your SaltStack installation at `salt/_modules/`.
 
 
 **Step 3:**
@@ -40,10 +40,4 @@ Sync the new module out to your minions:
 .. code-block:: shell
 
     salt \* saltutil.sync_modules
-
-
-
-
-.. toctree::
-   :maxdepth: 2
 
