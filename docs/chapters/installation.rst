@@ -2,8 +2,8 @@ Installation
 ============
 
 One of the primary design goals of Hubble is ease of installation. We've
-designed Hubble, from the start, to be compatible with SaltStack and make it as
-easy as possible to install. Full installation instructions detailed below.
+designed Hubble to be compatible with SaltStack and make it as easy as possible
+to install. Full installation instructions detailed below.
 
 (Note: HubbleStack plugins may require additional installation instructions.)
 
@@ -16,6 +16,10 @@ steps.
 
 Installation
 ============
+
+Hubble is made up of four different core components. Most of these are
+installed via Salt's package management system. The only component that needs
+to be manually installed is Nova, Hubble compliance auditing system.
 
 **Step 1:**
 -----------

@@ -9,10 +9,11 @@ Current Modules
 ---------------
 
  * checksum validation
- * beacon driven (inotify)
+ * inotify beacon
 
 
 Planned Modules
 ---------------
 
  * system driven (auditd)
+
