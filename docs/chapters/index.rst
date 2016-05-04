@@ -5,7 +5,7 @@ Chapters
    :maxdepth: 1
 
    installation
-   nova
-   nebula
-   pulsar
-   quasar
+   nova/index
+   nebula/index
+   pulsar/index
+   quasar/index
