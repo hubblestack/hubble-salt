@@ -1,5 +1,5 @@
-Getting started with HubbleStack
-================================
+Getting started with Hubble
+===========================
 
 Hubble is a modular, open-source security compliance framework built on top of
 SaltStack. The project provides on-demand profile-based auditing, real-time
