@@ -24,8 +24,8 @@ Each of the above components are modular, flexible, and easy to drop into
 place for any size infrastructure. Pre-built profiles, snapshot templates and
 report dashboards are included in the repository.
 
-Nova - Installation
--------------------
+Hubble - Installation
+---------------------
 
 1. Clone the HubbleStack Nova repository and copy `_modules/hubble.py` into
    `salt/_modules`.
@@ -43,8 +43,8 @@ Nova - Installation
 
     $ salt \* saltutil.sync_modules
 
-Nova - top.nova
----------------
+Hubble - Usage
+--------------
 
 Hubble provides pre-built profiles based on defined standards such as CIS, DISA STIG
 and more. These profiles simply need to be defined in a map-like "top file".
@@ -68,14 +68,13 @@ Below are a couple examples of these auditing maps:
 
 
 Hubble Functions
-================
+----------------
 
 Hubble's core module supports a couple of functions used in distributing,
 loading and running these audits. These three functions are: `sync`, `load`,
 and `audit`. Examples of running each is described below:
 
-hubble.sync
------------
+**hubble.sync**
 
 This function will ensure that your `hubblestack_nova` directory and contents
 are synced to the targeted minions.
@@ -84,8 +83,7 @@ are synced to the targeted minions.
 
     $ salt \* hubble.sync
 
-hubble.load
------------
+**hubble.load**
 
 This function will load the synced modules distributed using `hubble.sync`.
 This can be used to ensure the expected module is loaded and compatible with
@@ -95,8 +93,7 @@ the platform.
 
     $ salt \* hubble.load
 
-hubble.audit
-------------
+**hubble.audit**
 
 Finally you can run `hubble.audit` to audit your systems.
 

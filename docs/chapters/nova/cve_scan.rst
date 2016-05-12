@@ -43,3 +43,33 @@ should then be able to scan your system for vulnerabilities.
 
 In the future we plan to expand this report to include enough data to populate
 end-user dashboards for reporting, etc.
+
+To include a CVE scan in your Nova top file, simply add the name of the XML
+feed into a new Nova profile, like this:
+
+.. code-block:: yaml
+
+    cve_scan: salt://com.redhat.rhsa-RHEL7.xml
+
+.. note::
+
+    tl;dr - dash-delimited filenames only
+
+    You may be tempted to name the Nova profile the same name as the XML file.
+    Remember, a '.' is a directory-separator in Hubble, meaning you'd actually
+    be pointing to a file salt://com/redhat/rhsa-RHEL7/xml.
+
+Next add that new profile to the Nova top file:
+
+.. code-block:: yaml
+
+  nova:
+    'rhel-6-aws-*':
+      - rhsa-rhel-6
+      - cis-rhel-6-l1-scored
+    'rhel-7-aws-*':
+      - rhsa-rhel-7
+      - cis-rhel-7-l1-scored
+
+Finally, `hubble.audit` will read the `top.nova` and apply the listed checks to
+the listed hosts.

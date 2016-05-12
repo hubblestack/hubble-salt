@@ -2,7 +2,6 @@ Chapters
 ========
 
 .. toctree::
-   :maxdepth: 1
 
    installation
    nova/index

@@ -2,7 +2,6 @@ Modules
 =======
 
 .. toctree::
-   :maxdepth: 1
 
    cve_scan
    pkgng_audit
