@@ -12,7 +12,7 @@ support for this is limited to RHEL. CentOS planned immediately after).
 
 Red Hat publishes security advisories in the form of an XML file. These files
 follow a specific standard, which requires an additional dependency to use:
-openscap (http://open-scap.org). 
+openscap-scanner (http://open-scap.org).
 
 The XML files can be found here: https://www.redhat.com/security/data/oval/.
 
