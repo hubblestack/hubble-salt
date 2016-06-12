@@ -34,7 +34,7 @@ Hubble - Installation
 
     $ git clone https://github.com/HubbleStack/Nova.git hubblestack-nova.git
     $ cp hubblestack-nova.git/_modules /srv/salt/
-    $ cp hubblestack-nova.git/hubblestack_nova /srv/salt/
+    $ cp -r hubblestack-nova.git/hubblestack_nova /srv/salt/
 
 
 2. Sync the new module out to each Salt minion:
@@ -56,15 +56,15 @@ Below are a couple examples of these auditing maps:
     nova:
       '*':
         - cve_scan
-        - CIS-CentOS-7-L1-scored
+        - cis-centos-7-l1-scored
       'web*':
         - firewall
-        - CIS-CentOS-7-L2-scored
-        - CIS-CentOS-7-apache24-L1-scored
+        - cis-centos-7-l2-scored
+        - cis-centos-7-apache24-l1-scored
       'G@os_family:debian':
         - netstat
-        - CIS-Debian-7-L2-scored: 'CIS*'
-        - CIS-Debian-7-mysql57-L1-scored: 'CIS 2.1.2'
+        - cis-debian-7-l2-scored: 'CIS*'
+        - cis-debian-7-mysql57-l1-scored: 'CIS 2.1.2'
 
 
 Hubble Functions
@@ -95,7 +95,7 @@ the platform.
 
 **hubble.audit**
 
-Finally you can run `hubble.audit` to audit your systems.
+You can now run `hubble.audit` to audit your systems.
 
 .. code-block:: shell
 
@@ -105,3 +105,19 @@ Finally you can run `hubble.audit` to audit your systems.
 
     By default the hubble.audit function will sync and load the
     modules automatically.
+
+The `hubble.audit` command can either take a comma-separated list of
+arguments, or if no arguments are provided Hubble will default to
+loading the `top.nova` instructions.
+
+.. code-block:: shell
+
+    $ salt \* hubble.audit cve_scan,cis-centos-7-l1-scored
+
+It is also possible to directly call the `top.nova` map using the
+`hubble.top` command, eg:
+
+.. code-block:: shell
+
+    $ salt \* hubble.top
+
