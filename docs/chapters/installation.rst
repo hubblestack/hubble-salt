@@ -34,7 +34,7 @@ Hubble - Installation
 
     $ git clone https://github.com/HubbleStack/Nova.git hubblestack-nova.git
     $ cp hubblestack-nova.git/_modules /srv/salt/
-    $ cp -r hubblestack-nova.git/hubblestack_nova /srv/salt/
+    $ cp -a hubblestack-nova.git/hubblestack_nova /srv/salt/
 
 
 2. Sync the new module out to each Salt minion:
@@ -55,15 +55,12 @@ Below are a couple examples of these auditing maps:
 
     nova:
       '*':
-        - cve_scan
-        - cis-centos-7-l1-scored
+        - cve_scan_v2
       'web*':
-        - firewall
-        - cis-centos-7-l2-scored
-        - cis-centos-7-apache24-l1-scored
+        - firewall-https
+        - cis-centos-7-l1-scored
       'G@os_family:debian':
-        - netstat
-        - cis-debian-7-l2-scored: 'CIS*'
+        - cis-debian-7-l1-scored: 'CIS*'
         - cis-debian-7-mysql57-l1-scored: 'CIS 2.1.2'
 
 
