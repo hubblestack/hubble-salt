@@ -1,0 +1,12 @@
+[submodule "docs/nova"]
+	path = docs/nova
+	url = https://github.com/hubblestack/nova
+[submodule "docs/pulsar"]
+	path = docs/pulsar
+	url = https://github.com/hubblestack/pulsar
+[submodule "docs/nebula"]
+	path = docs/nebula
+	url = https://github.com/hubblestack/nebula
+[submodule "docs/quasar"]
+	path = docs/quasar
+	url = https://github.com/hubblestack/quasar
