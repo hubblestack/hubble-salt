@@ -1,19 +1,6 @@
-Pulsar
-======
+Pulsar Modules
+==============
 
-Pulsar is a collection of file-integrity monitoring tools aimed at detecting
-and reporting changes to system files. This component is modular, meaning it's
-possible to load in any set of existing FIM modules, or write your own!
+.. toctree::
 
-Current Modules
----------------
-
- * checksum validation
- * inotify beacon
-
-
-Planned Modules
----------------
-
- * system driven (auditd)
-
+   inotify

@@ -33,6 +33,15 @@ Nova - Installation
 
    nova/README
 
+Nova - Modules
+--------------
+
+.. toctree::
+   :maxdepth: 2
+
+   chapters/nova/cve-scan
+   chapters/nova/cve-scan-v2
+
 Pulsar - Installation
 ---------------------
 
@@ -40,6 +49,14 @@ Pulsar - Installation
    :maxdepth: 2
 
    pulsar/README
+
+Pulsar - Modules
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+   chapters/pulsar/inotify
 
 Nebula - Installation
 ---------------------
