@@ -25,46 +25,40 @@ overall auditing of your systems. These components are described here:
 Each of these components are modular, flexible, and easy to drop into place for
 any size infrastructure. 
 
-Nova - Installation
--------------------
-
-.. toctree::
-
-   nova/README
-
-Nova - Modules
---------------
+Nova
+----
 
 .. toctree::
    :maxdepth: 1
 
-   chapters/nova/cve-scan
-   chapters/nova/cve-scan-v2
+   chapters/nova/index
 
-Pulsar - Installation
----------------------
+----------
 
-.. toctree::
-
-   pulsar/README
-
-Pulsar - Modules
-----------------
+Pulsar
+------
 
 .. toctree::
+   :maxdepth: 1
 
-   chapters/pulsar/inotify
+   chapters/pulsar/index
 
-Nebula - Installation
----------------------
+----------
 
-.. toctree::
-
-   nebula/README
-
-Quasar - Installation
----------------------
+Nebula
+------
 
 .. toctree::
+   :maxdepth: 1
 
-   quasar/README
+   chapters/nebula/index
+
+----------
+
+Quasar
+------
+
+.. toctree::
+   :maxdepth: 1
+
+   chapters/quasar/index
