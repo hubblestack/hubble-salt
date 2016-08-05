@@ -29,3 +29,8 @@ overall auditing of your systems. These components are described here:
 
 Each of these components are modular, flexible, and easy to drop into place for
 any size infrastructure. 
+
+.. toctree::
+   :maxdepth: 1
+
+   components/index
