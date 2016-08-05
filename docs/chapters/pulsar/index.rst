@@ -1,11 +1,5 @@
 .. toctree::
 
-  ../../pulsar/README
-
-Modules
-=======
-
-.. toctree::
-   :maxdepth: 1
+   ../../pulsar/README
 
    inotify
