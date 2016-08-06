@@ -1,5 +1,5 @@
-CVE Scanning (vulners.com)
-==========================
+vulners.com
+===========
 
 :maintainer: HubbleStack / jaredhanson11
 

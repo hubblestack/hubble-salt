@@ -1,9 +1,9 @@
-==========
-Components
-==========
+===========
+HubbleStack
+===========
 
 Nova
-----
+====
 
 .. toctree::
    :maxdepth: 1
@@ -13,7 +13,7 @@ Nova
 ----------
 
 Nebula
-------
+======
 
 .. toctree::
    :maxdepth: 1
@@ -23,7 +23,7 @@ Nebula
 ----------
 
 Pulsar
-------
+======
 
 .. toctree::
    :maxdepth: 1
@@ -33,7 +33,7 @@ Pulsar
 ----------
 
 Quasar
-------
+======
 
 .. toctree::
    :maxdepth: 1

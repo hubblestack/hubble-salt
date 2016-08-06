@@ -1,5 +1,7 @@
-CVE Scanning (deprecated)
-=========================
+openscap
+========
+
+:maintainer: HubbleStack / cedwards
 
 Another major component of the Nova auditing system is the on-demand CVE
 scanning and reporting. This component automates the ingestion of security

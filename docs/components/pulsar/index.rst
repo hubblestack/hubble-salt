@@ -1,8 +1,20 @@
-HubbleStack Pulsar
-==================
+Pulsar
+------
 
 .. toctree::
 
    ../../pulsar/README
 
-   inotify
+Modules
+-------
+
+.. toctree::
+
+   modules/index
+
+Configuration
+-------------
+
+.. toctree::
+
+   configuration/index
