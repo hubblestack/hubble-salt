@@ -267,7 +267,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'HubbleStack', u'HubbleStack Documentation',
-     author, 'HubbleStack', 'One line description of project.',
+     author, 'HubbleStack', 'Security for DevOps.',
      'Miscellaneous'),
 ]
 
