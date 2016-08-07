@@ -2,6 +2,7 @@ Modules
 =======
 
 .. toctree::
+   :maxdepth: 1
 
    slack_pulsar
    splunk_nebula

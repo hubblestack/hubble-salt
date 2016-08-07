@@ -32,28 +32,24 @@ New to HubbleStack? Explore some of these topics:
 **Nova**
 
  * :doc:`Nova Modules<components/nova/modules/index>`
- * :doc:`Nova Profiles<components/nova/configuration/index>`
 
 ----------
 
 **Nebula**
 
  * :doc:`Nebula Modules<components/nebula/modules/index>`
- * :doc:`Nebula Configuration<components/nebula/configuration/index>`
 
 ----------
 
 **Pulsar**
 
  * :doc:`Pulsar Modules<components/pulsar/modules/index>`
- * :doc:`Pulsar Configuration<components/pulsar/configuration/index>`
 
 ----------
 
 **Quasar**
 
  * :doc:`Quasar Modules<components/quasar/modules/index>`
- * :doc:`Quasar Configuration<components/quasar/configuration/index>`
 
 ----------
 

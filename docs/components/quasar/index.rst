@@ -11,10 +11,3 @@ Modules
 .. toctree::
 
    modules/index
-
-Configuration
--------------
-
-.. toctree::
-
-   configuration/index
