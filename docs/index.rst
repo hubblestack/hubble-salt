@@ -61,11 +61,11 @@ New to HubbleStack? Explore some of these topics:
  * `Quasar Modules`_
  * `Quasar Configuration`_
 
-.. _`Nova Modules`: /components/nova/modules/index.html
-.. _`Nova Profiles`: /components/nova/configuration/index.html
+.. _`Nova Modules`: /en/latest/components/nova/modules/index.html
+.. _`Nova Profiles`: /en/latest/components/nova/configuration/index.html
 
-.. _`Nebula Modules`: /components/nebula/modules/index.html
-.. _`Nebula Configuration`: /components/nebula/configuration/index.html
+.. _`Nebula Modules`: /en/latest/components/nebula/modules/index.html
+.. _`Nebula Configuration`: /en/latest/components/nebula/configuration/index.html
 
 .. _`Pulsar Modules`: /en/latest/components/pulsar/modules/index.html
 .. _`Pulsar Configuration`: /en/latest/components/pulsar/configuration/index.html
