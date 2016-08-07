@@ -22,10 +22,10 @@ overall auditing of your systems. These components are described here:
  * Nebula_ - Nebula is Hubble's security snapshot utility.
  * Quasar_ - Quasar is Hubble's flexible reporting suite.
 
-.. _Nova:   /nova/README.html
-.. _Pulsar: /pulsar/README.html
-.. _Nebula: /nebula/README.html
-.. _Quasar: /quasar/README.html
+.. _Nova:   /en/latest/nova/README.html
+.. _Pulsar: /en/latest/pulsar/README.html
+.. _Nebula: /en/latest/nebula/README.html
+.. _Quasar: /en/latest/quasar/README.html
 
 
 Each of these components are modular, flexible, and easy to drop into place for
@@ -67,11 +67,11 @@ New to HubbleStack? Explore some of these topics:
 .. _`Nebula Modules`: /components/nebula/modules/index.html
 .. _`Nebula Configuration`: /components/nebula/configuration/index.html
 
-.. _`Pulsar Modules`: /components/pulsar/modules/index.html
-.. _`Pulsar Configuration`: /components/pulsar/configuration/index.html
+.. _`Pulsar Modules`: /en/latest/components/pulsar/modules/index.html
+.. _`Pulsar Configuration`: /en/latest/components/pulsar/configuration/index.html
 
-.. _`Quasar Modules`: /components/quasar/modules/index.html
-.. _`Quasar Configuration`: /components/quasar/configuration/index.html
+.. _`Quasar Modules`: /en/latest/components/quasar/modules/index.html
+.. _`Quasar Configuration`: /en/latest/components/quasar/configuration/index.html
 
 ----------
 
