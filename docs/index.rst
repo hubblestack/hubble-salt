@@ -35,14 +35,28 @@ any size infrastructure.
 
 New to HubbleStack? Explore some of these topics:
 
+**Nova**
+
  * `Nova Modules`_
  * `Nova Profiles`_
+
+----------
+
+**Nebula**
 
  * `Nebula Modules`_
  * `Nebula Configuration`_
 
+----------
+
+**Pulsar**
+
  * `Pulsar Modules`_
  * `Pulsar Configuration`_
+
+----------
+
+**Quasar**
 
  * `Quasar Modules`_
  * `Quasar Configuration`_
