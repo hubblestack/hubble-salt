@@ -1,14 +1,23 @@
 openscap
 ========
 
-:maintainer: HubbleStack / cedwards
+==========  ======================
+maintainer  HubbleStack / cedwards
+maturity    2016.7.0
+platform    All
+requires    SaltStack_, :doc:`HubbleStack Nova<../../../nova/README>`, openscap_
+source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova/modules/netstat.py
+==========  ======================
+
+.. _SaltStack: https://saltstack.com
+.. _openscap: https://www.open-scap.org/
 
 Another major component of the Nova auditing system is the on-demand CVE
 scanning and reporting. This component automates the ingestion of security
 advisory announcements, along with parsing, scanning and reporting. This
-feature was inspired by FreeBSD's VuXML integration with `pkg audit`.
+feature was inspired by FreeBSD's VuXML integration with ``pkg audit``.
 
-To run an on-demand CVE scan, ensure that the `oscap` execution module is
+To run an on-demand CVE scan, ensure that the ``oscap`` execution module is
 synced to your systems along with a security advisory XML feed. (Current
 support for this is limited to RHEL).
 

@@ -1,14 +1,20 @@
 openssl
 -------
 
-:maintainer: HubbleStack / avb76
-:maturity: 2016.7.0
-:platform: Linux
-:requires: SaltStack, python-OpenSSL
+==========  ======================
+maintainer  HubbleStack / avb76
+maturity    2016.7.0
+platform    All
+requires    SaltStack_, :doc:`HubbleStack Nova<../../../nova/README>`, python-OpenSSL
+source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova/modules/openssl.py
+==========  ======================
 
-:source: https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova/modules/openssl.py
+.. _SaltStack: https://saltstack.com
 
 HubbleStack Nova module for auditing SSL certificates.
+
+Configuration
+~~~~~~~~~~~~~
 
 Sample YAML data, with in line comments:
 

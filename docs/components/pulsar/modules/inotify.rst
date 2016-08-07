@@ -1,5 +1,5 @@
-Pulsar Beacon
-=============
+inotify
+=======
 
 Pulsar was written to leverage ``inotify`` to watch for file system events in
 real-time. This allows a system running the Pulsar Beacon to notify you on

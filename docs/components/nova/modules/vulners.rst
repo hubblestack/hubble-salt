@@ -1,7 +1,15 @@
 vulners.com
 ===========
 
-:maintainer: HubbleStack / jaredhanson11
+==========  ====================
+maintainer  HubbleStack / jaredhanson11
+maturity    2016.7.0
+platform    All
+requires    SaltStack_, :doc:`HubbleStack Nova<../../../nova/README>`
+source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova/modules/cve_scan_v2.py
+==========  ====================
+
+.. _SaltStack: https://saltstack.com
 
 Another major component of the Nova auditing system is the on-demand CVE
 scanning and reporting. This component automates the ingestion of security
@@ -17,12 +25,15 @@ will determine the amount of time the JSON data is cached on the minion.
 Example profiles for each of these are found at ``cve.scan-v2`` and
 ``cve.scan-v2-salt`` respectively.
 
+Configuration
+~~~~~~~~~~~~~
+
 The required JSON files can be downloaded using the ``utils/cve_store.py`` tool
 found in the Nova repository. These downloaded files can then be served using
 ``salt://``. 
 
 Usage
------
+~~~~~
 
 .. code-block:: shell
 
@@ -33,14 +44,14 @@ Usage
     salt \* hubble.audit cve.scan-v2-salt
 
 utils/cve_store.py
-------------------
+~~~~~~~~~~~~~~~~~~
 
 This python script will query the https://vulners.com API for the required CVE
 data related to the given operating system. Data is returned in a valid JSON
 format, which can be served via ``salt://``.
 
 Usage
------
+~~~~~
 
 The ``cve_store.py`` utility takes a space-delimited list of ``distro-version``:
 
@@ -55,7 +66,7 @@ Once you've downloaded the files you need you'll need to update or create new
 profiles that will use the downloaded data.
 
 Profiles
---------
+~~~~~~~~
 
 A ``scan-v2`` "profile" defines three things: 
 

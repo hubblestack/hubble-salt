@@ -1,5 +1,5 @@
-Modules
-=======
+Returner Modules
+----------------
 
 .. toctree::
    :maxdepth: 1

@@ -1,18 +1,24 @@
 stat
 ----
 
-:maintainer: HubbleStack / avb76
-:maturity: 2016.7.0
-:platform: Linux
-:requires: SaltStack
+==========  ====================
+maintainer  HubbleStack / avb76
+maturity    2016.7.0
+platform    All
+requires    SaltStack_, :doc:`HubbleStack Nova<../../../nova/README>`
+source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova/modules/stat.py
+==========  ====================
 
-:source: https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova/modules/stat.py
+.. _SaltStack: https://saltstack.com
 
 HubbleStack Nova module for using stat to verify ownership & permissions.
 
 This audit module requires yaml data to execute. It will search the local
 directory for any .yaml files, and if it finds a top-level 'stat' key, it will
 use that data.
+
+Configuration
+~~~~~~~~~~~~~
 
 Sample YAML data, with inline comments:
 

@@ -1,18 +1,24 @@
 sysctl
 ------
 
-:maintainer: HubbleStack / avb76
-:maturity: 2016.7.0
-:platform: Linux
-:requires: SaltStack
+==========  ====================
+maintainer  HubbleStack / avb76
+maturity    2016.7.0
+platform    All
+requires    SaltStack_, :doc:`HubbleStack Nova<../../../nova/README>`
+source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova/modules/sysctl.py
+==========  ====================
 
-:source: https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova/modules/sysctl.py
+.. _SaltStack: https://saltstack.com
 
 HubbleStack Nova module for using sysctl to verify sysctl parameter.
 
 This audit module requires yaml data to execute. It will search the local
 directory for any .yaml files, and if it finds a top-level 'sysctl' key, it
 will use that data.
+
+Configuration
+~~~~~~~~~~~~~
 
 Sample YAML data, with inline comments:
 

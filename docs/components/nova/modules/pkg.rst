@@ -1,12 +1,15 @@
 pkg
 ---
 
-:maintainer: HubbleStack / basepi
-:maturity: 2016.7.0
-:platform: All
-:requires: SaltStack
+==========  ======================
+maintainer  HubbleStack / basepi
+maturity    2016.7.0
+platform    All
+requires    SaltStack_, :doc:`HubbleStack Nova<../../../nova/README>`
+source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova/modules/pkg.py
+==========  ======================
 
-:source: https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova/modules/pkg.py
+.. _SaltStack: https://saltstack.com
 
 HubbleStack Nova module for auditing installed packages.
 
@@ -14,6 +17,8 @@ Supports both blacklisting and whitelisting pacakges. Blacklisted packages must
 not be installed. Whitelisted packages must be installed, with options for
 requiring a specific version or a minimum or maximum version.
 
+Configuration
+~~~~~~~~~~~~~
 
 Sample YAML data, with inline comments:
 

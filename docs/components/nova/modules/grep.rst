@@ -1,12 +1,15 @@
 grep
 ----
 
-:maintainer: HubbleStack / basepi
-:maturity: 2016.7.0
-:platform: All
-:requires: SaltStack
+==========  ====================
+maintainer  HubbleStack / basepi
+maturity    2016.7.0
+platform    All
+requires    SaltStack_, :doc:`HubbleStack Nova<../../../nova/README>`
+source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova/modules/grep.py
+==========  ====================
 
-:source: https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova/modules/grep.py
+.. _SaltStack: https://saltstack.com
 
 HubbleStack Nova plugin for using ``grep`` to verify settings in files.
 
@@ -14,8 +17,8 @@ Supports both blacklisting and whitelisting patterns. Blacklisted patterns must
 **not** be found in the specified file. Whitelisted patterns **must** be found in the
 specified file.
 
-This audit module requires a yaml profile to execute. An example of this
-module, with definitions, is included below:
+Configuration
+~~~~~~~~~~~~~
 
 Sample profile data, with inline comments:
 
@@ -51,8 +54,8 @@ Sample profile data, with inline comments:
 
 
 If ``match_on_file_missing`` is ommitted, success/failure will be determined
-entirely based on the grep command and other arguments. If it's set to ``True`` and
-the file is missing, then it will be considered a match (success for whitelist,
-failure for blacklist). If it's set to ``False`` and the file is missing, then it
-will be considered a non-match (success for blacklist, failure for whitelist).
-If the file exists, this setting is ignored.
+entirely based on the grep command and other arguments. If it's set to ``True``
+and the file is missing, then it will be considered a match (success for
+whitelist, failure for blacklist). If it's set to ``False`` and the file is
+missing, then it will be considered a non-match (success for blacklist, failure
+for whitelist).  If the file exists, this setting is ignored.

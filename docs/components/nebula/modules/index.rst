@@ -1,5 +1,5 @@
-Modules
-=======
+Query Modules
+-------------
 
 .. toctree::
 

@@ -1,5 +1,5 @@
-Modules
-=======
+FIM Modules
+-----------
 
 .. toctree::
    :maxdepth: 1

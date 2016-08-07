@@ -1,15 +1,21 @@
 command
 -------
 
-:maintainer: HubbleStack / basepi
-:maturity: 2016.7.0
-:platform: All
-:requires: SaltStack
+==========  ====================
+maintainer  HubbleStack / basepi
+maturity    2016.7.0
+platform    All
+requires    SaltStack_, :doc:`HubbleStack Nova<../../../nova/README>`
+source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova/modules/command.py
+==========  ====================
 
-:source: https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova/modules/command.py
+.. _SaltStack: https://saltstack.com
 
 Hubble Nova plugin for running arbitrary commands and checking the output of
-those commands
+those commands.
+
+Configuration
+~~~~~~~~~~~~~
 
 Sample YAML data, with inline comments:
 
