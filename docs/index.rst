@@ -17,16 +17,10 @@ Components
 Hubble is made up of four different components, each playing a role in the
 overall auditing of your systems. These components are described here:
 
- * Nova_ - Nova is Hubble's profile-based auditing engine.
- * Pulsar_ - Pulsar is Hubble's real-time event system.
- * Nebula_ - Nebula is Hubble's security snapshot utility.
- * Quasar_ - Quasar is Hubble's flexible reporting suite.
-
-.. _Nova:   /en/latest/nova/README.html
-.. _Pulsar: /en/latest/pulsar/README.html
-.. _Nebula: /en/latest/nebula/README.html
-.. _Quasar: /en/latest/quasar/README.html
-
+ * :doc:`Nova<nova/README>` - Nova is Hubble's profile-based auditing engine.
+ * :doc:`Pulsar<pulsar/README>` - Pulsar is Hubble's real-time event system.
+ * :doc:`Nebula<nebula/README>`- Nebula is Hubble's security snapshot utility.
+ * :doc:`Quasar<quasar/README>` - Quasar is Hubble's flexible reporting suite.
 
 Each of these components are modular, flexible, and easy to drop into place for
 any size infrastructure. 
@@ -37,41 +31,29 @@ New to HubbleStack? Explore some of these topics:
 
 **Nova**
 
- * `Nova Modules`_
- * `Nova Profiles`_
+ * :doc:`Nova Modules<components/nova/modules/index>`
+ * :doc:`Nova Profiles<components/nova/configuration/index>`
 
 ----------
 
 **Nebula**
 
- * `Nebula Modules`_
- * `Nebula Configuration`_
+ * :doc:`Nebula Modules<components/nebula/modules/index>`
+ * :doc:`Nebula Configuration<components/nebula/configuration/index>`
 
 ----------
 
 **Pulsar**
 
- * `Pulsar Modules`_
- * `Pulsar Configuration`_
+ * :doc:`Pulsar Modules<components/pulsar/modules/index>`
+ * :doc:`Pulsar Configuration<components/pulsar/configuration/index>`
 
 ----------
 
 **Quasar**
 
- * `Quasar Modules`_
- * `Quasar Configuration`_
-
-.. _`Nova Modules`: /en/latest/components/nova/modules/index.html
-.. _`Nova Profiles`: /en/latest/components/nova/configuration/index.html
-
-.. _`Nebula Modules`: /en/latest/components/nebula/modules/index.html
-.. _`Nebula Configuration`: /en/latest/components/nebula/configuration/index.html
-
-.. _`Pulsar Modules`: /en/latest/components/pulsar/modules/index.html
-.. _`Pulsar Configuration`: /en/latest/components/pulsar/configuration/index.html
-
-.. _`Quasar Modules`: /en/latest/components/quasar/modules/index.html
-.. _`Quasar Configuration`: /en/latest/components/quasar/configuration/index.html
+ * :doc:`Quasar Modules<components/quasar/modules/index>`
+ * :doc:`Quasar Configuration<components/quasar/configuration/index>`
 
 ----------
 

@@ -15,16 +15,12 @@ Sample YAML data, with inline comments:
 
 .. code-block:: yaml
 
-      # Unique ID for this set of audits
+    command:
       nodev:
         data:
-          # 'osfinger' grain, for multiplatform support
           'Red Hat Enterprise Linux Server-6':
-            # tag is required
-            tag: CIS-1.1.10
-            # `commands` is a list of commands with individual flags
-            commands:
-              # Command to be run
+            tag: CIS-1.1.10 # (required)
+            commands: # list of command stanzas with individual flags
               - 'grep "[[:space:]]/home[[:space:]]" /etc/fstab':
                   # Check the output for this pattern
                   # If match_output not provided, any output will be a match
