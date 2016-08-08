@@ -17,8 +17,8 @@ generate security snapshots of your systems. These snapshots are generally run
 on a schedule, with the data being gathered centrally using one of the
 :doc:`Quasar<../../../quasar/README>` returners.
 
-Configuration
-~~~~~~~~~~~~~
+Queries
+~~~~~~~
 
 This module requires pillar data to function. The default pillar key for
 this data is ``nebula_osquery``.  The queries themselves should be grouped
