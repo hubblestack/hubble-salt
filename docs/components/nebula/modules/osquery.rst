@@ -81,3 +81,28 @@ of sample schedules for use with the sample pillar data contained in this repo:
           - day
 
 .. note:: ``osqueryd`` does not need to be running, as we handle the scheduled queries via Salt's scheduler.
+
+Usage
+~~~~~
+
+Nebula query data is best tracked in a central logging or similar system.
+However, if you would like to run the queries manually you can call the ``nebula`` execution module.
+
+query_group
+  Group of queries to run
+
+verbose
+  Defaults to False. If set to True, more information (such as the query
+  which was run) will be included in the result.
+
+pillar_key
+  Defaults to 'nebula_osquery'. This is the key in pillar which will be
+  inspected for Nebula osquery data.
+
+**Examples:**
+
+.. code-block:: shell
+
+    salt '*' nebula.queries day
+    salt '*' nebula.queries hour [verbose=True]
+    salt '*' nebula.queries fifteen-min [pillar_key=sec_osqueries]
