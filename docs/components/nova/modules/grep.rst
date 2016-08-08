@@ -23,35 +23,34 @@ Configuration
 Sample profile data, with inline comments:
 
 .. code-block:: yaml
+   :linenos:
 
-    grep: # module definition
-      whitelist: # 'whitelist' or 'blacklist'
-        fstab_tmp_partition:  # unique ID
-          data: # required key
-            CentOS Linux-6:  # osfinger grain
-              - '/etc/fstab':  # full path to file
-                  tag: 'CIS-1.1.1'  # audit tag
-                  pattern: '/tmp'  # grep pattern
-                  match_output: 'nodev'  # string to check for in output of grep command (optional)
-                  match_output_regex: True  # whether to use regex when matching output (default: False)
-                  grep_args:  # extra args to grep
-                    - '-E'  # -E, --extended-regexp
-                    - '-i'  # -i, --ignore-case
-                    - '-B2' # -B num, --before-context=num
+
+    grep:                                      # module definition
+      whitelist:                               # 'whitelist' or 'blacklist'
+        fstab_tmp_partition:                   # unique ID
+          data:                                # required key
+            CentOS Linux-6:                    # osfinger grain
+              - '/etc/fstab':                  # full path to file
+                  tag: 'CIS-1.1.1'             # audit tag
+                  pattern: '/tmp'              # grep pattern
+                  match_output: 'nodev'        # string to check for in output of grep command (optional)
+                  match_output_regex: True     # whether to use regex when matching output (default: False)
+                  grep_args:                   # extra args to grep
+                    - '-E'                     # -E, --extended-regexp
+                    - '-i'                     # -i, --ignore-case
+                    - '-B2'                    # -B num, --before-context=num
                   match_on_file_missing: True  # See below
 
-            '*':  # wildcard, will be run if no direct osfinger match
-              - '/etc/fstab': # full path to file
-                  tag: 'CIS-1.1.1' # audit tag
-                  pattern: '/tmp' # grep pattern
+            '*':                               # wildcard, will be run if no direct osfinger match
+              - '/etc/fstab':                  # full path to file
+                  tag: 'CIS-1.1.1'             # audit tag
+                  pattern: '/tmp'              # grep pattern
 
           ## optional
           description: |
             The /tmp directory is intended to be world-writable, which presents a risk
             of resource exhaustion if it is not bound to a separate partition.
-          alert: False
-          trigger: state
-
 
 If ``match_on_file_missing`` is ommitted, success/failure will be determined
 entirely based on the grep command and other arguments. If it's set to ``True``

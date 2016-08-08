@@ -19,11 +19,13 @@ Configuration
 Sample data for the netstat whitelist:
 
 .. code-block:: yaml
+   :linenos:
 
-    netstat:
-        ssh:
-            address: '*:22'
-        another_identifier:
-            address:
-              - 127.0.0.1:80
-              - 0.0.0.0:80
+
+    netstat:                  # module definition
+        ssh:                  # unique id
+            address: '*:22'   # netstat output match
+        another_identifier:   # unique id
+            address:          # multiline output match
+              - 127.0.0.1:80  # multiline output match
+              - 0.0.0.0:80    # multiline output match

@@ -20,6 +20,8 @@ Configuration
 Sample YAML data, with inline comments:
 
 .. code-block:: yaml
+   :linenos:
+
 
     command:
       nodev:

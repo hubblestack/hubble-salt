@@ -14,7 +14,7 @@ source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova/mo
 Another major component of the Nova auditing system is the on-demand CVE
 scanning and reporting. This component automates the ingestion of security
 advisory announcements, and compares this data to the installed packages. This
-feature was inspired by FreeBSD's VuXML integration with `pkg audit`.
+feature was inspired by FreeBSD's VuXML integration with ``pkg audit``.
 
 This module, ``scan-v2``, uses a public vulnerability database at
 https://vulners.com. 
@@ -82,6 +82,8 @@ A ``scan-v2`` "profile" defines three things:
 The default profile, which queries https://vulners.com, looks like this:
 
 .. code-block:: yaml
+   :linenos:
+
 
     cve_scan_v2:
       ttl: 86400
@@ -99,6 +101,8 @@ The default profile, which queries https://vulners.com, looks like this:
 The alternate profile, which uses the ``salt://`` fileserver, looks like this:
 
 .. code-block:: yaml
+   :linenos:
+
 
     cve_scan_v2:
       ttl: 86400

@@ -13,37 +13,30 @@ source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova/mo
 
 Hubble Nova plugin for using iptables to verify firewall rules.
 
-This audit module requires yaml data to execute. Running hubble.audit will
-search the local directory for any .yaml files and it will pass all the data to
-this module.  If this module find a top-level 'firewall' key, it will use the
-data under that key.
-
 Configuration
 ~~~~~~~~~~~~~
 
-Sample YAML data used by firewall.py, with inline comments:
+Sample YAML data, with inline comments:
 
 .. code-block:: yaml
+   :linenos:
 
-    firewall:
-      whitelist: # whitelist or blacklist
-    
-        ssh: # unique id
-          data:
-            tag: 'FIREWALL-TCP-22'  # audit tag
-            table: 'filter' # iptables table to check   (REQUIRED)
-            chain: INPUT    # INPUT / OUTPUT / FORWARD  (REQUIRED)
-            rule:   #dict containing the elements for building the rule
-              proto: tcp
-              dport: 22
-              match: state
-              connstate: RELATED,ESTABLISHED
-              jump: ACCEPT
-            family: 'ipv4'  # iptables family   (REQUIRED)
+
+    firewall:                                    # module definition
+      whitelist:                                 # whitelist or blacklist
+        ssh:                                     # unique id
+          data:                                  # required key
+            tag: 'FIREWALL-TCP-22'               # audit tag
+            table: 'filter'                      # table to check (REQUIRED)
+            chain: INPUT                         # INPUT / OUTPUT / FORWARD (REQUIRED)
+            rule:                                # dict containing the elements for building the rule
+              proto: tcp                         # protocol (tcp/udp/icmp)
+              dport: 22                          # destination port
+              match: state                       # rule match
+              connstate: RELATED,ESTABLISHED     # connection state
+              jump: ACCEPT                       # 'jump' destination
+            family: 'ipv4'                       # iptables family (REQUIRED)
           description: 'ssh iptables rule check' # description of the check
-          # The rest of these attributes are optional, and currently not used
-          alert: email
-          trigger: state
 
 A few words about the auditing logic
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

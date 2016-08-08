@@ -19,14 +19,16 @@ Configuration
 Sample YAML data, with in line comments:
 
 .. code-block:: yaml
+   :linenos:
 
-    openssl:
-      google:
-        data:
-          tag: 'CERT-001'                   # required
-          endpoint: 'www.google.com'        # required only if file is not defined
-          file: null                        # required only if endpoint is not defined
-          port: 443                         # optional
+
+    openssl:                                # module definition
+      google:                               # unique ID
+        data:                               # required key
+          tag: 'CERT-001'                   # TAG
+          endpoint: 'www.google.com'        # https endpoint
+          file: False                       # PEM input file
+          port: 443                         # port (default: 443)
           not_after: 15                     # optional
           not_before: 2                     # optional
           fail_if_not_before: False         # optional
