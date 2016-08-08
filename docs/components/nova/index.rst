@@ -1,5 +1,5 @@
-Nova
-----
+Overview
+--------
 
 .. toctree::
    :maxdepth: 1

@@ -1,5 +1,5 @@
-Quasar
-------
+Overview
+--------
 
 .. toctree::
    :maxdepth: 1
