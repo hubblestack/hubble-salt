@@ -57,7 +57,7 @@ Have a look at the Nova module list, and learn how audit modules work.
 Nebula
 ~~~~~~
 
-.. seealso:: Nebula has a hard dependency on osquery. See install requirements here https://osquery.io/downloads/
+.. seealso:: Nebula has a hard dependency on ``osquery``. See install requirements here https://osquery.io/downloads/
 
 Nebula allows you to take snapshots of your systems by scheduling specific
 queries. These queries capture information such as:
