@@ -25,29 +25,95 @@ overall auditing of your systems. These components are described here:
 Each of these components are modular, flexible, and easy to drop into place for
 any size infrastructure. 
 
+While each of these components can be used standalone it is often required
+to combine each components with it's corresponding Quasar module. Quasar
+modules are what connects Nova, Nebula and Pulsar to external endpoints such as
+Splunk, Slack, etc.
+
 ----------
 
 New to HubbleStack? Explore some of these topics:
 
-**Nova**
+Nova
+~~~~
 
- * :doc:`Nova Modules<components/nova/modules/index>`
+Nova is the best place to get started with Hubble. Using pre-built security and
+compliance "profiles", Nova will give you a complete picture of your security
+stance.
+
+Check out the installation docs:
+
+ * :ref:`Package Installation <nova_installation_packages>` (stable)
+ * :ref:`Manual Installation <nova_installation_manual>` (develop)
+
+Have a look at the Nova module list, and learn how audit modules work.
+
+ * :doc:`Nova Modules<components/nova/modules/index>`.
+
+.. tip:: Once you have Nova installed, check out :doc:`Quasar<quasar/README>` next.
 
 ----------
 
-**Nebula**
+Nebula
+~~~~~~
 
- * :doc:`Nebula Modules<components/nebula/modules/index>`
+.. seealso:: Nebula has a hard dependency on osquery. See install requirements here https://osquery.io/downloads/
+
+Nebula allows you to take snapshots of your systems by scheduling specific
+queries. These queries capture information such as:
+
+ * running processes
+ * established outbound connections
+ * listening processes
+ * suid binaries
+ * crontab
+ * installed packages
+ * ...anything else you'd like to query
+
+Check out the installation docs:
+
+ * :ref:`Package Installation <nebula_installation_packages>` (stable)
+ * :ref:`Manual Installation <nebula_installation_manual>` (develop)
+
+Have a look at the Nebula modules:
+
+ * :doc:`Nebula Modules<components/nebula/modules/index>`.
+
+
+.. tip:: Once you have Nebula installed, checkout :doc:`Quasar<quasar/README>` next.
 
 ----------
 
-**Pulsar**
+Pulsar
+~~~~~~
+
+.. seealso:: Pulsar has a dependency on the Python ``pyinotify`` library. See: :ref:`Pulsar Required Packages <pulsar_installation_required_packages>`
+
+Pulsar watches for filesystem events as they happen and notify you in real-time
+regarding any changes.
+
+ * :ref:`Package Installation <pulsar_installation_packages>` (stable)
+ * :ref:`Manual Installation <pulsar_installation_manual>` (develop)
+
+You can also take a look at the Pulsar module list:
 
  * :doc:`Pulsar Modules<components/pulsar/modules/index>`
 
+.. tip:: Next step? Check out the :doc:`Quasar<quasar/README>` modules to collect Pulsar event data.
+
 ----------
 
-**Quasar**
+Quasar
+~~~~~~
+
+Quasar modules are integral in collecting and tracking your security data. In
+general you'll want to combine each HubbleStack component (Nova, Pulsar,
+Nebula) with it's corresponding Quasar module.
+
+ * :ref:`Package Installation <quasar_installation_packages>` (stable)
+ * :ref:`Manual Installation <quasar_installation_manual>` (develop)
+
+You can also take a look at the Pulsar module list:
 
  * :doc:`Quasar Modules<components/quasar/modules/index>`
 
