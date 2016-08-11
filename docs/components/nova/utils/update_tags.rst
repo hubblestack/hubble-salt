@@ -1,5 +1,5 @@
-update-tags
-~~~~~~~~~~~
+utils/update_tags.py
+~~~~~~~~~~~~~~~~~~~~
 
 This script does four things:
 

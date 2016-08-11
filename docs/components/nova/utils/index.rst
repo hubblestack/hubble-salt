@@ -2,7 +2,8 @@ Utilities
 ---------
 
 .. toctree::
+   :maxdepth: 1
 
-   check-yaml
-   update-tags
-   vulners
+   check_yaml
+   update_tags
+   cve_store

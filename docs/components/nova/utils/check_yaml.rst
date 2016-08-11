@@ -1,5 +1,5 @@
-Check YAML
-~~~~~~~~~~
+utils/check_yaml.py
+~~~~~~~~~~~~~~~~~~~
 
 A simple utility to validate YAML syntax in Nova profiles.
 

@@ -1,5 +1,5 @@
-Overview
---------
+Nova
+----
 
 .. toctree::
    :maxdepth: 1
@@ -13,6 +13,14 @@ Modules
    :maxdepth: 2
 
    modules/index
+
+Profiles
+--------
+
+.. toctree::
+   :maxdepth: 2
+
+   profiles/index
 
 Utilities
 ---------

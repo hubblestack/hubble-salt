@@ -1,5 +1,5 @@
-Overview
---------
+Pulsar
+------
 
 .. toctree::
    :maxdepth: 1
