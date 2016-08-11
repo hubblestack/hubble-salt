@@ -41,8 +41,10 @@ Usage
 
     salt \* hubble.audit cve.scan-v2
 
+.. seealso:: :doc:`cve.scan-v2 profile<../profiles/vulners>`
+
 .. code-block:: shell
 
     salt \* hubble.audit cve.scan-v2-salt
 
-
+.. seealso:: :doc:`cve.scan-v2-salt profile<../profiles/vulners-salt>`

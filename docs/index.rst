@@ -48,7 +48,11 @@ Check out the installation docs:
 
 Have a look at the Nova module list, and learn how audit modules work.
 
- * :doc:`Nova Modules<components/nova/modules/index>`.
+ * :doc:`Nova Modules<components/nova/modules/index>`
+
+... or read through some of the pre-built profiles:
+
+ * :doc:`Nova Profiles<components/nova/profiles/index>`
 
 .. tip:: Once you have Nova installed, check out :doc:`Quasar<quasar/README>` next.
 
