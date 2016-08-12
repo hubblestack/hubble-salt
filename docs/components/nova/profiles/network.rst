@@ -1,5 +1,5 @@
-network (netstat)
------------------
+network (netstat sample)
+------------------------
 
 .. literalinclude:: ../../../nova/hubblestack_nova/network/ssh.yaml
    :language: yaml

@@ -1,5 +1,5 @@
-vulners.com (cve.scan-v2-salt)
-------------------------------
+vulners.com (cve.scan-v2-salt example)
+--------------------------------------
 
 This example pulls from the ``salt://`` fileserver.
 

@@ -1,5 +1,5 @@
-vulners.com (cve.scan-v2)
--------------------------
+vulners.com (cve.scan-v2 example)
+---------------------------------
 
 This example pulls directly from vulners.com:
 
