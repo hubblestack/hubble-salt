@@ -1,0 +1,10 @@
+language: python
+
+python:
+  - '2.6'
+  - '2.7'
+
+before_install:
+  - pip install Sphinx
+
+script: "make -C docs html"
