@@ -1,6 +1,11 @@
 language: python
-
 python:
-  - '2.7'
-
-script: "make -C docs/ html dirhtml singlehtml epub linkcheck doctest coverage dummy"
+- '2.7'
+- '3.3'
+- '3.4'
+- '3.5'
+- nightly
+script: make -C docs/ html dirhtml singlehtml epub linkcheck doctest coverage dummy
+notifications:
+  slack:
+    secure: 27M/7RacSGVN8Z5Z0SlQnTUauYvw9ti+iFTxMK6U7mAfE+xnP/nHj7nxbVq76L8Qtd8jeAt1Pitqtz8kHAUHWgPE8H6hlFIuzYA1nUK6np7H8wIGjfwyWKz/k75Rxnv1to+zrKcA/IIdNEYGenBLNQTLmbjUCm/Zel+jPiqh7RRCxQRRvYwcHh3n6MGXSWPBDmxqwEMESAnMeX/bxU6zYZng91FFaJOv/bp/N/S3HqA7rIFRvUQbEK8NVLEbVs9l5JiCQqUKVuV0FQcI+K3kxGEj/H1inKCR5zphEUwnEwlNyN11b3/EUtVqFMmtL3W750/GAAA6oN82fEQDXk3JLoA6wVcc8iyml6/LNhM43XNk5/CHq+BTdaiZx9INxPbtpWuVK4CBrZoAlAzZxamvT5spACOeQcq2VAYNl3o09M+8uDnF89QNeNh7oOFJ8BR2boit3TViGSvrQkzKebi44Gh+SeijErhmCRb7aIiaEe9I+hAniG8D/0zWEBhOIQvAEBWXnv2EbRcMO+vOVwKuBAwKnetw/E6XX+Y2zkDDoHq/h3vpXJU5tOOZLwWQg0mQTLT2S+rN3oCYS7mcCH8acW5PHB32W+91LWwnBFddAcJYfn23HbYNXagDnc9+bv4c4d8f5NZb1xGJA0l9e8/wz/eYltn27L89zWvYVnjS8MU=
