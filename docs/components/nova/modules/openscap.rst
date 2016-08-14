@@ -24,9 +24,7 @@ Usage
 
 Red Hat publishes security advisories in the form of an XML file. These files
 follow a specific standard, which requires an additional dependency to use:
-openscap-scanner_.
-
-.. _openscap-scanner: http://open-scap.org
+openscap_.
 
 The XML files can be found here: https://www.redhat.com/security/data/oval/.
 

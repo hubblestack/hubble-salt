@@ -8,4 +8,4 @@ before_install:
   - pip install Sphinx
   - pip install sphinx_rtd_theme
 
-script: "make -C docs html"
+script: "make -C docs/ html linkcheck"
