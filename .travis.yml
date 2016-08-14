@@ -3,8 +3,4 @@ language: python
 python:
   - '2.7'
 
-before_install:
-  - pip install Sphinx
-  - pip install sphinx_rtd_theme
-
-script: "make -C docs/ html linkcheck"
+script: "make -C docs/ html dirhtml singlehtml epub linkcheck doctest coverage dummy"
