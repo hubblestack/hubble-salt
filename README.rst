@@ -1,6 +1,9 @@
 HubbleStack Documentation
 =========================
 
+.. image:: https://travis-ci.org/HubbleStack/Hubble.svg?branch=documentation
+    :target: https://travis-ci.org/HubbleStack/Hubble
+
 Check out the rendered documentation at `Read the Docs`_
 
-.. _`Read the Docs`: https://hubblestack.readthedocs.org/en/latest/
+.. _`Read the Docs`: https://hubblestack.readthedocs.io
