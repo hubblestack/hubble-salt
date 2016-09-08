@@ -9,7 +9,7 @@ requires    SaltStack_, :doc:`HubbleStack Nova<../../../nova/README>`
 source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova_modules/cve_scan_v2.py
 ==========  ==========
 
-.. _SaltStack: https:/saltstack.com
+.. _SaltStack: https://saltstack.com
 
 Another major component of the Nova auditing system is the on-demand CVE
 scanning and reporting. This component automates the ingestion of security

@@ -9,7 +9,7 @@ requires    SaltStack_, :doc:`HubbleStack Nova<../../../nova/README>`, openscap_
 source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova_modules/cve_scan.py
 ==========  ==========
 
-.. _SaltStack: https:/saltstack.com
+.. _SaltStack: https://saltstack.com
 .. _openscap: https:/www.open-scap.org/
 
 This module automates the ingestion of security advisory announcements, CVE

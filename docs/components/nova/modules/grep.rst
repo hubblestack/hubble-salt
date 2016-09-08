@@ -9,7 +9,7 @@ requires    SaltStack_, :doc:`HubbleStack Nova<../../../nova/README>`
 source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova_modules/grep.py
 ==========  ====================
 
-.. _SaltStack: https:/saltstack.com
+.. _SaltStack: https://saltstack.com
 
 HubbleStack Nova plugin for using ``grep`` to verify settings in files.
 

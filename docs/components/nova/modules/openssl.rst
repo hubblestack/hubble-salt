@@ -9,7 +9,7 @@ requires    SaltStack_, :doc:`HubbleStack Nova<../../../nova/README>`, python-Op
 source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova_modules/openssl.py
 ==========  ======================
 
-.. _SaltStack: https:/saltstack.com
+.. _SaltStack: https://saltstack.com
 
 HubbleStack Nova module for auditing SSL certificates.
 

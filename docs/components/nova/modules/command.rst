@@ -9,7 +9,7 @@ requires    SaltStack_, :doc:`HubbleStack Nova<../../../nova/README>`
 source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova_modules/command.py
 ==========  ====================
 
-.. _SaltStack: https:/saltstack.com
+.. _SaltStack: https://saltstack.com
 
 Hubble Nova plugin for running arbitrary commands and checking the output of
 those commands.

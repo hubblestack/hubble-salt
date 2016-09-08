@@ -9,7 +9,7 @@ requires    SaltStack_, :doc:`HubbleStack Nova<../../../nova/README>`
 source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova_modules/sysctl.py
 ==========  ====================
 
-.. _SaltStack: https:/saltstack.com
+.. _SaltStack: https://saltstack.com
 
 HubbleStack Nova module for using sysctl to verify sysctl parameter.
 
