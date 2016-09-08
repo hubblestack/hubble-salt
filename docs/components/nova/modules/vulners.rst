@@ -6,7 +6,7 @@ maintainer  HubbleStack / jaredhanson11
 maturity    2016.7.0
 platform    All
 requires    SaltStack_, :doc:`HubbleStack Nova<../../../nova/README>`
-source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova/modules/cve_scan_v2.py
+source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova_profiles/modules/cve_scan_v2.py
 ==========  ==========
 
 .. _SaltStack: https://saltstack.com
