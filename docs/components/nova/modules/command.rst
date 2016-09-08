@@ -6,10 +6,10 @@ maintainer  HubbleStack / basepi
 maturity    2016.7.0
 platform    All
 requires    SaltStack_, :doc:`HubbleStack Nova<../../../nova/README>`
-source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova_modules/modules/command.py
+source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova_modules/command.py
 ==========  ====================
 
-.. _SaltStack: https://saltstack.com
+.. _SaltStack: https:/saltstack.com
 
 Hubble Nova plugin for running arbitrary commands and checking the output of
 those commands.

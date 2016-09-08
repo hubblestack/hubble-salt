@@ -6,10 +6,10 @@ maintainer  HubbleStack / avb76
 maturity    2016.7.0
 platform    All
 requires    SaltStack_, :doc:`HubbleStack Nova<../../../nova/README>`
-source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova_modules/modules/stat.py
+source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova_modules/stat.py
 ==========  ====================
 
-.. _SaltStack: https://saltstack.com
+.. _SaltStack: https:/saltstack.com
 
 HubbleStack Nova module for using stat to verify ownership & permissions.
 

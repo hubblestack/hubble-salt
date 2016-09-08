@@ -6,10 +6,10 @@ maintainer  HubbleStack / avb76
 maturity    2016.7.0
 platform    All
 requires    SaltStack_, :doc:`HubbleStack Nova<../../../nova/README>`
-source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova_modules/modules/firewall.py
+source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova_modules/firewall.py
 ==========  ===================
 
-.. _SaltStack: https://saltstack.com
+.. _SaltStack: https:/saltstack.com
 
 Hubble Nova plugin for using iptables to verify firewall rules.
 
@@ -78,5 +78,5 @@ Check the following links for more details:
   - `iptables.build_rule`_ - upstream SaltStack documentation
   - `iptables`_ salt execution module source code (search for the ``build_rule`` function inside):
 
-.. _`iptables.build_rule`: https://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.iptables.html#salt.modules.iptables.build_rule
-.. _`iptables`: https://github.com/saltstack/salt/blob/develop/salt/modules/iptables.py
+.. _`iptables.build_rule`: https:/docs.saltstack.com/en/latest/ref/modules/all/salt.modules.iptables.html#salt.modules.iptables.build_rule
+.. _`iptables`: https:/github.com/saltstack/salt/blob/develop/salt/modules/iptables.py
