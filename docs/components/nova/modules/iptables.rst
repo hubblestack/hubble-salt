@@ -78,5 +78,5 @@ Check the following links for more details:
   - `iptables.build_rule`_ - upstream SaltStack documentation
   - `iptables`_ salt execution module source code (search for the ``build_rule`` function inside):
 
-.. _`iptables.build_rule`: https:/docs.saltstack.com/en/latest/ref/modules/all/salt.modules.iptables.html#salt.modules.iptables.build_rule
-.. _`iptables`: https:/github.com/saltstack/salt/blob/develop/salt/modules/iptables.py
+.. _`iptables.build_rule`: https://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.iptables.html#salt.modules.iptables.build_rule
+.. _`iptables`: https://github.com/saltstack/salt/blob/develop/salt/modules/iptables.py

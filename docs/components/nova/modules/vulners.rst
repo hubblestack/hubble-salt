@@ -17,9 +17,9 @@ advisory announcements, and compares this data to the installed packages. This
 feature was inspired by FreeBSD's VuXML integration with ``pkg audit``.
 
 This module, ``scan-v2``, uses a public vulnerability database at
-https:/vulners.com. 
+https://vulners.com. 
 
-Queries to https:/vulners.com are made either directly from the minion or
+Queries to https://vulners.com are made either directly from the minion or
 served from your ``salt:/`` fileserver. The defined ``ttl`` in either case
 will determine the amount of time the JSON data is cached on the minion.
 Example profiles for each of these are found at ``cve.scan-v2`` and
