@@ -3,7 +3,7 @@ vulners.com (cve.scan-v2 example)
 
 This example pulls directly from vulners.com:
 
-.. literalinclude:: ../../../nova/hubblestack_nova/cve/scan-v2.yaml
+.. literalinclude:: ../../../nova/hubblestack_nova_profiles/cve/scan-v2.yaml
    :language: yaml
    :emphasize-lines: 3
    :linenos:

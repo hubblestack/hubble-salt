@@ -4,7 +4,7 @@ sample profiles
 CVE-2014-2913
 ~~~~~~~~~~~~~
 
-.. literalinclude:: ../../../nova/hubblestack_nova/samples/dont_blame_nrpe.yaml
+.. literalinclude:: ../../../nova/hubblestack_nova_profiles/samples/dont_blame_nrpe.yaml
    :language: yaml
    :emphasize-lines: 8
    :linenos:
@@ -12,14 +12,14 @@ CVE-2014-2913
 command Profile
 ~~~~~~~~~~~~~~~
 
-.. literalinclude:: ../../../nova/hubblestack_nova/samples/sample_command.yaml
+.. literalinclude:: ../../../nova/hubblestack_nova_profiles/samples/sample_command.yaml
    :language: yaml
    :linenos:
 
 compensating control
 ~~~~~~~~~~~~~~~~~~~~
 
-.. literalinclude:: ../../../nova/hubblestack_nova/samples/sample_control.yaml
+.. literalinclude:: ../../../nova/hubblestack_nova_profiles/samples/sample_control.yaml
    :language: yaml
    :emphasize-lines: 19,44,57,103,124,143,177,210,235
    :linenos:
@@ -27,21 +27,21 @@ compensating control
 firewall
 ~~~~~~~~
 
-.. literalinclude:: ../../../nova/hubblestack_nova/samples/sample_firewall.yaml
+.. literalinclude:: ../../../nova/hubblestack_nova_profiles/samples/sample_firewall.yaml
    :language: yaml
    :linenos:
 
 openssl
 ~~~~~~~
 
-.. literalinclude:: ../../../nova/hubblestack_nova/samples/sample_openssl.yaml
+.. literalinclude:: ../../../nova/hubblestack_nova_profiles/samples/sample_openssl.yaml
    :language: yaml
    :linenos:
 
 sample CIS profile
 ~~~~~~~~~~~~~~~~~~
 
-.. literalinclude:: ../../../nova/hubblestack_nova/samples/sample_cis.yaml
+.. literalinclude:: ../../../nova/hubblestack_nova_profiles/samples/sample_cis.yaml
    :language: yaml
    :linenos:
 

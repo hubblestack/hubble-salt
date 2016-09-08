@@ -13,7 +13,7 @@ Simply point to your preferred OVAL file:
 Upstream
 ~~~~~~~~
 
-.. literalinclude:: ../../../nova/hubblestack_nova/cve/scan-v1.yaml
+.. literalinclude:: ../../../nova/hubblestack_nova_profiles/cve/scan-v1.yaml
    :language: yaml
    :linenos:
 

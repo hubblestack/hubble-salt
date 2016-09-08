@@ -3,7 +3,7 @@ vulners.com (cve.scan-v2-salt example)
 
 This example pulls from the ``salt://`` fileserver.
 
-.. literalinclude:: ../../../nova/hubblestack_nova/cve/scan-v2-salt.yaml
+.. literalinclude:: ../../../nova/hubblestack_nova_profiles/cve/scan-v2-salt.yaml
    :language: yaml
    :emphasize-lines: 3
    :linenos:
