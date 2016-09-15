@@ -6,7 +6,7 @@ maintainer  HubbleStack / avb76
 maturity    2016.7.0
 platform    All
 requires    SaltStack_, :doc:`HubbleStack Nova<../../../nova/README>`
-source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova_modules/stat.py
+source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova/stat.py
 ==========  ====================
 
 .. _SaltStack: https://saltstack.com

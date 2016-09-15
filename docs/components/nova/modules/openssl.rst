@@ -6,7 +6,7 @@ maintainer  HubbleStack / avb76
 maturity    2016.7.0
 platform    All
 requires    SaltStack_, :doc:`HubbleStack Nova<../../../nova/README>`, python-OpenSSL
-source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova_modules/openssl.py
+source      https://github.com/HubbleStack/Nova/blob/develop/hubblestack_nova/openssl.py
 ==========  ======================
 
 .. _SaltStack: https://saltstack.com
