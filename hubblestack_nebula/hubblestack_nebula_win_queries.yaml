@@ -1,0 +1,11 @@
+fifteen_min:
+  - query_name: running_procs
+    query: SELECT name AS process, pid AS process_id, cmdline, on_disk, resident_size AS mem_used, parent, path FROM processes
+hour:
+  - query_name: stuff_with_things
+    query: SELECT * FROM processes
+day:
+  - query_name: os_info
+    query: SELECT * FROM system_info
+  - query_name: interface_addresses
+    query: SELECT * FROM interface_addresses

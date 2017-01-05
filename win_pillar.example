@@ -1,0 +1,51 @@
+## populate the required fields for each returner needed
+
+#hubblestack:
+#  nova:
+#    returner:
+#      splunk:
+#        token: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+#        indexer: splunk-indexer.domain.tld
+#        sourcetype: hubble_audit
+#        index: hubble
+#
+#  nebula:
+#    returner:
+#      splunk:
+#        token: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+#        indexer: splunk-indexer.domain.tld
+#        sourcetype: hubble_osquery
+#        index: hubble
+#
+#  pulsar:
+#    returner:
+#      splunk:
+#        token: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+#        indexer: splunk-indexer.domain.tld
+#        sourcetype: hubble_fim
+#        index: hubble
+
+#slack_pulsar:
+#  as_user: true
+#  username: calculon
+#  channel: channel
+#  api_key: xoxb-xxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxx
+
+## Use this section to enable pulsar
+
+#beacons:
+#  pulsar:
+#    paths:
+#      - /var/cache/salt/minion/files/base/hubblestack_pulsar/hubblestack_pulsar_win_config.yaml
+#    interval: 30 # MUST be the same as win_notify_interval in file config
+#    disable_during_state_run: True
+
+## Config for pulsar must be synced down separately
+
+#schedule:
+#  cache_nebula:
+#    function: cp.cache_file
+#    seconds: 86400
+#    args:
+#      - salt://hubblestack_pulsar/hubblestack_pulsar_win_config.yaml
+#    return_job: False
