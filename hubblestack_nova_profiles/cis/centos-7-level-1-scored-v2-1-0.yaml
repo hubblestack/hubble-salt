@@ -744,7 +744,7 @@ service:
     nfs:
       data:
         CentOS Linux-7:
-        - nfs: 2.2.7
+        - nfs: CIS-2.2.7
       description: Ensure NFS and RPC are not enabled
     rpc:
       data:

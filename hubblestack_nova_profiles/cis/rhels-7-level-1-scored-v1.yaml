@@ -724,7 +724,7 @@ service:
     nfs:
       data:
         Red Hat Enterprise Linux Server-7:
-        - nfs: 2.2.7
+        - nfs: CIS-2.2.7
       description:  Ensure nfs is not enabled (Scored)
     rpc:
       data:
