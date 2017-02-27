@@ -28,3 +28,9 @@ gitfs_remotes:
 ```
 
 > Remember to restart the Salt Master after applying this change.
+
+You can then run `salt '*' saltutil.sync_all` to sync the modules to your
+minions.
+
+See `pillar.example` for sample pillar data for configuring the pulsar beacon
+and the splunk/slack returners.
