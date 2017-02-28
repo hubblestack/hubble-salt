@@ -787,46 +787,35 @@ service:
         Red Hat Enterprise Linux Server-7:
         - syslog-ng: CIS-4.2.2.1_running
 stat:
-  at_allow:
-    data:
-      Red Hat Enterprise Linux Server-7:
-      - /etc/at.allow:
-          gid: 0
-          group: root
-          mode: 600
-          tag: CIS-5.1.8
-          uid: 0
-          user: root
-    description: /etc/at.allow must be owned by root and have persmissions 600 (Scored)
   at_cron_allow:
     data:
       Red Hat Enterprise Linux Server-7:
       - /etc/cron.deny:
-          gid: 0
-          group: root
-          mode: 600
-          tag: CIS-5.1.8
-          uid: 0
-          user: root
+          gid: null
+          group: null
+          mode: null
+          tag: CIS-6.1.11
+          uid: null
+          user: null
       - /etc/at.deny:
-          gid: 0
-          group: root
-          mode: 600
-          tag: CIS-5.1.8
-          uid: 0
-          user: root
+          gid: null
+          group: null
+          mode: null
+          tag: CIS-6.1.11
+          uid: null
+          user: null
       - /etc/cron.allow:
           gid: 0
           group: root
           mode: 600
-          tag: CIS-5.1.8
+          tag: CIS-6.1.11
           uid: 0
           user: root
       - /etc/at.allow:
           gid: 0
           group: root
           mode: 600
-          tag: CIS-5.1.8
+          tag: CIS-6.1.11
           uid: 0
           user: root
     description: Restrict at/cron to authorized users (Scored)
@@ -1106,7 +1095,7 @@ sysctl:
       Red Hat Enterprise Linux Server-7:
       - net.ipv6.conf.all.accept_ra:
           match_output: '0'
-          tag: CIS 3.3.1
+          tag: CIS-3.3.1
       - net.ipv6.conf.default.accept_ra:
           match_output: '0'
           tag: CIS-3.3.1

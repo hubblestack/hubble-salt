@@ -788,19 +788,19 @@ stat:
     data:
       Ubuntu-14.04:
       - /etc/cron.deny:
-          gid: 0
-          group: root
-          mode: 600
+          gid: null
+          group: null
+          mode: null
           tag: CIS-9.1.8
-          uid: 0
-          user: root
+          uid: null
+          user: null
       - /etc/at.deny:
-          gid: 0
-          group: root
-          mode: 600
+          gid: null
+          group: null
+          mode: null
           tag: CIS-9.1.8
-          uid: 0
-          user: root
+          uid: null
+          user: null
       - /etc/cron.allow:
           gid: 0
           group: root

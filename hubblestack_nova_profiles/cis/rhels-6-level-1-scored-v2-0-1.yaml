@@ -472,15 +472,10 @@ pkg:
       description: Ensure rsyslog or syslog-ng is installed
 service:
   whitelist:
-    anacron_running:
-      data:
-        Red Hat Enterprise Linux Server-6:
-        - cronie-anacron: CIS-6.1.1_running
-      description: anacron should be running
     auditd_running:
       data:
         Red Hat Enterprise Linux Server-6:
-        - auditd: CIS-5.2_running
+        - auditd: CIS-4.1.2_running
       description: auditd should be running
     crond_running:
       data:
@@ -490,12 +485,12 @@ service:
     iptables_running:
       data:
         Red Hat Enterprise Linux Server-6:
-        - iptables: CIS-4.7_running
-      description:
+        - iptables: CIS-3.6.1_running
+      description: iptables should be running
     rsyslogd_running:
       data:
         Red Hat Enterprise Linux Server-6:
-        - rsyslogd: CIS-5.1.2_running
+        - rsyslogd: CIS-4.2.1_running
       description: rsyslogd should be running
 stat:
   anacrontab:
