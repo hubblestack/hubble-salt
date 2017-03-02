@@ -3,8 +3,6 @@
 # Subscribes to CIS, cve_scan, and misc.yaml for miscellaneous checks
 
 nova:
-  'G@kernel:Linux and not G@osfinger:*CoreOS*':
-    - cve.scan-v2
   'G@osfinger:*CoreOS*':
     - cis.coreos-level-1
   'G@osfinger:CentOS-6':
@@ -33,3 +31,5 @@ nova:
     - cis.amazon-level-1-scored-v1-0-0
   #'*':
   #  - misc
+  #'G@kernel:Linux and not G@osfinger:*CoreOS*':
+  #  - cve.scan-v2
