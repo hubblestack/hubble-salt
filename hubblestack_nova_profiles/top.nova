@@ -19,6 +19,8 @@ nova:
     - cis.rhelw-7-level-1-scored-v2-1-0
   'G@osfinger:Ubuntu-14.04':
     - cis.ubuntu-1404-level-1-scored-v1-0-0
+  'G@osfinger:Ubuntu-16.04':
+    - cis.ubuntu-1604-level-1-scored-v1-0-0
   'G@osfullname:Microsoft*Windows*Server*2008*':
     - cis.windows-2008r2-level-1-scored-v3-0-0
   'G@osfullname:Microsoft*Windows*Server*2012*':
