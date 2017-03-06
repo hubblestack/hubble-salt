@@ -434,17 +434,6 @@ stat:
           user: root
     description: /etc/anacrontab file be owned by root and must have permissions 600
       (Scored)
-  at_allow:
-    data:
-      CentOS Linux-7:
-      - /etc/at.allow:
-          gid: 0
-          group: root
-          mode: 600
-          tag: CIS-6.1.10
-          uid: 0
-          user: root
-    description: /etc/at.allow must be owned by root and have persmissions 600 (Scored)
   at_cron_allow:
     data:
       CentOS Linux-7:
@@ -469,7 +458,7 @@ stat:
           tag: CIS-6.1.11
           uid: 0
           user: root
-      - /etc/at/allow:
+      - /etc/at.allow:
           gid: 0
           group: root
           mode: 600

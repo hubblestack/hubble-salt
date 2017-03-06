@@ -40,7 +40,7 @@ from salt.exceptions import CommandExecutionError
 
 log = logging.getLogger(__name__)
 
-__version__ = 'v2017.1.1'
+__version__ = 'v2017.3.1'
 __virtualname__ = 'nebula'
 
 
@@ -88,7 +88,8 @@ def queries(query_group,
             ret = []
             ret.append(
                     {'fallback_osfinger': {
-                         'data': [{'osfinger': __grains__.get('osfinger', __grains__.get('osfullname'))}],
+                         'data': [{'osfinger': __grains__.get('osfinger', __grains__.get('osfullname')),
+                                   'osrelease': __grains__.get('osrelease', __grains__.get('lsb_distrib_release'))}],
                          'result': True
                     }}
             )
@@ -99,6 +100,15 @@ def queries(query_group,
                              'result': True
                         }}
                 )
+            uptime = __salt__['status.uptime']()
+            if isinstance(uptime, dict):
+                uptime = uptime.get('seconds', __salt__['cmd.run']('uptime'))
+            ret.append(
+                    {'fallback_uptime': {
+                         'data': [{'uptime': uptime}],
+                         'result': True
+                    }}
+            )
             if report_version_with_day:
                 ret.append(hubble_versions())
             return ret

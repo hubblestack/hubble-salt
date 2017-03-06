@@ -3,8 +3,8 @@
 # Subscribes to CIS, cve_scan, and misc.yaml for miscellaneous checks
 
 nova:
-  'G@kernel:Linux':
-    - cve.scan-v2
+  'G@osfinger:*CoreOS*':
+    - cis.coreos-level-1
   'G@osfinger:CentOS-6':
     - cis.centos-6-level-1-scored-v2-0-1
   'G@osfinger:CentOS*Linux-7':
@@ -19,6 +19,8 @@ nova:
     - cis.rhelw-7-level-1-scored-v2-1-0
   'G@osfinger:Ubuntu-14.04':
     - cis.ubuntu-1404-level-1-scored-v1-0-0
+  'G@osfinger:Ubuntu-16.04':
+    - cis.ubuntu-1604-level-1-scored-v1-0-0
   'G@osfullname:Microsoft*Windows*Server*2008*':
     - cis.windows-2008r2-level-1-scored-v3-0-0
   'G@osfullname:Microsoft*Windows*Server*2012*':
@@ -31,3 +33,5 @@ nova:
     - cis.amazon-level-1-scored-v1-0-0
   #'*':
   #  - misc
+  #'G@kernel:Linux and not G@osfinger:*CoreOS*':
+  #  - cve.scan-v2

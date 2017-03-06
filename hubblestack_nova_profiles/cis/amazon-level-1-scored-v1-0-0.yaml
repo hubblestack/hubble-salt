@@ -590,7 +590,7 @@ grep:
           - '/etc/ntp.conf':
               tag: 'CIS-3.6'
               pattern: '^server'
-          - '/etc/sysconfig/ntpd':
+          - '/etc/init.d/ntpd':
               tag: 'CIS-3.6'
               pattern: 'ntp:ntp'
       description: 'Configure Network Time Protocol (NTP) (Scored)'
@@ -665,7 +665,7 @@ grep:
               tag: 'CIS-6.2.8'
               pattern: "^PermitRootLogin"
               match_output: "PermitRootLogin no"
-      description: 'Set SSH HostbasedAuthentication to No (Scored)'
+      description: 'Set SSH PermitRootLogin to No (Scored)'
 
     sshd_permit_empty_passwords:
       data:
