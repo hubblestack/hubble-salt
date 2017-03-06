@@ -84,7 +84,7 @@ def returner(ret):
                                        timeout=1).text
         aws_account_id = requests.get('http://169.254.169.254/latest/dynamic/instance-identity/document',
                                       timeout=1).json().get('accountId', 'unknown')
-    except (requests.exceptions.ConnectTimeout, ValueError):
+    except (requests.exceptions.RequestException, ValueError):
         # Not on an AWS box
         pass
 
