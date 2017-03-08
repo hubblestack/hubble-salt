@@ -156,6 +156,7 @@ def beacon(config):
     True, then changes will be discarded.
     '''
     if not HAS_PYINOTIFY:
+        log.debug('Not running beacon pulsar. No python-inotify installed.')
         return []
     global CONFIG_STALENESS
     global CONFIG
