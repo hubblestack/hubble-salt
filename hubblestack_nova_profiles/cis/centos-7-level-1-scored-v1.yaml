@@ -556,7 +556,7 @@ stat:
   grub_conf_own:
     data:
       CentOS Linux-7:
-      - /etc/grub2/grub.cfg:
+      - /boot/grub2/grub.cfg:
           gid: 0
           group: root
           tag: CIS-1.5.1
@@ -566,7 +566,7 @@ stat:
   grub_conf_perm:
     data:
       CentOS Linux-7:
-      - /etc/grub2/grub.cfg:
+      - /boot/grub2/grub.cfg:
           mode: 600
           tag: CIS-1.5.2
     description: Grub must have permissions 600 (Scored)
