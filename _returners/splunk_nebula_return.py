@@ -239,13 +239,9 @@ class http_event_collector:
             servers = [servers]
         for server in servers:
             if http_event_server_ssl:
-                buildURI = ['https://']
+                self.server_uri.append('https://%s:%s/services/collector/event' % (server, http_event_port))
             else:
-                buildURI = ['http://']
-            for i in [server, ':', http_event_port, '/services/collector/event']:
-                buildURI.append(i)
-            uri = [''.join(buildURI), '']
-            self.server_uri.append(uri)
+                self.server_uri.append('http://%s:%s/services/collector/event' % (server, http_event_port))
 
         if http_event_collector_debug:
             print self.token
@@ -308,17 +304,17 @@ class http_event_collector:
 
         if len(self.batchEvents) > 0:
             headers = {'Authorization': 'Splunk ' + self.token}
-            self.server_uri = [x for x in self.server_uri if x[1] is not "bad"]
+            self.server_uri = [x for x in self.server_uri if x[1] is not False]
             for server in self.server_uri:
                 try:
                     r = requests.post(server[0], data=' '.join(self.batchEvents), headers=headers, verify=http_event_collector_SSL_verify, proxies=self.proxy, timeout=self.timeout)
                     r.raise_for_status()
-                    server[1] = "good"
+                    server[1] = True
                     break
                 except requests.exceptions.RequestException:
-                    log.error('Request to splunk server "%s" failed. Marking as bad.' % server[0])
-                    server[1] = "bad"
+                    log.info('Request to splunk server "%s" failed. Marking as bad.' % server[0])
+                    server[1] = False
                 except Exception as e:
-                    log.error('Request to splunk threw an error: {0}'.format(e))
+                    log.info('Request to splunk threw an error: {0}'.format(e))
             self.batchEvents = []
             self.currentByteLength = 0
