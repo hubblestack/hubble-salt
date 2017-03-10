@@ -21,7 +21,7 @@
 #beacons:
 #  pulsar:
 #    paths:
-#      - /var/cache/salt/minion/files/base/hubblestack_pulsar/hubblestack_pulsar_win_config.yaml
+#      - 'C:\salt\var\cache\salt\minion\files\base\hubblestack_pulsar\hubblestack_pulsar_win_config.yaml'
 #    interval: 30 # MUST be the same as win_notify_interval in file config
 #    disable_during_state_run: True
 
