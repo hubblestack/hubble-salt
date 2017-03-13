@@ -406,6 +406,6 @@ class http_event_collector:
                     log.info('Request to splunk server "%s" failed. Marking as bad.' % server[0])
                     server[1] = False
                 except Exception as e:
-                    log.info('Request to splunk threw an error: {0}'.format(e))
+                    log.error('Request to splunk threw an error: {0}'.format(e))
             self.batchEvents = []
             self.currentByteLength = 0
