@@ -239,9 +239,9 @@ class http_event_collector:
             servers = [servers]
         for server in servers:
             if http_event_server_ssl:
-                self.server_uri.append('https://%s:%s/services/collector/event' % (server, http_event_port))
+                self.server_uri.append(['https://%s:%s/services/collector/event' % (server, http_event_port), True])
             else:
-                self.server_uri.append('http://%s:%s/services/collector/event' % (server, http_event_port))
+                self.server_uri.append(['http://%s:%s/services/collector/event' % (server, http_event_port), True])
 
         if http_event_collector_debug:
             print self.token
