@@ -186,7 +186,7 @@ def beacon(config):
         # We're in maintenance mode, throw away findings
         ret = []
 
-    # Handle regex excludes
+    # Handle excludes
     new_ret = []
     for r in ret:
         _append = True
@@ -197,6 +197,9 @@ def beacon(config):
                 for exclude in config[path]['exclude']:
                     if isinstance(exclude, dict) and exclude.values()[0].get('regex', False):
                         if re.search(exclude.keys()[0], r['Object Name']):
+                            _append = False
+                    else:
+                        if fnmatch.fnmatch(r['Object Name'], exclude):
                             _append = False
         if _append:
             new_ret.append(r)
