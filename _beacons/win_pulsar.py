@@ -176,7 +176,7 @@ def beacon(config):
                             else:
                                 _remove_acl(exclude)
 
-    #Read in events since last call.  Time_frame in minutes
+    # Read in events since last call.  Time_frame in minutes
     ret = _pull_events(config['win_notify_interval'], config.get('checksum', 'sha256'))
     if sys_check == 1:
         log.error('The ACLs were not setup correctly, or global auditing is not enabled.  This could have '
@@ -190,9 +190,11 @@ def beacon(config):
     new_ret = []
     for r in ret:
         _append = True
+        config_found = False
         for path in config:
             if not r['Object Name'].startswith(path):
                 continue
+            config_found = True
             if isinstance(config[path], dict) and 'exclude' in config[path]:
                 for exclude in config[path]['exclude']:
                     if isinstance(exclude, dict) and exclude.values()[0].get('regex', False):
@@ -201,7 +203,12 @@ def beacon(config):
                     else:
                         if fnmatch.fnmatch(r['Object Name'], exclude):
                             _append = False
-        if _append:
+                        elif r['Object Name'].startswith(exclude):
+                            # Startswith is well and good, but it needs to be a parent directory or it doesn't count
+                            _, _, leftover = r['Object Name'].partition(exclude)
+                            if leftover.startswith(os.sep):
+                                _append = False
+        if _append and config_found:
             new_ret.append(r)
     ret = new_ret
 
