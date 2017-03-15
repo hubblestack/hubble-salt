@@ -143,12 +143,15 @@ def beacon(config):
                                        python_shell=True)
     if global_check:
         if not 'Success and Failure' in global_check:
-            __salt__['cmd.run']('auditpol /set /subcategory:"file system" /success:enable /failure:enable')
+            __salt__['cmd.run']('auditpol /set /subcategory:"file system" /success:enable /failure:enable',
+                                python_shell=True)
             sys_check = 1
 
     # Validate ACLs on watched folders/files and add if needed
     for path in config:
-        if path == 'win_notify_interval':
+        if path == 'win_notify_interval' or path == 'return' or path == 'batch' or path == 'checksum' or path == 'stats':
+            continue
+        if not os.path.exists(path):
             continue
         if isinstance(config[path], dict):
             mask = config[path].get('mask', DEFAULT_MASK)
@@ -168,7 +171,7 @@ def beacon(config):
                             _remove_acl(exclude)
 
     #Read in events since last call.  Time_frame in minutes
-    ret = _pull_events(config['win_notify_interval'])
+    ret = _pull_events(config['win_notify_interval'], config.get('checksum', 'sha256'))
     if sys_check == 1:
         log.error('The ACLs were not setup correctly, or global auditing is not enabled.  This could have '
                   'been remedied, but GP might need to be changed')
@@ -399,23 +402,23 @@ def _remove_acl(path):
 
 
 
-def _pull_events(time_frame):
+def _pull_events(time_frame, checksum):
     events_list = []
     events_output = __salt__['cmd.run_stdout']('mode con:cols=1000 lines=1000; Get-EventLog -LogName Security '
                                                '-After ((Get-Date).AddSeconds(-{0})) -InstanceId 4663 | fl'.format(
                                                 time_frame), shell='powershell', python_shell=True)
-    events = events_output.split('\n\n')
+    events = events_output.split('\r\n\r\n')
     for event in events:
         if event:
             event_dict = {}
-            items = event.split('\n')
+            items = event.split('\r\n')
             for item in items:
                 if ':' in item:
                     item.replace('\t', '')
                     k, v = item.split(':', 1)
                     event_dict[k.strip()] = v.strip()
             event_dict['Accesses'] = _get_access_translation(event_dict['Accesses'])
-            event_dict['Hash'] = _get_item_hash(event_dict['Object Name'])
+            event_dict['Hash'] = _get_item_hash(event_dict['Object Name'], checksum)
             #needs hostname, checksum, filepath, time stamp, action taken
             events_list.append({k: event_dict[k] for k in ('EntryType', 'Accesses', 'TimeGenerated', 'Object Name', 'Hash')})
     return events_list
@@ -487,12 +490,15 @@ def _get_access_translation(access):
         return 'Access number {0} is not a recognized access code.'.format(access)
 
 
-def _get_item_hash(item):
+def _get_item_hash(item, checksum):
     item = item.replace('\\\\','\\')
     test = os.path.isfile(item)
     if os.path.isfile(item):
-        hashy = __salt__['file.get_hash']('{0}'.format(item))
-        return hashy
+        try:
+            hashy = __salt__['file.get_hash']('{0}'.format(item), form=checksum)
+            return hashy
+        except:
+            return ''
     else:
         return 'Item is a directory'
 
