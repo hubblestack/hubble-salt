@@ -15,6 +15,7 @@ import threading
 import os
 import glob
 import yaml
+import re
 
 import salt.ext.six
 import salt.loader
@@ -184,6 +185,22 @@ def beacon(config):
     if __salt__['config.get']('hubblestack:pulsar:maintenance', False):
         # We're in maintenance mode, throw away findings
         ret = []
+
+    # Handle regex excludes
+    new_ret = []
+    for r in ret:
+        _append = True
+        for path in config:
+            if not r['Object Name'].startswith(path):
+                continue
+            if isinstance(config[path], dict) and 'exclude' in config[path]:
+                for exclude in config[path]['exclude']:
+                    if isinstance(exclude, dict) and exclude.values()[0].get('regex', False):
+                        if re.search(exclude.keys()[0], r['Object Name']):
+                            _append = False
+        if _append:
+            new_ret.append(r)
+    ret = new_ret
 
     if ret and 'return' in config:
         __opts__['grains'] = __grains__
