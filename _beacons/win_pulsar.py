@@ -101,6 +101,7 @@ def beacon(config):
     sys_check = 0
 
     # Get config(s) from filesystem if we don't have them already
+    update_acls= False
     if CONFIG and CONFIG_STALENESS < config.get('refresh_frequency', 60):
         CONFIG_STALENESS += 1
         CONFIG.update(config)
@@ -129,6 +130,7 @@ def beacon(config):
                     log.error('Path {0} does not exist or is not a file'.format(path))
         else:
             log.error('Pulsar beacon \'paths\' data improperly formatted. Should be list of paths')
+        update_acls = True
 
         new_config.update(config)
         config = new_config
@@ -148,27 +150,30 @@ def beacon(config):
             sys_check = 1
 
     # Validate ACLs on watched folders/files and add if needed
-    for path in config:
-        if path == 'win_notify_interval' or path == 'return' or path == 'batch' or path == 'checksum' or path == 'stats':
-            continue
-        if not os.path.exists(path):
-            continue
-        if isinstance(config[path], dict):
-            mask = config[path].get('mask', DEFAULT_MASK)
-            wtype = config[path].get('wtype', DEFAULT_TYPE)
-            recurse = config[path].get('recurse', True)
-            if isinstance(mask, list) and isinstance(wtype, str) and isinstance(recurse, bool):
-                success = _check_acl(path, mask, wtype, recurse)
-                if not success:
-                    confirm = _add_acl(path, mask, wtype, recurse)
-                    sys_check = 1
-                if config[path].get('exclude', False):
-                    for exclude in config[path]['exclude']:
-                        if '*' in exclude:
-                            for wildcard_exclude in glob.iglob(exclude):
-                                _remove_acl(wildcard_exclude)
-                        else:
-                            _remove_acl(exclude)
+    if update_acls:
+        for path in config:
+            if path == 'win_notify_interval' or path == 'return' or path == 'batch' or path == 'checksum' or path == 'stats':
+                continue
+            if not os.path.exists(path):
+                continue
+            if isinstance(config[path], dict):
+                mask = config[path].get('mask', DEFAULT_MASK)
+                wtype = config[path].get('wtype', DEFAULT_TYPE)
+                recurse = config[path].get('recurse', True)
+                if isinstance(mask, list) and isinstance(wtype, str) and isinstance(recurse, bool):
+                    success = _check_acl(path, mask, wtype, recurse)
+                    if not success:
+                        confirm = _add_acl(path, mask, wtype, recurse)
+                        sys_check = 1
+                    if config[path].get('exclude', False):
+                        for exclude in config[path]['exclude']:
+                            if not isinstance(exclude, str):
+                                continue
+                            if '*' in exclude:
+                                for wildcard_exclude in glob.iglob(exclude):
+                                    _remove_acl(wildcard_exclude)
+                            else:
+                                _remove_acl(exclude)
 
     #Read in events since last call.  Time_frame in minutes
     ret = _pull_events(config['win_notify_interval'], config.get('checksum', 'sha256'))
