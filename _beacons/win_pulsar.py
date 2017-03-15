@@ -41,23 +41,38 @@ def beacon(config):
     '''
     Watch the configured files
 
-    Example Config
+    Example pillar config
 
     .. code-block:: yaml
 
-      beacons:
-        win_notify:
-          /path/to/file/or/dir:
-            mask:
-              - Write
-              - ExecuteFile
-              - Delete
-              - DeleteSubdirectoriesAndFiles
-            wtype: all
-            recurse: True
-            exclude:
-              - /path/to/file/or/dir/exclude1
-              - /path/to/*/file/or/dir/*/exclude2
+        beacons:
+          pulsar:
+            paths:
+              - 'C:\salt\var\cache\salt\minion\files\base\hubblestack_pulsar\hubblestack_pulsar_win_config.yaml'
+            interval: 30 # MUST be the same as win_notify_interval in file config
+            disable_during_state_run: True
+
+    Example yaml config on fileserver (targeted by pillar)
+
+    .. code-block:: yaml
+
+        C:\Users: {}
+        C:\Windows:
+          mask:
+            - Write
+            - Delete
+            - DeleteSubdirectoriesAndFiles
+            - ChangePermissions
+            - TakeOwnership
+          exclude:
+            - C:\Windows\System32
+        C:\temp: {}
+        win_notify_interval: 30 # MUST be the same as interval in pillar config
+        return: splunk_pulsar_return
+        batch: True
+
+    Note that if `batch: True`, the configured returner must support receiving
+    a list of events, rather than single one-off events.
 
     The mask list can contain the following events (the default mask is create, delete, and modify):
 
@@ -81,15 +96,14 @@ def beacon(config):
 
        *If you want to monitor everything (A.K.A. Full Control) then you want options 9, 12, 13, 17
 
-    recurse:
-        Recursively watch files in the directory
     wtype:
         Type of Audit to watch for:
             1. Success  - Only report successful attempts
             2. Fail     - Only report failed attempts
             3. All      - Report both Success and Fail
     exclude:
-        Exclude directories or files from triggering events in the watched directory
+        Exclude directories or files from triggering events in the watched directory.
+        Note that directory excludes should *not* have a trailing slash.
 
     :return:
     '''
