@@ -39,7 +39,7 @@ except ImportError:
     DEFAULT_MASK = None
 
 __virtualname__ = 'pulsar'
-__version__ = 'v2017.3.1'
+__version__ = 'v2017.3.2'
 CONFIG = None
 CONFIG_STALENESS = 0
 
@@ -50,8 +50,6 @@ log = logging.getLogger(__name__)
 def __virtual__():
     if salt.utils.is_windows():
         return False, 'This module only works on Linux'
-    if HAS_PYINOTIFY:
-        return __virtualname__
     return False
 
 
@@ -157,6 +155,9 @@ def beacon(config):
     If pillar/grains/minion config key `hubblestack:pulsar:maintenance` is set to
     True, then changes will be discarded.
     '''
+    if not HAS_PYINOTIFY:
+        log.debug('Not running beacon pulsar. No python-inotify installed.')
+        return []
     global CONFIG_STALENESS
     global CONFIG
     if config.get('verbose'):

@@ -10,3 +10,5 @@ C:\Windows:
     - C:\Windows\System32
 C:\temp: {}
 win_notify_interval: 30 # MUST be the same as interval in pillar config
+return: splunk_pulsar_return
+batch: True
