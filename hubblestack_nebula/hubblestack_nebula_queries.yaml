@@ -11,6 +11,8 @@ hour:
 day:
   - query_name: rpm_packages
     query: SELECT rpm.name, rpm.version, rpm.release, rpm.source AS package_source, rpm.size, rpm.sha1, rpm.arch, t.iso_8601 FROM rpm_packages AS rpm JOIN time AS t;
+  - query_name: deb_packages
+    query: SELECT deb.name, deb.version, deb.revision, deb.source AS package_source, deb.size, deb.arch, t.iso_8601 FROM deb_packages AS deb JOIN time AS t;
   - query_name: os_info
     query: select * from os_version;
   - query_name: interface_addresses
