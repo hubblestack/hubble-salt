@@ -95,7 +95,7 @@ def process(configfile='salt://hubblestack_pulsar/hubblestack_pulsar_config.yaml
 
     :return:
     '''
-    config = __opts__.get('hubblestack_pulsar', {})
+    config = __salt__['config.get']('hubblestack_pulsar', {})
     if isinstance(configfile, list):
         config['paths'] = configfile
     else:
@@ -216,11 +216,6 @@ def process(configfile='salt://hubblestack_pulsar/hubblestack_pulsar_config.yaml
     ret = new_ret
 
     return ret
-
-
-def _return(args, returner):
-    __returners__ = salt.loader.returners(__opts__, __salt__)
-    __returners__[returner](*args)
 
 
 def _check_acl(path, mask, wtype, recurse):
