@@ -95,7 +95,7 @@ def process(configfile='salt://hubblestack_pulsar/hubblestack_pulsar_config.yaml
 
     :return:
     '''
-    config = __opts__.get('pulsar', {})
+    config = __opts__.get('hubblestack_pulsar', {})
     if isinstance(configfile, list):
         config['paths'] = configfile
     else:
