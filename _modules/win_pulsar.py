@@ -28,7 +28,7 @@ __virtualname__ = 'pulsar'
 CONFIG = None
 CONFIG_STALENESS = 0
 
-__version__ = 'v2017.3.2'
+__version__ = 'v2017.4.1'
 
 
 def __virtual__():
