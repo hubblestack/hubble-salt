@@ -39,7 +39,7 @@ except ImportError:
     DEFAULT_MASK = None
 
 __virtualname__ = 'pulsar'
-__version__ = 'v2017.3.2'
+__version__ = 'v2017.4.1'
 CONFIG = None
 CONFIG_STALENESS = 0
 
@@ -50,7 +50,7 @@ log = logging.getLogger(__name__)
 def __virtual__():
     if salt.utils.is_windows():
         return False, 'This module only works on Linux'
-    return False
+    return True
 
 
 def _get_mask(mask):

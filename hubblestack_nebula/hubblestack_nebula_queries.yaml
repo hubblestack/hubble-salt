@@ -4,13 +4,17 @@ fifteen_min:
   - query_name: established_outbound
     query: SELECT t.iso_8601 AS _time, pos.family, h.*, ltrim(pos.local_address, ':f') AS src_connection_ip, pos.local_port AS src_connection_port, pos.remote_port AS dest_connection_port, ltrim(remote_address, ':f') AS dest_connection_ip, name, p.path AS file_path, cmdline, pos.protocol FROM process_open_sockets AS pos JOIN processes AS p ON p.pid=pos.pid LEFT JOIN time AS t LEFT JOIN (SELECT * FROM listening_ports) AS lp ON lp.port=pos.local_port AND lp.protocol=pos.protocol LEFT JOIN hash AS h ON h.path=p.path WHERE NOT remote_address='' AND NOT remote_address='::' AND NOT remote_address='0.0.0.0' AND NOT remote_address='127.0.0.1' AND port is NULL;
   - query_name: listening_procs
-    query:  SELECT t.iso_8601 AS _time, h.md5 AS md5, p.pid AS process_id, name AS process, ltrim(address, ':f') AS address, port AS dest_port, p.path AS file_path, cmdline, p.on_disk, root, parent, CASE lp.protocol WHEN 6 THEN 'tcp' WHEN 17 THEN 'udp' ELSE lp.protocol END as transport FROM listening_ports AS lp LEFT JOIN processes AS p ON lp.pid=p.pid LEFT JOIN time AS t LEFT JOIN hash AS h ON h.path=p.path;
+    query: SELECT t.iso_8601 AS _time, h.md5 AS md5, p.pid AS process_id, name AS process, ltrim(address, ':f') AS address, port AS dest_port, p.path AS file_path, cmdline, p.on_disk, root, parent, CASE lp.protocol WHEN 6 THEN 'tcp' WHEN 17 THEN 'udp' ELSE lp.protocol END as transport FROM listening_ports AS lp LEFT JOIN processes AS p ON lp.pid=p.pid LEFT JOIN time AS t LEFT JOIN hash AS h ON h.path=p.path;
+  - query_name: shell_history
+    query: SELECT uid, gid, username, groupname, command, time, history_file FROM users JOIN groups USING (gid) JOIN shell_history USING (uid) WHERE time > strftime('%s', 'now', '-15 minutes');
 hour:
   - query_name: crontab
     query: SELECT c.*,t.iso_8601 AS _time FROM crontab AS c JOIN time AS t;
 day:
   - query_name: rpm_packages
     query: SELECT rpm.name, rpm.version, rpm.release, rpm.source AS package_source, rpm.size, rpm.sha1, rpm.arch, t.iso_8601 FROM rpm_packages AS rpm JOIN time AS t;
+  - query_name: deb_packages
+    query: SELECT deb.name, deb.version, deb.revision, deb.source AS package_source, deb.size, deb.arch, t.iso_8601 FROM deb_packages AS deb JOIN time AS t;
   - query_name: os_info
     query: select * from os_version;
   - query_name: interface_addresses
@@ -19,3 +23,5 @@ day:
     query: SELECT total_seconds AS uptime FROM uptime;
   - query_name: suid_binaries
     query: SELECT sb.*, t.iso_8601 AS _time, h.sha1, h.sha256 FROM suid_bin AS sb JOIN time AS t LEFT JOIN hash AS h ON sb.path=h.path;
+  - query_name: ssh_key_files
+    query: SELECT u.username AS user, usk.uid, g.groupname AS groupname, f.gid, usk.path AS file_path, usk.encrypted, f.mode AS file_acl, f.device, f.size AS file_size, f.atime AS file_access_time, f.mtime AS file_modify_time, f.ctime AS file_change_time, h.md5, h.sha1, h.sha256 FROM user_ssh_keys AS usk LEFT JOIN hash AS h ON h.path=usk.path LEFT JOIN file AS f ON f.path=usk.path LEFT JOIN users AS u ON u.uid=usk.uid  LEFT JOIN groups AS g ON g.gid=f.gid ;

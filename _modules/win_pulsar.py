@@ -1,7 +1,7 @@
 #win_notify
 '''
 This will setup your computer to enable auditing for specified folders inputted into a yaml file. It will
-then scan the event log for changes to those folders every 5 minutes and report when it finds one.
+then scan the event log for changes to those folders and report when it finds one.
 '''
 
 
@@ -11,7 +11,6 @@ import collections
 import datetime
 import fnmatch
 import logging
-import threading
 import os
 import glob
 import yaml
@@ -26,9 +25,10 @@ DEFAULT_MASK = ['ExecuteFile', 'Write', 'Delete', 'DeleteSubdirectoriesAndFiles'
 DEFAULT_TYPE = 'all'
 
 __virtualname__ = 'pulsar'
-__version__ = 'v2017.4.1'
 CONFIG = None
 CONFIG_STALENESS = 0
+
+__version__ = 'v2017.4.1'
 
 
 def __virtual__():
@@ -37,22 +37,12 @@ def __virtual__():
     return __virtualname__
 
 
-def beacon(config):
+def process(configfile='salt://hubblestack_pulsar/hubblestack_pulsar_config.yaml',
+            verbose=False):
     '''
     Watch the configured files
 
-    Example pillar config
-
-    .. code-block:: yaml
-
-        beacons:
-          pulsar:
-            paths:
-              - 'C:\salt\var\cache\salt\minion\files\base\hubblestack_pulsar\hubblestack_pulsar_win_config.yaml'
-            interval: 30 # MUST be the same as win_notify_interval in file config
-            disable_during_state_run: True
-
-    Example yaml config on fileserver (targeted by pillar)
+    Example yaml config on fileserver (targeted by configfile option)
 
     .. code-block:: yaml
 
@@ -67,7 +57,7 @@ def beacon(config):
           exclude:
             - C:\Windows\System32
         C:\temp: {}
-        win_notify_interval: 30 # MUST be the same as interval in pillar config
+        win_notify_interval: 30 # MUST be the same as interval in schedule
         return: splunk_pulsar_return
         batch: True
 
@@ -107,11 +97,17 @@ def beacon(config):
 
     :return:
     '''
+    config = __salt__['config.get']('hubblestack_pulsar', {})
+    if isinstance(configfile, list):
+        config['paths'] = configfile
+    else:
+        config['paths'] = [configfile]
+    config['verbose'] = verbose
     global CONFIG_STALENESS
     global CONFIG
     if config.get('verbose'):
-        log.debug('Pulsar beacon called.')
-        log.debug('Pulsar beacon config from pillar:\n{0}'.format(config))
+        log.debug('Pulsar module called.')
+        log.debug('Pulsar module config from pillar:\n{0}'.format(config))
     ret = []
     sys_check = 0
 
@@ -124,17 +120,12 @@ def beacon(config):
         config = CONFIG
     else:
         if config.get('verbose'):
-            log.debug('No cached config found for pulsar, retrieving fresh from disk.')
+            log.debug('No cached config found for pulsar, retrieving fresh from fileserver.')
         new_config = config
         if isinstance(config.get('paths'), list):
             for path in config['paths']:
                 if 'salt://' in path:
-                    log.error('Path {0} is not an absolute path. Please use a '
-                              'scheduled cp.cache_file job to deliver the '
-                              'config to the minion, then provide the '
-                              'absolute path to the cached file on the minion '
-                              'in the beacon config.'.format(path))
-                    continue
+                    path = __salt__['cp.cache_file'](path)
                 if os.path.isfile(path):
                     with open(path, 'r') as f:
                         new_config = _dict_update(new_config,
@@ -226,51 +217,7 @@ def beacon(config):
             new_ret.append(r)
     ret = new_ret
 
-    if ret and 'return' in config:
-        __opts__['grains'] = __grains__
-        __opts__['pillar'] = __pillar__
-        __returners__ = salt.loader.returners(__opts__, __salt__)
-        return_config = config['return']
-        if isinstance(return_config, salt.ext.six.string_types):
-            tmp = {}
-            for conf in return_config.split(','):
-                tmp[conf] = None
-            return_config = tmp
-        for returner_mod in return_config:
-            returner = '{0}.returner'.format(returner_mod)
-            if returner not in __returners__:
-                log.error('Could not find {0} returner for pulsar beacon'.format(config['return']))
-                return ret
-            batch_config = config.get('batch')
-            if isinstance(return_config[returner_mod], dict) and return_config[returner_mod].get('batch'):
-                batch_config = True
-            if batch_config:
-                transformed = []
-                for item in ret:
-                    transformed.append({'return': item})
-                if config.get('multiprocessing_return', True):
-                    p = threading.Thread(target=_return, args=((transformed,), returner))
-                    p.daemon = True
-                    p.start()
-                else:
-                    __returners__[returner](transformed)
-            else:
-                for item in ret:
-                    if config.get('multiprocessing_return', True):
-                        p = threading.Thread(target=_return, args=(({'return': item},), returner))
-                        p.daemon = True
-                        p.start()
-                    else:
-                        __returners__[returner]({'return': item})
-        return []
-    else:
-        # Return event data
-        return ret
-
-
-def _return(args, returner):
-    __returners__ = salt.loader.returners(__opts__, __salt__)
-    __returners__[returner](*args)
+    return ret
 
 
 def _check_acl(path, mask, wtype, recurse):
