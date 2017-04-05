@@ -40,7 +40,7 @@ and the splunk/slack returners.
 Here is a sample cron file you can drop into cron.d in order to run the jobs
 at regular intervals and return the results to splunk:
 
-```
+```bash
 # Recommended cron jobs for minions
 #
 # This file is here for your consumption, but will not automatically be
