@@ -129,7 +129,7 @@ def returner(ret):
 
                         payload.update({'host': fqdn})
                         payload.update({'index': opts['index']})
-                        payload.update({'sourcetype': opts['sourcetype']})
+                        payload.update({'sourcetype': "%s:%s" % (opts['sourcetype'], query_name)})
                         payload.update({'event': event})
 
                         # If the osquery query includes a field called 'time' it will be checked.
