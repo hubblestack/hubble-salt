@@ -138,7 +138,7 @@ def queries(query_group,
                 return ret
             else:
                return None
-                   
+
 
     orig_filename = query_file
     query_file = __salt__['cp.cache_file'](query_file)
