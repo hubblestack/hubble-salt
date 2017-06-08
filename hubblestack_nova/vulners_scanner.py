@@ -22,11 +22,14 @@ This allows the module to run under a certain profile, as all of the other Nova 
 '''
 
 from __future__ import absolute_import
+import logging
 
 import sys
 import requests
 
-# TODO: add logging
+
+log = logging.getLogger(__name__)
+
 
 def __virtual__():
     return not sys.platform.startswith('win')
@@ -36,12 +39,18 @@ def audit(data_list, tags, debug=False):
     os_name = __grains__.get('os').lower()
     os_version = __grains__.get('osmajorrelease')
 
+    if debug:
+        log.debug("os_version: {0}, os_name{1}".format(os_version, os_name))
+
     ret = {'Success': [], 'Failure': [], 'Controlled': []}
 
     for profile, data in data_list:
         if 'vulners_scanner' in data:
 
             local_packages = _get_local_packages()
+            vulners_data = _vulners_query(local_packages, os=os_name, version=os_version)
+            if vulners_data['result'] == 'ERROR':
+                log.error(vulners_data['data']['error'])
             vulners_data = _process_vulners(_vulners_query(local_packages, os = os_name, version = os_version))
 
             total_packages = len(local_packages)
