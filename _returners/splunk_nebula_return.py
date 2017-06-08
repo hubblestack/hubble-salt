@@ -39,8 +39,9 @@ be skipped:
               - product_group
 '''
 import socket
-# Import AWS details
+# Import AWS and Azure details
 from aws_details import get_aws_details
+from azure_details import get_azure_details
 
 # Imports for http event forwarder
 import requests
@@ -64,8 +65,9 @@ hec = None
 def returner(ret):
     opts_list = _get_options()
 
-    # Get aws details
+    # Get aws/azure details
     aws = get_aws_details()
+    azure = get_azure_details()
 
     for opts in opts_list:
         logging.info('Options: %s' % json.dumps(opts))
@@ -117,6 +119,9 @@ def returner(ret):
                             event.update({'aws_ami_id': aws['aws_ami_id']})
                             event.update({'aws_instance_id': aws['aws_instance_id']})
                             event.update({'aws_account_id': aws['aws_account_id']})
+
+                        if azure['azure_vmId'] is not None:
+                            event.update({'azure_vmId': azure['azure_vmId']})
 
                         for custom_field in custom_fields:
                             custom_field_name = 'custom_' + custom_field
