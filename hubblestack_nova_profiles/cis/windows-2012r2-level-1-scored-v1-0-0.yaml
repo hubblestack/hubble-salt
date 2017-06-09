@@ -19,7 +19,7 @@ win_secedit:
               tag: CIS-1.1.1
               match_output: '23'
               value_type: 'more'
-      description: (L1) Ensure 'enforce password history' is set to '24 or more password(s)'
+      description: 'Encorce password history must be set to 24 or more'
     maximum_password_age:
       data:
         'Microsoft Windows Server 2012*':
@@ -27,7 +27,7 @@ win_secedit:
               tag: CIS-1.1.2
               match_output: '61'
               value_type: 'less'
-      description: (L1) Ensure 'maximum password age' is set to '60 or fewer days, but not 0'
+      description: 'Set Maximum password age to 60 or fewer days but not 0'
     minimum_password_age:
       data:
         'Microsoft Windows Server 2012*':
@@ -35,7 +35,7 @@ win_secedit:
               tag: CIS-1.1.3
               match_output: '1'
               value_type: 'more'
-      description: (L1) Ensure 'minimum password age' is set to '1 or more day(s)'
+      description: 'Minimum password age must be set to 1 or more'
     minimum_password_length:
       data:
         'Microsoft Windows Server 2012*':
@@ -43,7 +43,7 @@ win_secedit:
               tag: CIS-1.1.4
               match_output: '14'
               value_type: 'more'
-      description: (L1) Ensure 'minimum password length' is set to '14 or more character(s)'
+      description: 'Minimum password length must be set to 14 or more'
     password_complexity:
       data:
         'Microsoft Windows Server 2012*':
@@ -51,7 +51,7 @@ win_secedit:
               tag: CIS-1.1.5
               match_output: '1'
               value_type: 'equal'
-      description: (L1) Ensure 'password must meet complexity requirements' is set to 'enabled'
+      description: 'Password complexity requirements must be set to Enabled'
     reversible_encryption:
       data:
         'Microsoft Windows Server 2012*':
@@ -59,7 +59,7 @@ win_secedit:
               tag: CIS-1.1.6
               match_output: '0'
               value_type: 'equal'
-      description: (L1) Ensure 'store passwords using reversible encryption' is set to 'disabled'
+      description: 'Store passwords using reversible encryption must be set to Disabled'
     lockout_duration:
       data:
         'Microsoft Windows Server 2012*':
@@ -67,7 +67,7 @@ win_secedit:
               tag: CIS-1.2.1
               match_output: '14'
               value_type: 'more'
-      description: (L1) Ensure 'account lockout duration' is set to '15 or more minute(s)'
+      description: 'Account lockout duration must be set to 15 or more'
     lockout_threshold:
       data:
         'Microsoft Windows Server 2012*':
@@ -75,7 +75,7 @@ win_secedit:
               tag: CIS-1.2.2
               match_output: '11'
               value_type: 'less'
-      description: (L1) Ensure 'account lockout threshold' is set to '10 or fewer invalid logon attempt(s), but not 0'
+      description: 'Account lockout threshold must be set to 10 or less'
     reset_lockout_counter:
       data:
         'Microsoft Windows Server 2012*':
@@ -83,7 +83,7 @@ win_secedit:
               tag: CIS-1.2.3
               match_output: '14'
               value_type: 'more'
-      description: (L1) Ensure 'reset account lockout counter after' is set to '15 or more minute(s)'
+      description: 'Reset account lockout counter after must be set to 15 or more'
     access_from_network:
       data:
         'Microsoft Windows Server 2012*':
@@ -91,7 +91,7 @@ win_secedit:
               tag: CIS-2.2.2
               match_output: 'Administrators, Authenticated Users'
               value_type: 'account'
-      description: (l1) configure 'access this computer from the network'
+      description: 'Access this computer from the network must be set to Administrators Authenticated Users only'
     adjust_memory_quotas:
       data:
         'Microsoft Windows Server 2012*':
@@ -99,7 +99,7 @@ win_secedit:
               tag: CIS-2.2.5
               match_output: 'Administrators, LOCAL SERVICE, NETWORK SERVICE'
               value_type: 'match'
-      description: (L1) Ensure 'adjust memory quotas for a process' is set to 'administrators, local service, network service'
+      description: 'Adjust memory quotas for a proccess must be set to Administrators LOCAL and NETOWORK SERVICE'
     allow_logon_locally:
       data:
         'Microsoft Windows Server 2012*':
@@ -107,7 +107,7 @@ win_secedit:
               tag: CIS-2.2.6
               match_output: 'Administrators'
               value_type: 'account'
-      description: (l1) configure 'allow log on locally'
+      description: 'Allow log on locally must be set to Administrators'
     allow_log_on_through_remote_desktop_services :
       data:
         'Microsoft Windows Server 2012*':
@@ -115,7 +115,7 @@ win_secedit:
               tag: CIS-2.2.7
               match_output: Administrators
               value_type: 'account'
-      description: (l1) configure 'allow log on through remote desktop services'
+      description: 'Allow log on through Remote Desktop Services'
     back_up_files_and_directories :
       data:
         'Microsoft Windows Server 2012*':
@@ -123,7 +123,7 @@ win_secedit:
               tag: CIS-2.2.8
               match_output: 'Administrators'
               value_type: 'account'
-      description: (L1) Ensure 'back up files and directories' is set to 'administrators'
+      description: 'Back up files and directories'
     change_the_system_time :
       data:
         'Microsoft Windows Server 2012*':
@@ -131,7 +131,7 @@ win_secedit:
               tag: CIS-2.2.9
               match_output: 'Administrators, LOCAL SERVICE'
               value_type: 'account'
-      description: (L1) Ensure 'change the system time' is set to 'administrators, local service'
+      description: 'Change the system time'
     change_the_time_zone :
       data:
         'Microsoft Windows Server 2012*':
@@ -139,7 +139,7 @@ win_secedit:
               tag: CIS-2.2.10
               match_output: 'Administrators, LOCAL SERVICE'
               value_type: 'account'
-      description: (L1) Ensure 'change the time zone' is set to 'administrators, local service'
+      description: 'Change the time zone'
     create_a_pagefile :
       data:
         'Microsoft Windows Server 2012*':
@@ -147,7 +147,7 @@ win_secedit:
               tag: CIS-2.2.11
               match_output: 'Administrators'
               value_type: 'account'
-      description: (L1) Ensure 'create a pagefile' is set to 'administrators'
+      description: 'Create a pagefile'
     create_global_objects :
       data:
         'Microsoft Windows Server 2012*':
@@ -155,7 +155,7 @@ win_secedit:
               tag: CIS-2.2.13
               match_output: 'Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE'
               value_type: 'account'
-      description: (L1) Ensure 'create global objects' is set to 'administrators, local service, network service, service'
+      description: 'Create global objects'
     create_symbolic_links :
       data:
         'Microsoft Windows Server 2012*':
@@ -163,7 +163,7 @@ win_secedit:
               tag: CIS-2.2.15
               match_output: 'Administrators'
               value_type: 'account'
-      description: (l1) configure 'create symbolic links'
+      description: 'Create symbolic links'
     debug_programs :
       data:
         'Microsoft Windows Server 2012*':
@@ -171,7 +171,7 @@ win_secedit:
               tag: CIS-2.2.16
               match_output: 'Administrators'
               value_type: 'account'
-      description: (L1) Ensure 'debug programs' is set to 'administrators'
+      description: 'Debug programs'
     deny_access_to_this_computer_from_the_network :
       data:
         'Microsoft Windows Server 2012*':
@@ -179,7 +179,7 @@ win_secedit:
               tag: CIS-2.2.17
               match_output: 'Guests'
               value_type: 'account'
-      description: (l1) configure 'deny access to this computer from the network'
+      description: 'Deny access to this computer from the network'
     deny_log_on_as_a_batch_job :
       data:
         'Microsoft Windows Server 2012*':
@@ -187,7 +187,7 @@ win_secedit:
               tag: CIS-2.2.18
               match_output: 'Guests'
               value_type: 'account'
-      description: (L1) Ensure 'deny log on as a batch job' to include 'guests'
+      description: 'Deny log on as a batch job'
     deny_log_on_as_a_service :
       data:
         'Microsoft Windows Server 2012*':
@@ -195,7 +195,7 @@ win_secedit:
               tag: CIS-2.2.19
               match_output: 'Guests'
               value_type: 'account'
-      description: (L1) Ensure 'deny log on as a service' to include 'guests'
+      description: 'Deny log on as a service'
     deny_log_on_locally :
       data:
         'Microsoft Windows Server 2012*':
@@ -203,7 +203,7 @@ win_secedit:
               tag: CIS-2.2.20
               match_output: 'Guests'
               value_type: 'account'
-      description: (L1) Ensure 'deny log on locally' to include 'guests'
+      description: 'Deny log on locally'
     deny_log_on_through_remote_desktop_services :
       data:
         'Microsoft Windows Server 2012*':
@@ -211,7 +211,7 @@ win_secedit:
               tag: CIS-2.2.21
               match_output: 'Guests, LOCAL SERVICE'
               value_type: 'account'
-      description: (L1) Ensure 'deny log on through remote desktop services' to include 'guests, local account'
+      description: 'Deny log on through Remote Desktop Services'
     force_shutdown_from_a_remote_system :
       data:
         'Microsoft Windows Server 2012*':
@@ -219,7 +219,7 @@ win_secedit:
               tag: CIS-2.2.23
               match_output: 'Administrators'
               value_type: 'account'
-      description: (L1) Ensure 'force shutdown from a remote system' is set to 'administrators'
+      description: 'Force shutdown from a remote system'
     generate_security_audits :
       data:
         'Microsoft Windows Server 2012*':
@@ -227,7 +227,7 @@ win_secedit:
               tag: CIS-2.2.24
               match_output: 'LOCAL SERVICE, NETWORK SERVICE'
               value_type: 'account'
-      description: (L1) Ensure 'generate security audits' is set to 'local service, network service'
+      description: 'Generate security audits'
     impersonate_a_client_after_authentication :
       data:
         'Microsoft Windows Server 2012*':
@@ -235,7 +235,7 @@ win_secedit:
               tag: CIS-2.2.25
               match_output: 'Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE'
               value_type: 'account'
-      description: (l1) configure 'impersonate a client after authentication'
+      description: 'Impersonate a client after authentication'
     increase_scheduling_priority :
       data:
         'Microsoft Windows Server 2012*':
@@ -243,7 +243,7 @@ win_secedit:
               tag: CIS-2.2.26
               match_output: 'Administrators'
               value_type: 'account'
-      description: (L1) Ensure 'increase scheduling priority' is set to 'administrators'
+      description: 'Increase scheduling priority'
     load_and_unload_device_drivers :
       data:
         'Microsoft Windows Server 2012*':
@@ -251,79 +251,79 @@ win_secedit:
               tag: CIS-2.2.27
               match_output: 'Administrators'
               value_type: 'account'
-      description: (L1) Ensure 'load and unload device drivers' is set to 'administrators'
+      description: 'Load and unload device drivers'
     manage_auditing_and_security_log :
       data:
         'Microsoft Windows Server 2012*':
           - 'SeSecurityPrivilege':
-              tag: CIS-2.2.29
+              tag: CIS-2.2.30
               match_output: '*S-1-5-32-544' #Administrators
               value_type: 'account'
-      description: (l1) configure 'manage auditing and security log'
+      description: 'Manage auditing and security log'
     modify_firmware_environment_values :
       data:
         'Microsoft Windows Server 2012*':
           - 'SeSystemEnvironmentPrivilege':
-              tag: CIS-2.2.31
+              tag: CIS-2.2.32
               match_output: 'Administrators'
               value_type: 'account'
-      description: (L1) Ensure 'modify firmware environment values' is set to 'administrators'
+      description: 'Modify firmware environment values'
     perform_volume_maintenance_tasks :
       data:
         'Microsoft Windows Server 2012*':
           - 'SeManageVolumePrivilege':
-              tag: CIS-2.2.32
+              tag: CIS-2.2.33
               match_output: 'Administrators'
               value_type: 'account'
-      description: (L1) Ensure 'perform volume maintenance tasks' is set to 'administrators'
+      description: 'Perform volume maintenance tasks'
     profile_single_process :
       data:
         'Microsoft Windows Server 2012*':
           - 'SeProfileSingleProcessPrivilege':
-              tag: CIS-2.2.33
+              tag: CIS-2.2.34
               match_output: 'Administrators'
               value_type: 'account'
-      description: (L1) Ensure 'profile single process' is set to 'administrators'
+      description: 'Profile single process'
     profile_system_performance :
       data:
         'Microsoft Windows Server 2012*':
           - 'SeSystemProfilePrivilege':
-              tag: CIS-2.2.34
+              tag: CIS-2.2.35
               match_output: 'Administrators, NT SERVICE\WdiServiceHost'
               value_type: 'account'
-      description: (L1) Ensure 'profile system performance' is set to 'administrators, nt service\wdiservicehost'
+      description: 'Profile system performance'
     replace_a_process_level_token :
       data:
         'Microsoft Windows Server 2012*':
           - 'SeAssignPrimaryTokenPrivilege':
-              tag: CIS-2.2.35
+              tag: CIS-2.2.36
               match_output: 'LOCAL SERVICE, NETWORK SERVICE'
               value_type: 'account'
-      description: (L1) Ensure 'replace a process level token' is set to 'local service, network service'
+      description: 'Replace a process level token'
     restore_files_and_directories :
       data:
         'Microsoft Windows Server 2012*':
           - 'SeRestorePrivilege':
-              tag: CIS-2.2.36
+              tag: CIS-2.2.37
               match_output: 'Administrators'
               value_type: 'account'
-      description: (L1) Ensure 'restore files and directories' is set to 'administrators'
+      description: 'Restore files and directories'
     shut_down_the_system :
       data:
         'Microsoft Windows Server 2012*':
           - 'SeShutdownPrivilege':
-              tag: CIS-2.2.37
+              tag: CIS-2.2.38
               match_output: 'Administrators'
               value_type: 'account'
-      description: (L1) Ensure 'shut down the system' is set to 'administrators'
+      description: 'Shut down the system'
     take_ownership_of_files_or_other_objects :
       data:
         'Microsoft Windows Server 2012*':
           - 'SeTakeOwnershipPrivilege':
-              tag: CIS-2.2.39
+              tag: CIS-2.2.40
               match_output: 'Administrators'
               value_type: 'account'
-      description: (L1) Ensure 'take ownership of files or other objects' is set to 'administrators'
+      description: 'Take ownership of files or other objects'
     accounts_administrator_account_status :
       data:
         'Microsoft Windows Server 2012*':
@@ -331,7 +331,7 @@ win_secedit:
               tag: CIS-2.3.1.1
               match_output: '0'
               value_type: 'equal'
-      description: (L1) Ensure 'accounts - administrator account status' is set to 'disabled'
+      description: 'Accounts Administrator account status'
     accounts_block_microsoft_accounts :
       data:
         'Microsoft Windows Server 2012*':
@@ -339,7 +339,7 @@ win_secedit:
               tag: CIS-2.3.1.2
               match_output: 'users cant add or log on with microsoft accounts'
               value_type: 'equal'
-      description: (L1) Ensure 'accounts - - block microsoft accounts' is set to 'users can't add or log on with microsoft accounts'
+      description: 'Accounts Block Microsoft accounts'
     accounts_guest_account_status :
       data:
         'Microsoft Windows Server 2012*':
@@ -347,7 +347,7 @@ win_secedit:
               tag: CIS-2.3.1.3
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'accounts - guest account status' is set to 'disabled'
+      description: 'Accounts Guest account status'
     accounts_limit_local_account_use_of_blank_passwords_to_console_logon_only :
       data:
         'Microsoft Windows Server 2012*':
@@ -355,7 +355,7 @@ win_secedit:
               tag: CIS-2.3.1.4
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'accounts - limit local account use of blank passwords to console logon only' is set to 'enabled'
+      description: 'Accounts Limit local account use of blank passwords to console logon only'
     audit_force_audit_policy_subcategory_settings_to_override_audit_policy_category_settings :
       data:
         'Microsoft Windows Server 2012*':
@@ -363,7 +363,7 @@ win_secedit:
               tag: CIS-2.3.2.1
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'audit - force audit policy subcategory settings (windows vista or later) to override audit policy category settings' is set to 'enabled'
+      description: 'Audit Force audit policy subcategory settings  to override audit policy category settings'
     audit_shut_down_system_immediately_if_unable_to_log_security_audits :
       data:
         'Microsoft Windows Server 2012*':
@@ -371,7 +371,7 @@ win_secedit:
               tag: CIS-2.3.2.2
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'audit - shut down system immediately if unable to log security audits' is set to 'disabled'
+      description: 'Audit Shut down system immediately if unable to log security audits'
     devices_allowed_to_format_and_eject_removable_media :
       data:
         'Microsoft Windows Server 2012*':
@@ -379,7 +379,7 @@ win_secedit:
               tag: CIS-2.3.4.1
               match_output: 'Administrators'
               value_type: 'equal'
-      description: (L1) Ensure 'devices - allowed to format and eject removable media' is set to 'administrators'
+      description: 'Devices Allowed to format and eject removable media'
     devices_prevent_users_from_installing_printer_drivers :
       data:
         'Microsoft Windows Server 2012*':
@@ -387,7 +387,7 @@ win_secedit:
               tag: CIS-2.3.4.2
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'devices - prevent users from installing printer drivers' is set to 'enabled'
+      description: 'Devices Prevent users from installing printer drivers'
     domain_member_digitally_encrypt_or_sign_secure_channel_data_ :
       data:
         'Microsoft Windows Server 2012*':
@@ -395,7 +395,7 @@ win_secedit:
               tag: CIS-2.3.6.1
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'domain member - digitally encrypt or sign secure channel data (always)' is set to 'enabled'
+      description: 'Domain member Digitally encrypt or sign secure channel data '
     domain_member_digitally_encrypt_secure_channel_data :
       data:
         'Microsoft Windows Server 2012*':
@@ -403,7 +403,7 @@ win_secedit:
               tag: CIS-2.3.6.2
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'domain member - digitally encrypt secure channel data (when possible)' is set to 'enabled'
+      description: 'Domain member Digitally encrypt secure channel data '
     domain_member_digitally_sign_secure_channel_data :
       data:
         'Microsoft Windows Server 2012*':
@@ -411,7 +411,7 @@ win_secedit:
               tag: CIS-2.3.6.3
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'domain member - digitally sign secure channel data (when possible)' is set to 'enabled'
+      description: 'Domain member Digitally sign secure channel data '
     domain_member_disable_machine_account_password_changes :
       data:
         'Microsoft Windows Server 2012*':
@@ -419,7 +419,7 @@ win_secedit:
               tag: CIS-2.3.6.4
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'domain member - disable machine account password changes' is set to 'disabled'
+      description: 'Domain member Disable machine account password changes'
     domain_member_maximum_machine_account_password_age :
       data:
         'Microsoft Windows Server 2012*':
@@ -427,7 +427,7 @@ win_secedit:
               tag: CIS-2.3.6.5
               match_output: '31'
               value_type: 'less'
-      description: (L1) Ensure 'domain member - maximum machine account password age' is set to '30 or fewer days, but not 0'
+      description: 'Domain member Maximum machine account password age'
     domain_member_require_strong_session_key :
       data:
         'Microsoft Windows Server 2012*':
@@ -435,7 +435,7 @@ win_secedit:
               tag: CIS-2.3.6.6
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'domain member - require strong (windows 2000 or later) session key' is set to 'enabled'
+      description: 'Domain member Require strong  session key'
     interactive_logon_do_not_display_last_user_name :
       data:
         'Microsoft Windows Server 2012*':
@@ -443,7 +443,7 @@ win_secedit:
               tag: CIS-2.3.7.1
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'interactive logon - do not display last user name' is set to 'enabled'
+      description: 'Interactive logon Do not display last user name'
     interactive_logon_do_not_require_ctrl+alt+del :
       data:
         'Microsoft Windows Server 2012*':
@@ -451,7 +451,7 @@ win_secedit:
               tag: CIS-2.3.7.2
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'interactive logon - do not require ctrl+alt+del' is set to 'disabled'
+      description: 'Interactive logon Do not require CTRL+ALT+DEL'
     interactive_logon_machine_inactivity_limit :
       data:
         'Microsoft Windows Server 2012*':
@@ -459,7 +459,7 @@ win_secedit:
               tag: CIS-2.3.7.3
               match_output: '901'
               value_type: 'less'
-      description: (L1) Ensure 'interactive logon - machine inactivity limit' is set to '900 or fewer second(s), but not 0'
+      description: 'Interactive logon Machine inactivity limit'
     interactive_logon_message_text_for_users_attempting_to_log_on : #NOTE: Configure this
       data:
         'Microsoft Windows Server 2012*':
@@ -467,7 +467,7 @@ win_secedit:
               tag: CIS-2.3.7.4
               match_output: ''
               value_type: 'configured'
-      description: (l1) configure 'interactive logon - message text for users attempting to log on'
+      description: 'Interactive logon Message text for users attempting to log on'
     interactive_logon_message_title_for_users_attempting_to_log_on : #NOTE: Configure this
       data:
         'Microsoft Windows Server 2012*':
@@ -475,7 +475,7 @@ win_secedit:
               tag: CIS-2.3.7.5
               match_output: ''
               value_type: 'configured'
-      description: (l1) configure 'interactive logon - message title for users attempting to log on'
+      description: 'Interactive logon Message title for users attempting to log on'
     interactive_logon_number_of_previous_logons_to_cache:
       data:
         'Microsoft Windows Server 2012*':
@@ -491,7 +491,7 @@ win_secedit:
               tag: CIS-2.3.7.7
               match_output: '15' # between 5 and 14
               value_type: 'less'
-      description: (L1) Ensure 'interactive logon - prompt user to change password before expiration' is set to 'between 5 and 14 days'
+      description: 'Interactive logon Prompt user to change password before expiration'
     interactive_logon_require_domain_controller_authentication_to_unlock_workstation :
       data:
         'Microsoft Windows Server 2012*':
@@ -507,23 +507,23 @@ win_secedit:
               tag: CIS-2.3.7.9
               match_output: 'Lock Workstation' # can be anything but No Action
               value_type: 'equal'
-      description: (L1) Ensure 'interactive logon - smart card removal behavior' is set to 'lock workstation' or higher
-    microsoft_network_client_digitally_sign_communications_always :
+      description: 'Interactive logon Smart card removal behavior'
+    microsoft_network_client_digitally_sign_communications_ :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\System\CurrentControlSet\Services\LanmanWorkstation\Parameters\RequireSecuritySignature':
               tag: CIS-2.3.8.1
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'microsoft network client - digitally sign communications (always)' is set to 'enabled'
-    microsoft_network_client_digitally_sign_communications_if_server_agrees :
+      description: 'Microsoft network client Digitally sign communications '
+    microsoft_network_client_digitally_sign_communications_ :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\System\CurrentControlSet\Services\LanmanWorkstation\Parameters\EnableSecuritySignature':
               tag: CIS-2.3.8.2
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'microsoft network client - digitally sign communications (if server agrees)' is set to 'enabled'
+      description: 'Microsoft network client Digitally sign communications '
     microsoft_network_client_send_unencrypted_password_to_third-party_smb_servers :
       data:
         'Microsoft Windows Server 2012*':
@@ -531,7 +531,7 @@ win_secedit:
               tag: CIS-2.3.8.3
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'microsoft network client - send unencrypted password to third-party smb servers' is set to 'disabled'
+      description: 'Microsoft network client Send unencrypted password to third-party SMB servers'
     microsoft_network_server_amount_of_idle_time_required_before_suspending_session :
       data:
         'Microsoft Windows Server 2012*':
@@ -539,23 +539,23 @@ win_secedit:
               tag: CIS-2.3.9.1
               match_output: '16'
               value_type: 'less'
-      description: (L1) Ensure 'microsoft network server - amount of idle time required before suspending session' is set to '15 or fewer minute(s), but not 0'
-    microsoft_network_server_digitally_sign_communications_always :
+      description: 'Microsoft network server Amount of idle time required before suspending session'
+    microsoft_network_server_digitally_sign_communications_ :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\RequireSecuritySignature':
               tag: CIS-2.3.9.2
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'microsoft network server - digitally sign communications (always)' is set to 'enabled'
-    microsoft_network_server_digitally_sign_communications_if_client_agrees :
+      description: 'Microsoft network server Digitally sign communications '
+    microsoft_network_server_digitally_sign_communications_ :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\EnableSecuritySignature':
               tag: CIS-2.3.9.3
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'microsoft network server - digitally sign communications (if client agrees)' is set to 'enabled'
+      description: 'Microsoft network server Digitally sign communications '
     microsoft_network_server_disconnect_clients_when_logon_hours_expire :
       data:
         'Microsoft Windows Server 2012*':
@@ -563,7 +563,7 @@ win_secedit:
               tag: CIS-2.3.9.4
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'microsoft network server - disconnect clients when logon hours expire' is set to 'enabled'
+      description: 'Microsoft network server Disconnect clients when logon hours expire'
     microsoft_network_server_server_spn_target_name_validation_level :
       data:
         'Microsoft Windows Server 2012*':
@@ -571,248 +571,256 @@ win_secedit:
               tag: CIS-2.3.9.5
               match_output: 'Accept if provided by client'
               value_type: 'equal'
-      description: (L1) Ensure 'microsoft network server - server spn target name validation level' is set to 'accept if provided by client' or higher
+      description: 'Microsoft network server Server SPN target name validation level'
     network_access_allow_anonymous_sid/name_translation :
       data:
         'Microsoft Windows Server 2012*':
           - 'LSAAnonymousNameLookup':
-              tag: CIS-2.3.11.1
+              tag: CIS-2.3.10.1
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'network access - allow anonymous sid/name translation' is set to 'disabled'
+      description: 'Network access Allow anonymous SID/Name translation'
     network_access_do_not_allow_anonymous_enumeration_of_sam_accounts :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\System\CurrentControlSet\Control\Lsa\RestrictAnonymousSAM':
-              tag: CIS-2.3.11.2
+              tag: CIS-2.3.10.2
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'network access - do not allow anonymous enumeration of sam accounts' is set to 'enabled'
+      description: 'Network access Do not allow anonymous enumeration of SAM accounts'
     network_access_do_not_allow_anonymous_enumeration_of_sam_accounts_and_shares :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\System\CurrentControlSet\Control\Lsa\RestrictAnonymous':
-              tag: CIS-2.3.11.3
+              tag: CIS-2.3.10.3
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'network access - do not allow anonymous enumeration of sam accounts and shares' is set to 'enabled'
+      description: 'Network access Do not allow anonymous enumeration of SAM accounts and shares'
+    network_access_do_not_allow_storage_of_passwords_and_credentials_for_network_authentication :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'MACHINE\System\CurrentControlSet\Control\Lsa\DisableDomainCreds':
+              tag: CIS-2.3.10.4
+              match_output: 'Enabled'
+              value_type: 'equal'
+      description: 'Network access Do not allow storage of passwords and credentials for network authentication'
     network_access_let_everyone_persmissions_apply_to_anonymous_users :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\System\CurrentControlSet\Control\Lsa\EveryoneIncludesAnonymous':
-              tag: CIS-2.3.11.5
+              tag: CIS-2.3.10.5
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'network access - let everyone permissions apply to anonymous users' is set to 'disabled'
+      description: 'Network access Let Everyone permissions apply to anonymous users'
     network_access_remotely_accessible_registry_paths :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\System\CurrentControlSet\Control\SecurePipeServers\Winreg\AllowedExactPaths\Machine':
-              tag: CIS-2.3.11.7
+              tag: CIS-2.3.10.7
               match_output: 'System\CurrentControlSet\Control\ProductOptions, System\CurrentControlSet\Control\Server Applications, Software\Microsoft\Windows NT\CurrentVersion'
               value_type: 'equal'
-      description: (L1) Ensure 'network access - remotely accessible registry paths'
+      description: 'Network access Remotely accessible registry paths'
     network_access_remotely_accessible_registry_paths_and_sub-paths :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\System\CurrentControlSet\Control\SecurePipeServers\Winreg\AllowedPaths\Machine':
-              tag: CIS-2.3.11.8
+              tag: CIS-2.3.10.8
               match_output: 'System\CurrentControlSet\Control\Print\Printers, System\CurrentControlSet\Services\Eventlog, Software\Microsoft\OLAP Server, Software\Microsoft\Windows NT\CurrentVersion\Print, Software\Microsoft\Windows NT\CurrentVersion\Windows, System\CurrentControlSet\Control\ContentIndex, System\CurrentControlSet\Control\Terminal Server, System\CurrentControlSet\Control\Terminal Server\UserConfig, System\CurrentControlSet\Control\Terminal Server\DefaultUserConfiguration, Software\Microsoft\Windows NT\CurrentVersion\Perflib, System\CurrentControlSet\Services\SysmonLog'
               value_type: 'equal'
-      description: (L1) Ensure 'network access - remotely accessible registry paths and sub-paths'
+      description: 'Network access Remotely accessible registry paths and sub-paths'
     network_access_restrict_anonymous_access_to_named_pipes_and_shares :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\RestrictNullSessAccess':
-              tag: CIS-2.3.11.9
+              tag: CIS-2.3.10.9
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'network access - restrict anonymous access to named pipes and shares' is set to 'enabled'
+      description: 'Network access Restrict anonymous access to Named Pipes and Shares'
     network_access_sharing_and_security_model_for_local_accounts :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\System\CurrentControlSet\Control\Lsa\ForceGuest':
-              tag: CIS-2.3.11.11
+              tag: CIS-2.3.10.11
               match_output: 'Classic - local users authenticate as themselves'
               value_type: 'equal'
-      description: (L1) Ensure 'network access - sharing and security model for local accounts' is set to 'classic - local users authenticate as themselves'
+      description: 'Network access Sharing and security model for local accounts'
     network_security_allow_local_system_to_use_computer_identity_for_ntlm :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\System\CurrentControlSet\Control\Lsa\UseMachineId':
-              tag: CIS-2.3.12.1
+              tag: CIS-2.3.11.1
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'network security - allow local system to use computer identity for ntlm' is set to 'enabled'
+      description: 'Network security Allow Local System to use computer identity for NTLM'
     network_security_allow_localsystem_null_session_fallback :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\System\CurrentControlSet\Control\Lsa\MSV1_0\allownullsessionfallback':
-              tag: CIS-2.3.12.2
+              tag: CIS-2.3.11.2
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'network security - allow localsystem null session fallback' is set to 'disabled'
+      description: 'Network security Allow LocalSystem NULL session fallback'
     network_security_allow_pku2u_authentication_requests_to_this_computer_to_use_online_identities :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\System\CurrentControlSet\Control\Lsa\pku2u\AllowOnlineID':
-              tag: CIS-2.3.12.3
+              tag: CIS-2.3.11.3
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'network security - allow pku2u authentication requests to this computer to use online identities' is set to 'disabled'
+      description: 'Network Security Allow PKU2U authentication requests to this computer to use online identities'
     network_security_configure_encryption_types_allowed_for_kerberos :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\Kerberos\Parameters\SupportedEncryptionTypes':
-              tag: CIS-2.3.12.4
+              tag: CIS-2.3.11.4
               match_output: 'RC4_HMAC_MD5, AES128_HMAC_SHA1, AES256_HMAC_SHA1, Future encryption types'
               value_type: 'equal'
-      description: (L1) Ensure 'network security - configure encryption types allowed for kerberos' is set to 'rc4_hmac_md5, aes128_hmac_sha1, aes256_hmac_sha1, future encryption types'
+      description: 'Network Security Configure encryption types allowed for Kerberos'
     network_security_do_not_store_lan_manager_hash_value_on_next_password_change :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\System\CurrentControlSet\Control\Lsa\NoLMHash':
-              tag: CIS-2.3.12.5
+              tag: CIS-2.3.11.5
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'network security - do not store lan manager hash value on next password change' is set to 'enabled'
+      description: 'Network security Do not store LAN Manager hash value on next password change'
     network_security_force_logoff_when_logon_hours_expire :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\EnableForcedLogOff':
-              tag: CIS-2.3.12.6
+              tag: CIS-2.3.11.6
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'network security - force logoff when logon hours expire' is set to 'enabled'
+      description: 'Network security Force logoff when logon hours expire'
     network_security_lan_manager_authentication_level :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\System\CurrentControlSet\Control\Lsa\LmCompatibilityLevel':
-              tag: CIS-2.3.12.7
+              tag: CIS-2.3.11.7
               match_output: 'Send NTLMv2 response only. Refuse LM & NTLM'
               value_type: 'equal'
-      description: (L1) Ensure 'network security - lan manager authentication level' is set to 'send ntlmv2 response only. refuse lm & ntlm'
+      description: 'Network security LAN Manager authentication level'
     network_security_ldap_client_signing_requirements :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\System\CurrentControlSet\Services\LDAP\LDAPClientIntegrity':
-              tag: CIS-2.3.12.8
+              tag: CIS-2.3.11.8
               match_output: 'Negotiate signing'
               value_type: 'equal'
-      description: (L1) Ensure 'network security - ldap client signing requirements' is set to 'negotiate signing' or higher
+      description: 'Network security LDAP client signing requirements'
     network_security_minimum_session_security_for_ntlm_ssp_based_clients :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\System\CurrentControlSet\Control\Lsa\MSV1_0\NTLMMinClientSec':
-              tag: CIS-2.3.12.9
+              tag: CIS-2.3.11.9
               match_output: 'Require NTLMv2 session security, Require 128-bit encryption'
               value_type: 'equal'
-      description: (L1) Ensure 'network security - minimum session security for ntlm ssp based (including secure rpc) clients' is set to 'require ntlmv2 session security, require 128-bit encryption'
+      description: 'Network security Minimum session security for NTLM SSP based  clients'
     network_security_minimum_session_security_for_ntlm_ssp_based_(including_secure_rpc_servers :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\System\CurrentControlSet\Control\Lsa\MSV1_0\NTLMMinServerSec':
-              tag: CIS-2.3.12.10
+              tag: CIS-2.3.11.10
               match_output: 'Require NTLMv2 session security, Require 128-bit encryption'
               value_type: 'equal'
-      description: (L1) Ensure 'network security - minimum session security for ntlm ssp based (including secure rpc) servers' is set to 'require ntlmv2 session security, require 128-bit encryption'
+      description: 'Network security Minimum session security for NTLM SSP based (including secure RPC_ servers'
     shutdown_allow_system_to_be_shut_down_without_having_to_log_on :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\ShutdownWithoutLogon':
-              tag: CIS-2.3.14.1
+              tag: CIS-2.3.13.1
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'shutdown - allow system to be shut down without having to log on' is set to 'disabled'
+      description: 'Shutdown Allow system to be shut down without having to log on'
     system_objects_require_case_insensitivity_for_non-windows_subsystems :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\System\CurrentControlSet\Control\Session Manager\Kernel\ObCaseInsensitive':
-              tag: CIS-2.3.16.1
+              tag: CIS-2.3.15.1
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'system objects - require case insensitivity for non-windows subsystems' is set to 'enabled'
+      description: 'System objects Require case insensitivity for non-Windows subsystems'
     system_objects_strengthen_default_permissions_of_internal_system_objects_(e.g._symbolic_links :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\System\CurrentControlSet\Control\Session Manager\ProtectionMode':
-              tag: CIS-2.3.16.2
+              tag: CIS-2.3.15.2
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'system objects - strengthen default permissions of internal system objects (e.g. symbolic links)' is set to 'enabled'
+      description: 'System objects Strengthen default permissions of internal system objects (e.g. Symbolic Links'
     user_account_control_admin_approval_mode_for_the_built-in_administrator_account :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\FilterAdministratorToken':
-              tag: CIS-2.3.18.1
+              tag: CIS-2.3.17.1
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'user account control - admin approval mode for the built-in administrator account' is set to 'enabled'
+      description: 'User Account Control Admin Approval Mode for the Built-in Administrator account'
     user_account_control_allow_uiaccess_applications_to_prompt_for_elevation_without_using_the_secure_desktop :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\EnableUIADesktopToggle':
-              tag: CIS-2.3.18.2
+              tag: CIS-2.3.17.2
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'user account control - allow uiaccess applications to prompt for elevation without using the secure desktop' is set to 'disabled'
+      description: 'User Account Control Allow UIAccess applications to prompt for elevation without using the secure desktop'
     user_account_control_behavior_of_the_elevation_prompt_for_administrators_in_admin_approval_mode :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\ConsentPromptBehaviorAdmin':
-              tag: CIS-2.3.18.3
+              tag: CIS-2.3.17.3
               match_output: 'Prompt for consent on the secure desktop'
               value_type: 'equal'
-      description: (L1) Ensure 'user account control - behavior of the elevation prompt for administrators in admin approval mode' is set to 'prompt for consent on the secure desktop'
+      description: 'User Account Control Behavior of the elevation prompt for administrators in Admin Approval Mode'
     user_account_control_behavior_of_the_elevation_prompt_for_standard_users :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\ConsentPromptBehaviorUser':
-              tag: CIS-2.3.18.4
+              tag: CIS-2.3.17.4
               match_output: 'Automatically deny elevation requests'
               value_type: 'equal'
-      description: (L1) Ensure 'user account control - behavior of the elevation prompt for standard users' is set to 'automatically deny elevation requests'
+      description: 'User Account Control Behavior of the elevation prompt for standard users'
     user_account_control_detect_application_installations_and_prompt_for_elevation :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\EnableInstallerDetection':
-              tag: CIS-2.3.18.5
+              tag: CIS-2.3.17.5
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'user account control - detect application installations and prompt for elevation' is set to 'enabled'
+      description: 'User Account Control Detect application installations and prompt for elevation'
     user_account_control_only_elevate_uiaccess_applications_that_are_installed_in_secure_locations :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\EnableSecureUIAPaths':
-              tag: CIS-2.3.18.6
+              tag: CIS-2.3.17.6
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'user account control - only elevate uiaccess applications that are installed in secure locations' is set to 'enabled'
+      description: 'User Account Control Only elevate UIAccess applications that are installed in secure locations'
     user_account_control_run_all_administrators_in_admin_approval_mode :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\EnableLUA':
-              tag: CIS-2.3.18.7
+              tag: CIS-2.3.17.7
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'user account control - run all administrators in admin approval mode' is set to 'enabled'
+      description: 'User Account Control Run all administrators in Admin Approval Mode'
     user_account_control_switch_to_the_secure_desktop_when_prompting_for_elevation :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\PromptOnSecureDesktop':
-              tag: CIS-2.3.18.8
+              tag: CIS-2.3.17.8
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'user account control - switch to the secure desktop when prompting for elevation' is set to 'enabled'
+      description: 'User Account Control Switch to the secure desktop when prompting for elevation'
     user_account_control_virtualize_file_and_registry_write_failures_to_per-user_locations :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\':
-              tag: CIS-2.3.18.9
+              tag: CIS-2.3.17.9
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'user account control - virtualize file and registry write failures to per-user locations' is set to 'enabled'
-
+      description: 'User Account Control Virtualize file and registry write failures to per-user locations'
+       
   blacklist:
     accounts_rename_administrator_account :
       data:
@@ -821,7 +829,7 @@ win_secedit:
               tag: CIS-2.3.1.5
               match_output: 'Administrator'
               value_type: 'equal'
-      description: (l1) configure 'accounts - rename administrator account'
+      description: 'Accounts Rename administrator account'
     accounts_rename_guest_account :
       data:
         'Microsoft Windows Server 2012*':
@@ -829,23 +837,23 @@ win_secedit:
               tag: CIS-2.3.1.6
               match_output: 'Guest'
               value_type: 'equal'
-      description: (l1) configure 'accounts - rename guest account'
+      description: 'Accounts Rename guest account'
     network_access_named_pipes_that_can_be_accessed_anonymously :
       data:
         'Microsoft Windows Server 2012*':
-          - 'MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\NullSessionPipes':
-              tag: CIS-2.3.11.6
+          - 'MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\':
+              tag: CIS-2.3.10.6
               match_output: ''
               value_type: 'equal'
-      description: (l1) configure 'network access - named pipes that can be accessed anonymously'
+      description: 'Network access Named Pipes that can be accessed anonymously'
     network_access_shares_that_can_be_accessed_anonymously :
       data:
         'Microsoft Windows Server 2012*':
           - 'MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\NullSessionShares':
-              tag: CIS-2.3.11.10
+              tag: CIS-2.3.10.10
               match_output: ''
               value_type: 'equal'
-      description: (L1) Ensure 'network access - shares that can be accessed anonymously' is set to 'none'
+      description: 'Network access Shares that can be accessed anonymously'
     access_credential_manager:
       data:
         'Microsoft Windows Server 2012*':
@@ -853,7 +861,7 @@ win_secedit:
               tag: CIS-2.2.1
               match_output: 'No One'
               value_type: 'match'
-      description: (L1) Ensure 'access credential manager as a trusted caller' is set to 'no one'
+      description: 'Access Credential Manager as a trusted caller must be set to No One'
     act_as_operating_system:
       data:
         'Microsoft Windows Server 2012*':
@@ -861,7 +869,7 @@ win_secedit:
               tag: CIS-2.2.3
               match_output: 'No One'
               value_type: 'match'
-      description: (L1) Ensure 'act as part of the operating system' is set to 'no one'
+      description: 'Act as part of the operating system must be set to No One'
     create_a_token_object :
       data:
         'Microsoft Windows Server 2012*':
@@ -869,7 +877,7 @@ win_secedit:
               tag: CIS-2.2.12
               match_output: 'No One'
               value_type: 'account'
-      description: (L1) Ensure 'create a token object' is set to 'no one'
+      description: 'Create a token object'
     create_permanent_shared_objects :
       data:
         'Microsoft Windows Server 2012*':
@@ -877,7 +885,7 @@ win_secedit:
               tag: CIS-2.2.14
               match_output: 'No One'
               value_type: 'account'
-      description: (L1) Ensure 'create permanent shared objects' is set to 'no one'
+      description: 'Create permanent shared objects'
     enable_computer_and_user_accounts_to_be_trusted_for_delegation :
       data:
         'Microsoft Windows Server 2012*':
@@ -885,7 +893,7 @@ win_secedit:
               tag: CIS-2.2.22
               match_output: 'No one'
               value_type: 'account'
-      description: (l1) configure 'enable computer and user accounts to be trusted for delegation'
+      description: 'Enable computer and user accounts to be trusted for delegation'
     lock_pages_in_memory :
       data:
         'Microsoft Windows Server 2012*':
@@ -893,15 +901,23 @@ win_secedit:
               tag: CIS-2.2.28
               match_output: 'No One'
               value_type: 'account'
-      description: (L1) Ensure 'lock pages in memory' is set to 'no one'
+      description: 'Lock pages in memory'
     modify_an_object_label :
       data:
         'Microsoft Windows Server 2012*':
           - 'SeRelabelPrivilege':
-              tag: CIS-2.2.30
+              tag: CIS-2.2.31
               match_output: 'No One'
               value_type: 'account'
-      description: (L1) Ensure 'modify an object label' is set to 'no one'
+      description: 'Modify an object label'
+    synchronize_directory_service_data :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'SeSyncAgentPrivilege':
+              tag: CIS-2.2.39
+              match_output: 'No One'
+              value_type: 'account'
+      description: 'Synchronize directory service data'
 
 win_firewall:
   whitelist:
@@ -912,7 +928,7 @@ win_firewall:
               tag: CIS-9.1.1
               match_output: 'True'
               value_type: 'domain'
-      description: (L1) Ensure 'windows firewall - domain - firewall state' is set to 'on (recommended)'
+      description: 'Windows Firewall Domain Firewall state'
     windows_firewall_domain_inbound_connections :
       data:
         'Microsoft Windows Server 2012*':
@@ -920,7 +936,7 @@ win_firewall:
               tag: CIS-9.1.2
               match_output: 'Block'
               value_type: 'domain'
-      description: (L1) Ensure 'windows firewall - domain - inbound connections' is set to 'block (default)'
+      description: 'Windows Firewall Domain Inbound connections'
     windows_firewall_domain_outbound_connections :
       data:
         'Microsoft Windows Server 2012*':
@@ -928,71 +944,63 @@ win_firewall:
               tag: CIS-9.1.3
               match_output: 'Allow'
               value_type: 'domain'
-      description: (L1) Ensure 'windows firewall - domain - outbound connections' is set to 'allow (default)'
+      description: 'Windows Firewall Domain Outbound connections'
     windows_firewall_domain_settings_display_a_notification :
       data:
         'Microsoft Windows Server 2012*':
-          - 'DisplayANotification':
+          - 'NotifyOnListen':
               tag: CIS-9.1.4
               match_output: 'False'
               value_type: 'domain'
-      description: (L1) Ensure 'windows firewall - domain - settings - display a notification' is set to 'no'
-    windows_firewall_domain_settings_allow_unicast_response :
-      data:
-        'Microsoft Windows Server 2012*':
-          - 'AllowUnicastResponse':
-              tag: CIS-9.1.5
-              match_output: 'False'
-              value_type: 'domain'
-      description: "(L1) Set 'Windows Firewall: Domain: Allow unicast response' to 'No'"
+      description: 'Windows Firewall Domain Settings Display a notification'
     windows_firewall_domain_settings_apply_local_firewall_rules :
       data:
         'Microsoft Windows Server 2012*':
           - 'AllowLocalFirewallRules':
-              tag: CIS-9.1.6
+              tag: CIS-9.1.5
               match_output: 'True'
               value_type: 'domain'
-      description: (L1) Ensure 'windows firewall - domain - settings - apply local firewall rules' is set to 'yes (default)'
+      description: 'Windows Firewall Domain Settings Apply local firewall rules'
     windows_firewall_domain_settings_apply_local_connection_security_rules :
       data:
         'Microsoft Windows Server 2012*':
           - 'AllowLocalIPsecRules':
-              tag: CIS-9.1.7
+              tag: CIS-9.1.6
               match_output: 'True'
               value_type: 'domain'
-      description: (L1) Ensure 'windows firewall - domain - settings - apply local connection security rules' is set to 'yes (default)'
+      description: 'Windows Firewall Domain Settings Apply local connection security rules'
     windows_firewall_domain_logging_name :
       data:
         'Microsoft Windows Server 2012*':
           - 'LogFileName':
-              tag: CIS-9.1.8
+              tag: CIS-9.1.7
               match_output: '%SYSTEMROOT%\System32\logfiles\firewall\domainfw.log'
               value_type: 'domain'
-      description: (L1) Ensure 'windows firewall - domain - logging - name' is set to '%systemroot%\system32\logfiles\firewall\domainfw.log'
+      description: 'Windows Firewall Domain Logging Name'
     windows_firewall_domain_logging_size_limit :
       data:
         'Microsoft Windows Server 2012*':
           - 'LogMaxSizeKilobytes':
-              tag: CIS-9.1.9
+              tag: CIS-9.1.8
               match_output: '16384'
               value_type: 'domain'
-      description: (L1) Ensure 'windows firewall - domain - logging - size limit (kb)' is set to '16,384 kb or greater'
+      description: 'Windows Firewall Domain Logging Size limit'
     windows_firewall_domain_logging_log_dropped_packets :
       data:
         'Microsoft Windows Server 2012*':
           - 'LogBlocked':
-              tag: CIS-9.1.10
+              tag: CIS-9.1.9
               match_output: 'True'
               value_type: 'domain'
-      description: (L1) Ensure 'windows firewall - domain - logging - log dropped packets' is set to 'yes'
+      description: 'Windows Firewall Domain Logging Log dropped packets'
     windows_firewall_domain_logging_log_successful_connections :
       data:
         'Microsoft Windows Server 2012*':
           - 'LogAllowed':
-              tag: CIS-9.1.11
+              tag: CIS-9.1.10
               match_output: 'True'
               value_type: 'domain'
-      description: (L1) Ensure 'windows firewall - domain - logging - log successful connections' is set to 'yes'
+      description: 'Windows Firewall Domain Logging Log successful connections'
     windows_firewall_private_firewall_state :
       data:
         'Microsoft Windows Server 2012*':
@@ -1000,7 +1008,7 @@ win_firewall:
               tag: CIS-9.2.1
               match_output: 'True'
               value_type: 'private'
-      description: (L1) Ensure 'windows firewall - private - firewall state' is set to 'on (recommended)'
+      description: 'Windows Firewall Private Firewall state'
     windows_firewall_private_inbound_connections :
       data:
         'Microsoft Windows Server 2012*':
@@ -1008,7 +1016,7 @@ win_firewall:
               tag: CIS-9.2.2
               match_output: 'Block'
               value_type: 'private'
-      description: (L1) Ensure 'windows firewall - private - inbound connections' is set to 'block (default)'
+      description: 'Windows Firewall Private Inbound connections'
     windows_firewall_private_outbound_connections :
       data:
         'Microsoft Windows Server 2012*':
@@ -1016,71 +1024,63 @@ win_firewall:
               tag: CIS-9.2.3
               match_output: 'Allow'
               value_type: 'private'
-      description: (L1) Ensure 'windows firewall - private - outbound connections' is set to 'allow (default)'
+      description: 'Windows Firewall Private Outbound connections'
     windows_firewall_private_settings_display_a_notification :
       data:
         'Microsoft Windows Server 2012*':
-          - 'DisplayANotification':
+          - 'NotifyOnListen':
               tag: CIS-9.2.4
               match_output: 'False'
               value_type: 'private'
-      description: (L1) Ensure 'windows firewall - private - settings - display a notification' is set to 'no'
-    windows_firewall_private_settings_allow_unicast_response :
-      data:
-        'Microsoft Windows Server 2012*':
-          - 'AllowUnicastResponse':
-              tag: CIS-9.2.5
-              match_output: 'False'
-              value_type: 'private'
-      description: "(L1) Set 'Windows Firewall: private: Allow unicast response' to 'No'"
+      description: 'Windows Firewall Private Settings Display a notification'
     windows_firewall_private_settings_apply_local_firewall_rules :
       data:
         'Microsoft Windows Server 2012*':
           - 'AllowLocalFirewallRules':
-              tag: CIS-9.2.6
+              tag: CIS-9.2.5
               match_output: 'True'
               value_type: 'private'
-      description: (L1) Ensure 'windows firewall - private - settings - apply local firewall rules' is set to 'yes (default)'
+      description: 'Windows Firewall Private Settings Apply local firewall rules'
     windows_firewall_private_settings_apply_local_connection_security_rules :
       data:
         'Microsoft Windows Server 2012*':
           - 'AllowLocalIPsecRules':
-              tag: CIS-9.2.7
+              tag: CIS-9.2.6
               match_output: 'True'
               value_type: 'private'
-      description: (L1) Ensure 'windows firewall - private - settings - apply local connection security rules' is set to 'yes (default)'
+      description: 'Windows Firewall Private Settings Apply local connection security rules'
     windows_firewall_private_logging_name :
       data:
         'Microsoft Windows Server 2012*':
           - 'LogFileName':
-              tag: CIS-9.2.8
+              tag: CIS-9.2.7
               match_output: '%SYSTEMROOT%\System32\logfiles\firewall\privatefw.log'
               value_type: 'private'
-      description: (L1) Ensure 'windows firewall - private - logging - name' is set to '%systemroot%\system32\logfiles\firewall\privatefw.log'
+      description: 'Windows Firewall Private Logging Name'
     windows_firewall_private_logging_size_limit :
       data:
         'Microsoft Windows Server 2012*':
           - 'LogMaxSizeKilobytes':
-              tag: CIS-9.2.9
+              tag: CIS-9.2.8
               match_output: '16384'
               value_type: 'private'
-      description: (L1) Ensure 'windows firewall - private - logging - size limit (kb)' is set to '16,384 kb or greater'
+      description: 'Windows Firewall Private Logging Size limit'
     windows_firewall_private_logging_log_dropped_packets :
       data:
         'Microsoft Windows Server 2012*':
           - 'LogBlocked':
-              tag: CIS-9.2.10
+              tag: CIS-9.2.9
               match_output: 'True'
               value_type: 'private'
-      description: (L1) Ensure 'windows firewall - private - logging - log dropped packets' is set to 'yes'
+      description: 'Windows Firewall Private Logging Log dropped packets'
     windows_firewall_private_logging_log_successful_connections :
       data:
         'Microsoft Windows Server 2012*':
           - 'LogAllowed':
-              tag: CIS-9.2.11
+              tag: CIS-9.2.10
               match_output: 'True'
               value_type: 'private'
-      description: (L1) Ensure 'windows firewall - private - logging - log successful connections' is set to 'yes'
+      description: 'Windows Firewall Private Logging Log successful connections'
     windows_firewall_public_firewall_state :
       data:
         'Microsoft Windows Server 2012*':
@@ -1088,7 +1088,7 @@ win_firewall:
               tag: CIS-9.3.1
               match_output: 'True'
               value_type: 'public'
-      description: (L1) Ensure 'windows firewall - public - firewall state' is set to 'on (recommended)'
+      description: 'Windows Firewall Public Firewall state'
     windows_firewall_public_inbound_connections :
       data:
         'Microsoft Windows Server 2012*':
@@ -1096,7 +1096,7 @@ win_firewall:
               tag: CIS-9.3.2
               match_output: 'Block'
               value_type: 'public'
-      description: (L1) Ensure 'windows firewall - public - inbound connections' is set to 'block (default)'
+      description: 'Windows Firewall Public Inbound connections'
     windows_firewall_public_outbound_connections :
       data:
         'Microsoft Windows Server 2012*':
@@ -1104,71 +1104,63 @@ win_firewall:
               tag: CIS-9.3.3
               match_output: 'Allow'
               value_type: 'public'
-      description: (L1) Ensure 'windows firewall - public - outbound connections' is set to 'allow (default)'
+      description: 'Windows Firewall Public Outbound connections'
     windows_firewall_public_settings_display_a_notification :
       data:
         'Microsoft Windows Server 2012*':
-          - 'DisplayANotification':
+          - 'NotifyOnListen':
               tag: CIS-9.3.4
               match_output: 'True'
               value_type: 'public'
-      description: (L1) Ensure 'windows firewall - public - settings -  display a notification' is set to 'yes'
-    windows_firewall_public_settings_allow_unicast_response :
-      data:
-        'Microsoft Windows Server 2012*':
-          - 'AllowUnicastResponse':
-              tag: CIS-9.3.5
-              match_output: 'False'
-              value_type: 'public'
-      description: "(L1) Set 'Windows Firewall: Public: Allow unicast response' to 'No'"
+      description: 'Windows Firewall Public Settings Display a notification'
     windows_firewall_public_settings_apply_local_firewall_rules :
       data:
         'Microsoft Windows Server 2012*':
           - 'AllowLocalFirewallRules':
-              tag: CIS-9.3.6
+              tag: CIS-9.3.5
               match_output: 'False'
               value_type: 'public'
-      description: (L1) Ensure 'windows firewall - public - settings -  apply local firewall rules' is set to 'no'
+      description: 'Windows Firewall Public Settings Apply local firewall rules'
     windows_firewall_public_settings_apply_local_connection_security_rules :
       data:
         'Microsoft Windows Server 2012*':
           - 'AllowLocalIPsecRules':
-              tag: CIS-9.3.7
+              tag: CIS-9.3.6
               match_output: 'False'
               value_type: 'public'
-      description: (L1) Ensure 'windows firewall - public - settings -  apply local connection security rules' is set to 'no'
+      description: 'Windows Firewall Public Settings Apply local connection security rules'
     windows_firewall_public_logging_name :
       data:
         'Microsoft Windows Server 2012*':
           - 'LogFileName':
-              tag: CIS-9.3.8
+              tag: CIS-9.3.7
               match_output: '%SYSTEMROOT%\System32\logfiles\firewall\publicfw.log'
               value_type: 'public'
-      description: (L1) Ensure 'windows firewall - public - logging -  name' is set to '%systemroot%\system32\logfiles\firewall\publicfw.log'
+      description: 'Windows Firewall Public Logging Name'
     windows_firewall_public_logging_size_limit_(kb :
       data:
         'Microsoft Windows Server 2012*':
           - 'LogMaxSizeKilobytes':
-              tag: CIS-9.3.9
+              tag: CIS-9.3.8
               match_output: '16384'
               value_type: 'public'
-      description: (L1) Ensure 'windows firewall - public - logging -  size limit (kb)' is set to '16,384 kb or greater'
+      description: 'Windows Firewall Public Logging Size limit'
     windows_firewall_public_logging_log_dropped_packets :
       data:
         'Microsoft Windows Server 2012*':
           - 'LogBlocked':
-              tag: CIS-9.3.10
+              tag: CIS-9.3.9
               match_output: 'True'
               value_type: 'public'
-      description: (L1) Ensure 'windows firewall - public - logging -  log dropped packets' is set to 'yes'
+      description: 'Windows Firewall Public Logging Log dropped packets'
     windows_firewall_public_logging_log_successful_connections :
       data:
         'Microsoft Windows Server 2012*':
           - 'LogAllowed':
-              tag: CIS-9.3.11
+              tag: CIS-9.3.10
               match_output: 'True'
               value_type: 'public'
-      description: (L1) Ensure 'windows firewall - public - logging -  log successful connections' is set to 'yes'
+      description: 'Windows Firewall Public Logging Log successful connections'
 
 win_auditpol:
   whitelist:
@@ -1179,43 +1171,52 @@ win_auditpol:
               tag: CIS-17.1.1
               match_output: 'Success and Failure'
               value_type: 'equal'
-      description: (L1) Ensure 'audit credential validation' is set to 'success and failure'
+      description: 'Ensure Audit Credential Validation is set to Success and Failure'
+
+    Audit Application Group Management :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'Application Group Management':
+              tag: CIS-17.2.1
+              match_output: 'Success and Failure'
+              value_type: 'equal'
+      description: 'Ensure Audit Application Group Management is set to Success and Failure'
 
     Audit Computer Account Management :
       data:
         'Microsoft Windows Server 2012*':
           - 'Computer Account Management':
-              tag: CIS-17.2.1
+              tag: CIS-17.2.2
               match_output: 'Success and Failure'
               value_type: 'equal'
-      description: (L1) Ensure 'audit computer account management' is set to 'success and failure'
+      description: 'Ensure Audit Computer Account Management is set to Success and Failure'
 
     Audit Other Account Management Events :
       data:
         'Microsoft Windows Server 2012*':
           - 'Other Account Management Events':
-              tag: CIS-17.2.3
+              tag: CIS-17.2.4
               match_output: 'Success and Failure'
               value_type: 'equal'
-      description: (L1) Ensure 'audit other account management events' is set to 'success and failure'
+      description: 'Ensure Audit Other Account Management Events is set to Success and Failure'
 
     Audit Security Group Management :
       data:
         'Microsoft Windows Server 2012*':
           - 'Security Group Management':
-              tag: CIS-17.2.4
+              tag: CIS-17.2.5
               match_output: 'Success and Failure'
               value_type: 'equal'
-      description: (L1) Ensure 'audit security group management' is set to 'success and failure'
+      description: 'Ensure Audit Security Group Management is set to Success and Failure'
 
     Audit User Account Management :
       data:
         'Microsoft Windows Server 2012*':
           - 'User Account Management':
-              tag: CIS-17.2.5
+              tag: CIS-17.2.6
               match_output: 'Success and Failure'
               value_type: 'equal'
-      description: (L1) Ensure 'audit User Account management' is set to 'success and failure'
+      description: 'Ensure Audit User Account Management is set to Success and Failure'
 
     Audit Process Creation :
       data:
@@ -1224,7 +1225,7 @@ win_auditpol:
               tag: CIS-17.3.1
               match_output: 'Success'
               value_type: 'equal'
-      description: (L1) Ensure 'audit process creation' is set to 'success'
+      description: 'Ensure Audit Process Creation is set to Success'
 
     Audit Account Lockout :
       data:
@@ -1233,7 +1234,7 @@ win_auditpol:
               tag: CIS-17.5.1
               match_output: 'Success'
               value_type: 'equal'
-      description: (L1) Ensure 'audit account lockout' is set to 'success'
+      description: 'Ensure Audit Account Lockout is set to Success'
 
     Audit Logoff :
       data:
@@ -1242,7 +1243,7 @@ win_auditpol:
               tag: CIS-17.5.2
               match_output: 'Success'
               value_type: 'equal'
-      description: (L1) Ensure 'audit logoff' is set to 'success'
+      description: 'Ensure Audit Logoff is set to Success'
 
     Audit Logon :
       data:
@@ -1251,7 +1252,7 @@ win_auditpol:
               tag: CIS-17.5.3
               match_output: 'Success and Failure'
               value_type: 'equal'
-      description: (L1) Ensure 'audit logon' is set to 'success and failure'
+      description: 'Ensure Audit Logon is set to Success and Failure'
 
     Audit Other Logon/Logoff Events :
       data:
@@ -1260,7 +1261,7 @@ win_auditpol:
               tag: CIS-17.5.4
               match_output: 'Success and Failure'
               value_type: 'equal'
-      description: (L1) Ensure 'audit other logon/logoff events' is set to 'success and failure'
+      description: 'Ensure Audit Other Logon/Logoff Events is set to Success and Failure'
 
     Audit Special Logon :
       data:
@@ -1269,7 +1270,7 @@ win_auditpol:
               tag: CIS-17.5.5
               match_output: 'Success'
               value_type: 'equal'
-      description: (L1) Ensure 'audit special logon' is set to 'success'
+      description: 'Ensure Audit Special Logon is set to Success'
 
     Audit Removable Storage :
       data:
@@ -1278,7 +1279,7 @@ win_auditpol:
               tag: CIS-17.6.1
               match_output: 'Success and Failure'
               value_type: 'equal'
-      description: (L1) Ensure 'audit removable storage' is set to 'success and failure'
+      description: 'Ensure Audit Removable Storage is set to Success and Failure'
 
     Audit Audit Policy Change :
       data:
@@ -1287,7 +1288,7 @@ win_auditpol:
               tag: CIS-17.7.1
               match_output: 'Success and Failure'
               value_type: 'equal'
-      description: (L1) Ensure 'audit audit policy change' is set to 'success and failure'
+      description: 'Ensure Audit Audit Policy Change is set to Success and Failure'
 
     Audit Authentication Policy Change :
       data:
@@ -1296,7 +1297,7 @@ win_auditpol:
               tag: CIS-17.7.2
               match_output: 'Success'
               value_type: 'equal'
-      description: (L1) Ensure 'audit authentication policy change' is set to 'success'
+      description: 'Ensure Audit Authentication Policy Change is set to Success'
 
     Audit Sensitive Privilege Use :
       data:
@@ -1305,7 +1306,7 @@ win_auditpol:
               tag: CIS-17.8.1
               match_output: 'Success and Failure'
               value_type: 'equal'
-      description: (L1) Ensure 'audit sensitive privilege use' is set to 'success and failure'
+      description: 'Ensure Audit Sensitive Privilege Use is set to Success and Failure'
 
     Audit IPsec Driver :
       data:
@@ -1314,7 +1315,7 @@ win_auditpol:
               tag: CIS-17.9.1
               match_output: 'Success and Failure'
               value_type: 'equal'
-      description: (L1) Ensure 'audit ipsec driver' is set to 'success and failure'
+      description: 'Ensure Audit IPsec Driver is set to Success and Failure'
 
     Audit Other System Events :
       data:
@@ -1323,7 +1324,7 @@ win_auditpol:
               tag: CIS-17.9.2
               match_output: 'Success and Failure'
               value_type: 'equal'
-      description: (L1) Ensure 'audit other system events' is set to 'success and failure'
+      description: 'Ensure Audit Other System Events is set to Success and Failure'
 
     Audit Security State Change :
       data:
@@ -1332,7 +1333,7 @@ win_auditpol:
               tag: CIS-17.9.3
               match_output: 'Success'
               value_type: 'equal'
-      description: (L1) Ensure 'audit security state change' is set to 'success'
+      description: 'Ensure Audit Security State Change is set to Success'
 
     Audit Security System Extension :
       data:
@@ -1341,7 +1342,7 @@ win_auditpol:
               tag: CIS-17.9.4
               match_output: 'Success and Failure'
               value_type: 'equal'
-      description: (L1) Ensure 'audit security system extension' is set to 'success and failure'
+      description: 'Ensure Audit Security System Extension is set to Success and Failure'
 
     Audit System Integrity :
       data:
@@ -1350,7 +1351,7 @@ win_auditpol:
               tag: CIS-17.9.5
               match_output: 'Success and Failure'
               value_type: 'equal'
-      description: (L1) Ensure 'audit system integrity' is set to 'success and failure'
+      description: 'Ensure Audit System Integrity is set to Success and Failure'
 
 win_reg:
   whitelist:
@@ -1370,76 +1371,155 @@ win_reg:
               match_output: 'Enabled'
               value_type: 'equal'
       description: 'Ensure Prevent enabling lock screen slide show is set to Enabled'
-
+    Do not allow password expiration time longer than required by policy :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft Services\AdmPwd\PwdExpirationProtectionEnabled':
+              tag: CIS-18.2.2
+              match_output: 'Enabled'
+              value_type: 'equal'
+      description: 'Ensure Do not allow password expiration time longer than required by policy is set to Enabled '
+    Enable Local Admin Password Management :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft Services\AdmPwd\AdmPwdEnabled':
+              tag: CIS-18.2.3
+              match_output: 'Enabled'
+              value_type: 'equal'
+      description: 'Ensure Enable Local Admin Password Management is set to Enabled '
+    Password Settings_ Password Complexity :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft Services\AdmPwd\PasswordComplexity':
+              tag: CIS-18.2.4
+              match_output: 'Enabled: Large letters + small letters + numbers + special characters'
+              value_type: 'equal'
+      description: 'Ensure Password Settings- Password Complexity is set to Enabled. Large letters + small letters + numbers + special characters '
+    Password Settings_ Password Length :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft Services\AdmPwd\PasswordLength':
+              tag: CIS-18.2.5
+              match_output: 'Enabled: 15 or more'
+              value_type: 'equal'
+      description: 'Ensure Password Settings- Password Length is set to Enabled. 15 or more '
+    Password Settings_ Password Age :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft Services\AdmPwd\PasswordAgeDays':
+              tag: CIS-18.2.6
+              match_output: 'Enabled: 30 or fewer'
+              value_type: 'equal'
+      description: 'Ensure Password Settings- Password Age is set to Enabled. 30 or fewer '
     MSS_DisableIPSourceRouting IPv6 IP source routing protection level protects against packet spoofing :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Tcpip6\Parameters\DisableIPSourceRouting':
-              tag: CIS-2.3.10.2
+              tag: CIS-18.3.2
               match_output: 'Enabled' #: Highest protection, source routing is completely disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'mss -  (disableipsourcerouting ipv6) ip source routing protection level (protects against packet spoofing)' is set to 'enabled -  highest protection, source routing is completely disabled'
+      description: 'Ensure MSS_ IP source routing protection level  is set to Enabled Highest protection source routing is completely disabled'
     MSS_ IP source routing protection level protects against packet spoofing :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Tcpip\Parameters\DisableIPSourceRouting':
-              tag: CIS-2.3.10.3
+              tag: CIS-18.3.3
               match_output: 'Enabled' #: Highest protection, source routing is completely disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'mss -  (disableipsourcerouting) ip source routing protection level (protects against packet spoofing)' is set to 'enabled -  highest protection, source routing is completely disabled'ed'
+      description: 'Ensure MSS-IP source routing protection level is set to Enabled Highest protection source routing is completely disabled'
+    MSS_ Allow ICMP redirects to override OSPF generated routes :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Tcpip\Parameters\EnableICMPRedirect':
+              tag: CIS-18.3.4
+              match_output: 'Disabled'
+              value_type: 'equal'
+      description: 'Ensure MSS- Allow ICMP redirects to override OSPF generated routes is set to Disabled'
+    MSS_ Allow the computer to ignore NetBIOS name release requests except from WINS servers :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\NetBT\Parameters\nonamereleaseondemand':
+              tag: CIS-18.3.6
+              match_output: 'Enabled'
+              value_type: 'equal'
+      description: 'Ensure MSS- Allow the computer to ignore NetBIOS name release requests except from WINS servers is set to Enabled'
     MSS_ Enable Safe DLL search mode :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\SafeDllSearchMode':
-              tag: CIS-2.3.10.7
+              tag: CIS-18.3.8
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'mss -  (safedllsearchmode) enable safe dll search mode (recommended)' is set to 'enabled'
+      description: 'Ensure MSS- Enable Safe DLL search mode is set to Enabled'
     MSS_ The time in seconds before the screen saver grace period expires :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\ScreenSaverGracePeriod':
-              tag: CIS-2.3.10.8
+              tag: CIS-18.3.9
               match_output: 'Enabled: 5 or fewer seconds'
               value_type: 'equal'
-      description: (L1) Ensure 'mss -  (screensavergraceperiod) the time in seconds before the screen saver grace period expires (0 recommended)' is set to 'enabled -  5 or fewer seconds'
+      description: 'Ensure MSS- The time in seconds before the screen saver grace period expires is set to Enabled. 5 or fewer seconds'
     MSS_ Percentage threshold for the security event log at which the system will generate a warning :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\Security\WarningLevel':
-              tag: CIS-2.3.10.11
+              tag: CIS-18.3.12
               match_output: 'Enabled' #Enabled: 90% or less
               value_type: 'less'
-      description: (L1) Ensure 'mss -  (warninglevel) percentage threshold for the security event log at which the system will generate a warning' is set to 'enabled -  90% or less'
+      description: 'Ensure MSS- Percentage threshold for the security event log at which the system will generate a warning is set to Enabled. 90 or less'
+    Ensure Turn off Microsoft Peer-to-Peer Networking Services is set to Enabled :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Peernet\Disabled':
+              tag: CIS-18.4.9.2
+              match_output: 'Enabled'
+              value_type: 'equal'
+      description: 'Ensure Turn off Microsoft Peer-to-Peer Networking Services is set to Enabled'
     Prohibit installation and configuration of Network Bridge on your DNS domain network :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Network Connections\NC_AllowNetBridge_NLA':
-              tag: CIS-18.3.10.2
+              tag: CIS-18.4.10.2
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'prohibit installation and configuration of network bridge on your dns domain network' is set to 'enabled'
+      description: 'Ensure Prohibit installation and configuration of Network Bridge on your DNS domain network is set to Enabled'
     Require domain users to elevate when setting a network :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Network Connections\NC_StdDomainUserSetLocation':
-              tag: CIS-18.3.10.3
-              match_output: 'Enabled'
+              tag: CIS-18.4.10.3
+              match_output: ' is set to '
               value_type: 'equal'
-      description: (L1) Ensure 'require domain users to elevate when setting a network's location' is set to 'enabled'
+      description: 'Ensure Require domain users to elevate when setting a networks location is set to Enabled'
     Hardened UNC Paths :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\NetworkProvider\HardenedPaths\\*\NETLOGON':
-              tag: CIS-18.3.13.1
+              tag: CIS-18.4.13.1
               match_output: 'Enabled' #with "Require Mutual Authentication" and "Require Integrity" set for all NETLOGON and SYSVOL shares'
               value_type: 'equal'
-      description: (L1) Ensure 'hardened unc paths' is set to 'enabled, with "require mutual authentication" and "require integrity" set for all netlogon and sysvol shares'
+      description: 'Ensure Hardened UNC Paths is set to Enabled with Require Mutual Authentication and Require Integrity set for all NETLOGON and SYSVOL shares'
+    Disable IPv6 :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TCPIP6\Parameters\DisabledComponents':
+              tag: CIS-18.4.18.2.1
+              match_output: '255'
+              value_type: 'equal'
+      description: 'Disable IPv6 - Ensure TCPIP6 Parameter DisabledComponents is set to 0xff (255)'
+    Minimize the number of simultaneous connections to the Internet or a Windows Domain :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WcmSvc\GroupPolicy\fMinimizeConnections':
+              tag: CIS-18.4.20.1
+              match_output: 'Enabled'
+              value_type: 'equal'
+      description: 'Ensure Minimize the number of simultaneous connections to the Internet or a Windows Domain is set to Enabled'
     Apply UAC restrictions to local accounts on network logons :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\LocalAccountTokenFilterPolicy':
-              tag: CIS-18.5.1
+              tag: CIS-18.6.1
               match_output: 'Enabled'
               value_type: 'equal'
       description: 'Ensure Apply UAC restrictions to local accounts on network logons is set to Enabled '
@@ -1447,55 +1527,55 @@ win_reg:
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Policies\EarlyLaunch\DriverLoadPolicy':
-              tag: CIS-18.7.11.1
-              match_output: 'Enabled' #: Good, unknown and bad but critical'
+              tag: CIS-18.8.11.1
+              match_output: 'Enabled' # Good, unknown and bad but critical'
               value_type: 'equal'
-      description: (L1) Ensure 'boot-start driver initialization policy' is set to 'enabled -  good, unknown and bad but critical'
+      description: 'Ensure Boot-Start Driver Initialization Policy is set to Enabled Good unknown and bad but critical'
     Configure registry policy processing_ Do not apply during periodic background processing :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Group Policy\{35378EAC-683F-11D2-A89A-00C04FBBCFA2}\NoBackgroundPolicy':
-              tag: CIS-18.7.18.2
-              match_output: 'Enabled'# : FALSE'
+              tag: CIS-18.8.18.2
+              match_output: 'Enabled' # FALSE'
               value_type: 'equal'
-      description: (L1) Ensure 'configure registry policy processing - do not apply during periodic background processing' is set to 'enabled -  false'
+      description: 'Ensure Configure registry policy processing. Do not apply during periodic background processing is set to Enabled. FALSE'
     Configure registry policy processing_ Process even if the Group Policy objects have not changed :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Group Policy\{35378EAC-683F-11D2-A89A-00C04FBBCFA2}\NoGPOListChanges':
-              tag: CIS-18.7.18.3
-              match_output: 'Enabled' #: TRUE'
+              tag: CIS-18.8.18.3
+              match_output: 'Enabled' # TRUE'
               value_type: 'equal'
-      description: (L1) Ensure 'configure registry policy processing - process even if the group policy objects have not changed' is set to 'enabled -  true'
+      description: 'Ensure Configure registry policy processing. Process even if the Group Policy objects have not changed is set to Enabled. TRUE'
     Do not display network selection UI :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\System\DontDisplayNetworkSelectionUI':
-              tag: CIS-18.7.24.1
+              tag: CIS-18.8.24.1
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'do not display network selection ui' is set to 'enabled'
+      description: 'Ensure Do not display network selection UI is set to Enabled'
     Do not enumerate connected users on domain-joined computers :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\System\DontEnumerateConnectedUsers':
-              tag: CIS-18.7.24.2
+              tag: CIS-18.8.24.2
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'do not enumerate connected users on domain-joined computers' is set to 'enabled'
+      description: 'Ensure Do not enumerate connected users on domain-joined computers is set to Enabled'
     Turn off app notifications on the lock screen :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\System\DisableLockScreenAppNotifications':
-              tag: CIS-18.7.24.4
+              tag: CIS-18.8.24.4
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'turn off app notifications on the lock screen' is set to 'enabled'
+      description: 'Ensure Turn off app notifications on the lock screen is set to Enabled'
     Enable RPC Endpoint Mapper Client Authentication :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows NT\Rpc\EnableAuthEpResolution':
-              tag: CIS-18.7.31.1
+              tag: CIS-18.8.31.1
               match_output: 'Enabled'
               value_type: 'equal'
       description: 'Ensure Enable RPC Endpoint Mapper Client Authentication is set to Enabled '
@@ -1503,194 +1583,242 @@ win_reg:
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\MSAOptional':
-              tag: CIS-18.8.5.1
+              tag: CIS-18.9.6.1
               match_output: 'Enabled'
               value_type: 'equal'
       description: 'Ensure Allow Microsoft accounts to be optional is set to Enabled'
+    Disallow Autoplay for non-volume devices :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer\NoAutoplayfornonVolume':
+              tag: CIS-18.9.8.1
+              match_output: 'Enabled'
+              value_type: 'equal'
+      description: 'Ensure Disallow Autoplay for non-volume devices is set to Enabled'
+    Set the default behavior for AutoRun :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoAutorun':
+              tag: CIS-18.9.8.2
+              match_output: 'Enabled' # Do not execute any autorun commands'
+              value_type: 'equal'
+      description: 'Ensure Set the default behavior for AutoRun is set to Enabled. Do not execute any autorun commands'
     Turn off Autoplay :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoDriveTypeAutoRun':
-              tag: CIS-18.8.7.2
-              match_output: 'Enabled: All drives'
+              tag: CIS-18.9.8.3
+              match_output: 'Enabled' # All drives
               value_type: 'equal'
-      description: (L1) Ensure 'turn off autoplay' is set to 'enabled -  all drives'
+      description: 'Ensure Turn off Autoplay is set to Enabled. All drives'
     Do not display the password reveal button :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\CredUI\DisablePasswordReveal':
-              tag: CIS-18.8.11.1
+              tag: CIS-18.9.13.1
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'do not display the password reveal button' is set to 'enabled'
+      description: 'Ensure Do not display the password reveal button is set to Enabled'
+    Default Action and Mitigation Settings :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\EMET\SysSettings\AntiDetours': 
+              tag: CIS-18.9.22.2
+              match_output: 'Enabled'
+              value_type: 'equal'
+      description: 'Ensure Default Action and Mitigation Settings is set to Enabled '
     Default Protections for Internet Explorer :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\EMET\Defaults\IE':
-              tag: CIS-18.8.20.2
+              tag: CIS-18.9.22.3
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'default protections for internet explorer' is set to 'enabled'
+      description: 'Ensure Default Protections for Internet Explorer is set to Enabled'
     Default Protections for Popular Software :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\EMET\Defaults':
-              tag: CIS-18.8.20.3
+              tag: CIS-18.9.22.4
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'default protections for popular software' is set to 'enabled'
+      description: 'Ensure Default Protections for Popular Software is set to Enabled'
     Default Protections for Recommended Software :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\EMET\Defaults':
-              tag: CIS-18.8.20.4
+              tag: CIS-18.9.22.5
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'default protections for recommended software' is set to 'enabled'
+      description: 'Ensure Default Protections for Recommended Software is set to Enabled'
     System ASLR :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\EMET\SysSettings\ASLR':
-              tag: CIS-18.8.20.5
-              match_output: 'Enabled'#: Application Opt-In'
+              tag: CIS-18.9.22.6
+              match_output: 'Enabled' # Application Opt-In'
               value_type: 'equal'
-      description: (L1) Ensure 'system aslr' is set to 'enabled -  application opt-in'
+      description: 'Ensure System ASLR is set to Enabled. Application Opt-In'
     System DEP :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\EMET\SysSettings\DEP':
-              tag: CIS-18.8.20.6
-              match_output: 'Enabled'#: Application Opt-Out'
+              tag: CIS-18.9.22.7
+              match_output: 'Enabled' # Application Opt-Out'
               value_type: 'equal'
-      description: (L1) Ensure 'system dep' is set to 'enabled -  application opt-out'
+      description: 'Ensure System DEP is set to Enabled. Application Opt-Out'
     System SEHOP :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\EMET\SysSettings\SEHOP':
-              tag: CIS-18.8.20.7
-              match_output: 'Enabled'#: Application Opt-Out'
+              tag: CIS-18.9.22.8
+              match_output: 'Enabled' # Application Opt-Out'
               value_type: 'equal'
-      description: (L1) Ensure 'system sehop' is set to 'enabled -  application opt-out'
+      description: 'Ensure System SEHOP is set to Enabled. Application Opt-Out'
     Application_ Specify the maximum log file size  :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\EventLog\Application\MaxSize':
-              tag: CIS-18.8.22.1.2
-              match_output: 'Enabled'#_ 32768 or greater'
+              tag: CIS-18.9.24.1.2
+              match_output: 'Enabled' # 32768 or greater'
               value_type: 'equal'
-      description: (L1) Ensure 'application - specify the maximum log file size (kb)' is set to 'enabled -  32,768 or greater'
+      description: 'Ensure Application Specify the maximum log file size is set to Enabled. 32768 or greater'
     Security_ Specify the maximum log file size  :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\EventLog\Security\MaxSize':
-              tag: CIS-18.8.22.2.2
-              match_output: 'Enabled'#_ 196608 or greater'
+              tag: CIS-18.9.24.2.2
+              match_output: 'Enabled' # 196608 or greater'
               value_type: 'equal'
-      description: (L1) Ensure 'security - specify the maximum log file size (kb)' is set to 'enabled -  196,608 or greater'
+      description: 'Ensure Security_ Specify the maximum log file size  is set to Enabled. 196608 or greater'
     Setup_ Specify the maximum log file size  :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\EventLog\Setup\MaxSize':
-              tag: CIS-18.8.22.3.2
+              tag: CIS-18.9.24.3.2
               match_output: 'Enabled' # 32,768 or greater'
               value_type: 'equal'
-      description: (L1) Ensure 'setup - specify the maximum log file size (kb)' is set to 'enabled -  32,768 or greater'
+      description: 'Ensure Setup Specify the maximum log file size is set to Enabled. 32768 or greater'
     System_ Specify the maximum log file size  :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\EventLog\System\MaxSize':
-              tag: CIS-18.8.22.4.2
-              match_output: 'Enabled'#_ 32768 or greater'
+              tag: CIS-18.9.24.4.2
+              match_output: 'Enabled' # 32768 or greater
               value_type: 'equal'
-      description: (L1) Ensure 'system - specify the maximum log file size (kb)' is set to 'enabled -  32,768 or greater'
+      description: 'Ensure System_ Specify the maximum log file size is set to Enabled. 32768 or greater'
     Configure Windows SmartScreen :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\System\EnableSmartScreen':
-              tag: CIS-18.8.26.2
-              match_output: 'Enabled: Require approval from an administrator before running downloaded unknown software'
+              tag: CIS-18.9.28.2
+              match_output: 'Enabled' # Require approval from an administrator before running downloaded unknown software'
               value_type: 'equal'
-      description: (L1) Ensure 'configure windows smartscreen' is set to 'enabled -  require approval from an administrator before running downloaded unknown software'
+      description: 'Ensure Configure Windows SmartScreen is set to Enabled. Require approval from an administrator before running downloaded unknown software'
     Do not allow passwords to be saved :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services\DisablePasswordSaving':
-              tag: CIS-18.8.45.2.2
+              tag: CIS-18.9.48.2.2
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'do not allow passwords to be saved' is set to 'enabled'
+      description: 'Ensure Do not allow passwords to be saved is set to Enabled'
     Do not allow drive redirection :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services\fDisableCdm':
-              tag: CIS-18.8.45.3.3.2
+              tag: CIS-18.9.48.3.3.2
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'do not allow drive redirection' is set to 'enabled'
+      description: 'Ensure Do not allow drive redirection is set to Enabled'
     Always prompt for password upon connection :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services\fPromptForPassword':
-              tag: CIS-18.8.45.3.9.1
+              tag: CIS-18.9.48.3.9.1
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'always prompt for password upon connection' is set to 'enabled'
+      description: 'Ensure Always prompt for password upon connection is set to Enabled'
     Require secure RPC communication :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows NT\Terminal Services\fEncryptRPCTraffic':
-              tag: CIS-18.8.45.3.9.2
+              tag: CIS-18.9.48.3.9.2
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'require secure rpc communication' is set to 'enabled'
+      description: 'Ensure Require secure RPC communication is set to Enabled'
     Set client connection encryption level :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services\MinEncryptionLevel':
-              tag: CIS-18.8.45.3.9.3
-              match_output: 'Enabled'#: High Level'
+              tag: CIS-18.9.48.3.9.3
+              match_output: 'Enabled' # High Level'
               value_type: 'equal'
-      description: (L1) Ensure 'set client connection encryption level' is set to 'enabled -  high level'
+      description: 'Ensure Set client connection encryption level is set to Enabled. High Level'
+    Prevent downloading of enclosures :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Internet Explorer\Feeds\DisableEnclosureDownload':
+              tag: CIS-18.9.49.1
+              match_output: 'Enabled'
+              value_type: 'equal'
+      description: 'Ensure Prevent downloading of enclosures is set to Enabled'
     Prevent the usage of SkyDrive for file storage :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Skydrive\DisableFileSync':
-              tag: CIS-18.8.40.1
+              tag: CIS-18.9.54.1
               match_output: 'Enabled'
               value_type: 'equal'
       description: 'Ensure Prevent the usage of SkyDrive for file storage is set to Enabled'
+    Turn off the offer to update to the latest version of Windows :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore\DisableOSUpgrade':
+              tag: CIS-18.9.58.2
+              match_output: 'Enabled'
+              value_type: 'equal'
+      description: 'Ensure Turn off the offer to update to the latest version of Windows is set to Enabled'
+    Configure Default consent :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting\Consent\DefaultConsent':
+              tag: CIS-18.9.67.2.1
+              match_output: 'Enabled' # Always ask before sending data'
+              value_type: 'equal'
+      description: 'Ensure Configure Default consent is set to Enabled. Always ask before sending data'
     Disallow Digest authentication :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WinRM\Client\AllowDigest':
-              tag: CIS-18.8.77.1.3
+              tag: CIS-18.9.81.1.3
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'disallow digest authentication' is set to 'enabled'
+      description: 'Ensure Disallow Digest authentication is set to Enabled'
     Disallow WinRM from storing RunAs credentials :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WinRM\Service\DisableRunAs':
-              tag: CIS-18.8.77.2.3
+              tag: CIS-18.9.81.2.3
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'disallow winrm from storing runas credentials' is set to 'enabled'
+      description: 'Ensure Disallow WinRM from storing RunAs credentials is set to Enabled'
     Configure Automatic Updates :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate\AU\NoAutoUpdate':
-              tag: CIS-18.8.81.1
+              tag: CIS-18.9.85.1
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'configure automatic updates' is set to 'enabled'
+      description: 'Ensure Configure Automatic Updates is set to Enabled'
     Configure Automatic Updates_ Scheduled install day :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate\AU\ScheduledInstallDay':
-              tag: CIS-18.8.81.2
-              match_output: '0'# - Every day'
+              tag: CIS-18.9.85.2
+              match_output: '0' # Every day'
               value_type: 'equal'
-      description: (L1) Ensure 'configure automatic updates - scheduled install day' is set to '0 - every day'
+      description: 'Ensure Configure Automatic Updates- Scheduled install day is set to 0 - Every day'
     Enable screen saver :
       data:
         'Microsoft Windows Server 2012*':
@@ -1698,15 +1826,15 @@ win_reg:
               tag: CIS-19.1.3.1
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'enable screen saver' is set to 'enabled'
+      description: 'Ensure Enable screen saver is set to Enabled'
     Force specific screen saver_ Screen saver executable name :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_USERS\<SID>\Software\Policies\Microsoft\Windows\Control Panel\Desktop\SCRNSAVE.EXE':
               tag: CIS-19.1.3.2
-              match_output: 'Enabled'#: scrnsave.scr'
+              match_output: 'Enabled' # scrnsave.scr'
               value_type: 'equal'
-      description: (L1) Ensure 'force specific screen saver - screen saver executable name' is set to 'enabled -  scrnsave.scr'
+      description: 'Ensure Force specific screen saver Screen saver executable name is set to Enabled. scrnsave.scr'
     Password protect the screen saver :
       data:
         'Microsoft Windows Server 2012*':
@@ -1714,15 +1842,15 @@ win_reg:
               tag: CIS-19.1.3.3
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'password protect the screen saver' is set to 'enabled'
+      description: 'Ensure Password protect the screen saver is set to Enabled'
     Screen saver timeout :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_USERS\<SID>\Software\Policies\Microsoft\Windows\Control Panel\Desktop\ScreenSaveTimeOut':
               tag: CIS-19.1.3.4
-              match_output: 'Enabled'#: 900 seconds or fewer, but not 0'
+              match_output: 'Enabled' # 900 seconds or fewer, but not 0'
               value_type: 'equal'
-      description: (L1) Ensure 'screen saver timeout' is set to 'enabled -  900 seconds or fewer, but not 0'
+      description: 'Ensure Screen saver timeout is set to Enabled. 900 seconds or fewer but not 0'
     Turn off toast notifications on the lock screen :
       data:
         'Microsoft Windows Server 2012*':
@@ -1730,7 +1858,7 @@ win_reg:
               tag: CIS-19.5.1.1
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'turn off toast notifications on the lock screen' is set to 'enabled'
+      description: 'Ensure Turn off toast notifications on the lock screen is set to Enabled'
     Notify antivirus programs when opening attachments :
       data:
         'Microsoft Windows Server 2012*':
@@ -1738,7 +1866,7 @@ win_reg:
               tag: CIS-19.7.4.2
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'notify antivirus programs when opening attachments' is set to 'enabled'
+      description: 'Ensure Notify antivirus programs when opening attachments is set to Enabled'
     Prevent users from sharing files within their profile. :
       data:
         'Microsoft Windows Server 2012*':
@@ -1746,201 +1874,273 @@ win_reg:
               tag: CIS-19.7.25.1
               match_output: 'Enabled'
               value_type: 'equal'
-      description: (L1) Ensure 'prevent users from sharing files within their profile.' is set to 'enabled'
+      description: 'Ensure Prevent users from sharing files within their profile. is set to Enabled'
 
   blacklist:
     MSS_ Enable Automatic Logon :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\AutoAdminLogon':
-              tag: CIS-2.3.10.1
+              tag: CIS-18.3.1
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'mss -  (autoadminlogon) enable automatic logon (not recommended)' is set to 'disabled'
+      description: 'Ensure MSS_ Enable Automatic Logon is set to Disabled'
+    Ensure Turn on Mapper I/O driver is set to Disabled :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\LLTD\AllowLLTDIOOnDomain':
+              tag: CIS-18.4.8.1
+              match_output: 'Enabled'
+              value_type: 'equal'
+      description: 'Ensure Turn on Mapper I/O (LLTDIO) driver is set to Disabled'
+    Ensure Turn on Responder (RSPNDR) driver is set to Disabled :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\LLTD\AllowRspndrOnDomain':
+              tag: CIS-18.4.8.2
+              match_output: 'Enabled'
+              value_type: 'equal'
+      description: 'Ensure Turn on Responder (RSPNDR) driver is set to Disabled'
     WDigest Authentication :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest\UseLogonCredential':
-              tag: CIS-18.5.2
+              tag: CIS-18.6.2
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'wdigest authentication' is set to 'disabled'
-    Ensure Include command line in process creation events is Disabled:
+      description: 'Ensure WDigest Authentication is set to Disabled'
+    Ensure Include command line in process creation events :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Audit\ProcessCreationIncludeCmdLine_Enabled':
-              tag: CIS-18.7.2.1
+              tag: CIS-18.8.2.1
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'include command line in process creation events' is set to 'disabled'
+      description: 'Ensure Include command line in process creation events is set to Disabled'
     Turn off background refresh of Group Policy :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\DisableBkGndGroupPolicy':
-              tag: CIS-18.7.18.4
+              tag: CIS-18.8.18.4
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'turn off background refresh of group policy' is set to 'disabled'
+      description: 'Ensure Turn off background refresh of Group Policy is set to Disabled'
     Enumerate local users on domain-joined computers :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\System\EnumerateLocalUsers':
-              tag: CIS-18.7.24.3
+              tag: CIS-18.8.24.3
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'enumerate local users on domain-joined computers' is set to 'disabled'
+      description: 'Ensure Enumerate local users on domain-joined computers is set to Disabled'
     Turn on convenience PIN sign-in :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\System\AllowDomainPINLogon':
-              tag: CIS-18.7.24.5
+              tag: CIS-18.8.24.5
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'turn on convenience pin sign-in' is set to 'disabled'
+      description: 'Ensure Turn on convenience PIN sign-in is set to Disabled'
     Configure Offer Remote Assistance :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\policies\Microsoft\Windows NT\Terminal Services\fAllowUnsolicited':
-              tag: CIS-18.7.30.1
+              tag: CIS-18.8.30.1
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'configure offer remote assistance' is set to 'disabled'
+      description: 'Ensure Configure Offer Remote Assistance is set to Disabled'
     Configure Solicited Remote Assistance :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\policies\Microsoft\Windows NT\Terminal Services\fAllowToGetHelp':
-              tag: CIS-18.7.30.2
+              tag: CIS-18.8.30.2
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'configure solicited remote assistance' is set to 'disabled'
+      description: 'Ensure Configure Solicited Remote Assistance is set to Disabled'
     Enumerate administrator accounts on elevation :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\CredUI\EnumerateAdministrators':
-              tag: CIS-18.8.11.2
+              tag: CIS-18.9.13.2
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'enumerate administrator accounts on elevation' is set to 'disabled'
+      description: 'Ensure Enumerate administrator accounts on elevation is set to Disabled'
     Application_ Control Event Log behavior when the log file reaches its maximum size :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\EventLog\Application\Retention':
-              tag: CIS-18.8.22.1.1
+              tag: CIS-18.9.24.1.1
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'application - control event log behavior when the log file reaches its maximum size' is set to 'disabled'
+      description: 'Ensure Application- Control Event Log behavior when the log file reaches its maximum size is set to Disabled'
     Security_ Control Event Log behavior when the log file reaches its maximum size :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\EventLog\Security\Retention':
-              tag: CIS-18.8.22.2.1
+              tag: CIS-18.9.24.2.1
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'security - control event log behavior when the log file reaches its maximum size' is set to 'disabled'
+      description: 'Ensure Security_ Control Event Log behavior when the log file reaches its maximum size is set to Disabled'
     Setup_ Control Event Log behavior when the log file reaches its maximum size :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\EventLog\Setup\Retention':
-              tag: CIS-18.8.22.3.1
+              tag: CIS-18.9.24.3.1
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'setup - control event log behavior when the log file reaches its maximum size' is set to 'disabled'
+      description: 'Ensure Setup- Control Event Log behavior when the log file reaches its maximum size is set to Disabled'
     System_ Control Event Log behavior when the log file reaches its maximum size :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\EventLog\System\Retention':
-              tag: CIS-18.8.22.4.1
+              tag: CIS-18.9.24.4.1
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'system - control event log behavior when the log file reaches its maximum size' is set to 'disabled'
+      description: 'Ensure System- Control Event Log behavior when the log file reaches its maximum size is set to Disabled'
     Turn off Data Execution Prevention for Explorer :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer\NoDataExecutionPrevention':
-              tag: CIS-18.8.26.3
+              tag: CIS-18.9.28.3
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'turn off data execution prevention for explorer' is set to 'disabled'
+      description: 'Ensure Turn off Data Execution Prevention for Explorer is set to Disabled'
+    Turn off heap termination on corruption :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer\NoHeapTerminationOnCorruption':
+              tag: CIS-18.9.28.4
+              match_output: 'Disabled'
+              value_type: 'equal'
+      description: 'Ensure Turn off heap termination on corruption is set to Disabled'
     Turn off shell protocol protected mode :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\PreXPSP2ShellProtocolBehavior':
-              tag: CIS-18.8.26.5
+              tag: CIS-18.9.28.5
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'turn off shell protocol protected mode' is set to 'disabled'
+      description: 'Ensure Turn off shell protocol protected mode is set to Disabled'
+    Do not delete temp folders upon exit :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services\DeleteTempDirsOnExit':
+              tag: CIS-18.9.48.3.11.1
+              match_output: 'Disabled'
+              value_type: 'equal'
+      description: 'Ensure Do not delete temp folders upon exit is set to Disabled'
     Do not use temporary folders per session :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows NT\Terminal Services\PerSessionTempDir':
-              tag: CIS-18.8.45.3.11.1
+              tag: CIS-18.9.48.3.11.2
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'do not use temporary folders per session' is set to 'disabled'
+      description: 'Ensure Do not use temporary folders per session is set to Disabled'
     Allow indexing of encrypted files :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search\AllowIndexingEncryptedStoresOrItems':
-              tag: CIS-18.8.47.2
+              tag: CIS-18.9.50.2
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'allow indexing of encrypted files' is set to 'disabled'
-    Always install with elevated privileges system:
+      description: 'Ensure Allow indexing of encrypted files is set to Disabled'
+    Turn off Automatic Download and Install of updates :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore\AutoDownload':
+              tag: CIS-18.9.58.1
+              match_output: 'Disabled'
+              value_type: 'equal'
+      description: 'Ensure Turn off Automatic Download and Install of updates is set to Disabled'
+    Automatically send memory dumps for OS-generated error reports :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\Windows Error Reporting\AutoApproveOSDumps':
+              tag: CIS-18.9.67.3
+              match_output: 'Disabled'
+              value_type: 'equal'
+      description: 'Ensure Automatically send memory dumps for OS-generated error reports is set to Disabled'
+    Allow user control over installs :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Installer\EnableUserControl':
+              tag: CIS-18.9.69.1
+              match_output: 'Disabled'
+              value_type: 'equal'
+      description: 'Ensure Allow user control over installs is set to Disabled'
+    Always install with elevated privileges :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Installer\AlwaysInstallElevated':
-              tag: CIS-18.8.65.1
+              tag: CIS-18.9.69.2
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'always install with elevated privileges' is set to 'disabled'
+      description: 'Ensure Always install with elevated privileges is set to Disabled'
     Sign-in last interactive user automatically after a system-initiated restart :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\DisableAutomaticRestartSignOn':
-              tag: CIS-18.8.66.1
+              tag: CIS-18.9.70.1
               match_output: 'Disabled'
               value_type: 'equal'
       description: 'Ensure Sign-in last interactive user automatically after a system-initiated restart is set to Disabled'
-    Allow Basic authentication winrm client:
+    Turn on PowerShell Script Block Logging :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging\EnableScriptBlockLogging':
+              tag: CIS-18.9.79.1
+              match_output: 'Disabled'
+              value_type: 'equal'
+      description: 'Ensure Turn on PowerShell Script Block Logging is set to Disabled'
+    Turn on PowerShell Transcription :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\PowerShell\Transcription\EnableTranscripting':
+              tag: CIS-18.9.79.2
+              match_output: 'Disabled'
+              value_type: 'equal'
+      description: 'Ensure Turn on PowerShell Transcription is set to Disabled'
+    Allow Basic authentication :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WinRM\Client\AllowBasic':
-              tag: CIS-18.8.77.1.1
+              tag: CIS-18.9.81.1.1
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'allow basic authentication' is set to 'disabled'
-    Allow unencrypted traffic winrm client:
+      description: 'Ensure Allow Basic authentication is set to Disabled'
+    Allow unencrypted traffic :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WinRM\Client\AllowUnencryptedTraffic':
-              tag: CIS-18.8.77.1.2
+              tag: CIS-18.9.81.1.2
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'allow unencrypted traffic' is set to 'disabled'
-    Allow Basic authentication winrm service:
+      description: 'Ensure Allow unencrypted traffic is set to Disabled'
+    Allow Basic authentication :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WinRM\Service\AllowBasic':
-              tag: CIS-18.8.77.2.1
+              tag: CIS-18.9.81.2.1
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'allow basic authentication' is set to 'disabled'
-    Allow unencrypted traffic winrm service:
+      description: 'Ensure Allow Basic authentication is set to Disabled'
+    Allow unencrypted traffic :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WinRM\Service\AllowUnencryptedTraffic':
-              tag: CIS-18.8.77.2.2
+              tag: CIS-18.9.81.2.2
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'allow unencrypted traffic' is set to 'disabled'
+      description: 'Ensure Allow unencrypted traffic is set to Disabled'
     No auto-restart with logged on users for scheduled automatic updates installations :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate\AU\NoAutoRebootWithLoggedOnUsers':
-              tag: CIS-18.8.81.5
+              tag: CIS-18.9.85.3
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'no auto-restart with logged on users for scheduled automatic updates installations' is set to 'disabled'
+      description: 'Ensure No auto-restart with logged on users for scheduled automatic updates installations is set to Disabled'
     Do not preserve zone information in file attachments :
       data:
         'Microsoft Windows Server 2012*':
@@ -1948,16 +2148,15 @@ win_reg:
               tag: CIS-19.7.4.1
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'do not preserve zone information in file attachments' is set to 'disabled'
-    Always install with elevated privileges user:
+      description: 'Ensure Do not preserve zone information in file attachments is set to Disabled'
+    Always install with elevated privileges :
       data:
         'Microsoft Windows Server 2012*':
           - 'HKEY_USERS\<SID>\Software\Policies\Microsoft\Windows\Installer\AlwaysInstallElevated':
               tag: CIS-19.7.37.1
               match_output: 'Disabled'
               value_type: 'equal'
-      description: (L1) Ensure 'always install with elevated privileges' is set to 'disabled'
-
+      description: 'Ensure Always install with elevated privileges is set to Disabled'
 
 win_pkg:
   whitelist:
@@ -1965,7 +2164,15 @@ win_pkg:
       data:
         'Microsoft Windows Server 2012*':
           - 'EMET':
-              tag: CIS-18.8.20.1
+              tag: CIS-18.9.22.1
               match_output: '5.4'
               value_type: 'more'
-      description: (L1) Ensure 'emet 5.5' or higher is installed
+      description: 'Ensure EMET 5.5 or higher is installed'
+    LAPS AdmPwd GPO Extension / CSE is installed :
+      data:
+        'Microsoft Windows Server 2012*':
+          - 'Navigate to Control Panel\Program\Programs and Features and confirm "lAPS" is listed in the Name column.':
+              tag: CIS-18.2.1
+              match_output: 'Local Administrator Password Solution'
+              value_type: 'equal'
+      description: 'Ensure LAPS AdmPwd GPO Extension / CSE is installed '

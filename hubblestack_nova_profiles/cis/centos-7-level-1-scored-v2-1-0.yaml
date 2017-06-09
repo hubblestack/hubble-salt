@@ -1,3 +1,21 @@
+# NOTE: This CIS Profile only includes Level 1 Scored Items for CentOS 7
+# NOTE: Within this file, there are a few sections that should be tailored to your
+#       organization's specific policy.  Search for '# NOTE: ' comments through the file.
+
+# TODO: Checks that aren't implemented yet:
+#       1.1.21
+#       1.7.1.1
+#       1.7.2
+#       3.6.5
+#       4.2.4
+#       5.4.2
+#       5.4.3
+#       6.1.10-12
+#       6.2.1
+#       6.2.5-19
+
+
+
 grep:
   blacklist:
     legacy_passwd_entries_group:
@@ -48,7 +66,7 @@ grep:
       description: Ensure bootloader password is set
     chargen_disabled:
       data:
-        Red Hat Enterprise Server-7:
+        CentOS Linux-7:
         - /etc/xinetd.d/chargen-dgram:
             pattern: disable
             match_output: yes
@@ -60,7 +78,7 @@ grep:
       description: Ensure chargen services are not enabled
     daytime_disabled:
       data:
-        Red Hat Enterprise Server-7:
+        CentOS Linux-7:
         - /etc/xinetd.d/daytime-dgram:
             pattern: disable
             match_output: yes
@@ -72,7 +90,7 @@ grep:
       description: Ensure daytime services are not enabled
     discard_disabled:
       data:
-        Red Hat Enterprise Server-7:
+        CentOS Linux-7:
         - /etc/xinetd.d/discard-dgram:
             pattern: disable
             match_output: yes
@@ -84,7 +102,7 @@ grep:
       description: Ensure discard services are not enabled
     echo_disabled:
       data:
-        Red Hat Enterprise Server-7:
+        CentOS Linux-7:
         - /etc/xinetd.d/echo-dgram:
             pattern: disable
             match_output: yes
@@ -96,7 +114,7 @@ grep:
       description: Ensure echo services are not enabled
     time_disabled:
       data:
-        Red Hat Enterprise Server-7:
+        CentOS Linux-7:
         - /etc/xinetd.d/time-dgram:
             pattern: disable
             match_output: yes
@@ -235,6 +253,30 @@ grep:
               - '-r'
             tag: CIS-1.1.1.8
       description: Ensure mounting of FAT filesystems is disabled
+    fstab_var_tmp_partition_nodev:
+      data:
+        CentOS Linux-7:
+        - /etc/fstab:
+            match_output: nodev
+            pattern: /var/tmp
+            tag: CIS-1.1.8
+      description: Ensure nodev option set on /var/tmp partition
+    fstab_var_tmp_partition_nosuid:
+      data:
+        CentOS Linux-7:
+        - /etc/fstab:
+            match_output: nosuid
+            pattern: /var/tmp
+            tag: CIS-1.1.9
+      description: Ensure nosuid option set on /var/tmp partition
+    fstab_var_tmp_partition_noexec:
+      data:
+        CentOS Linux-7:
+        - /etc/fstab:
+            match_output: noexec
+            pattern: /var/tmp
+            tag: CIS-1.1.10
+      description: Ensure noexec option set on /var/tmp partition
     fstab_dev_shm_partition_nodev:
       data:
         CentOS Linux-7:
@@ -465,7 +507,8 @@ grep:
       data:
         CentOS Linux-7:
         - /etc/ssh/sshd_config:
-            match_output: 'aes256-ctr,aes192-ctr,aes128-ctr'
+            match_output: '^Ciphers aes256-ctr,aes192-ctr,aes128-ctr$|^Ciphers aes256-ctr,aes128-ctr,aes192-ctr$|^Ciphers aes192-ctr,aes128-ctr,aes256-ctr$|^Ciphers aes192-ctr,aes256-ctr,aes128-ctr$|^Ciphers aes128-ctr,aes256-ctr,aes192-ctr$|^Ciphers aes128-ctr,aes192-ctr,aes256-ctr$'
+            match_output_regex: True
             pattern: Ciphers
             tag: CIS-5.2.11
       description: Ensure only approved ciphers are used
@@ -619,7 +662,7 @@ pkg:
       description: Ensure DHCP Server is not enabled
     slapd:
       data:
-        Red Hat Entetrprise Linux Server-7:
+        CentOS Linux-7:
         - openldap-servers: CIS-2.2.6
       description: Ensure LDAP server is not enabled
     ftp:
@@ -650,6 +693,11 @@ pkg:
         CentOS Linux-7:
         - rsh: CIS-2.3.2
       description: Ensure rsh client is not installed
+    tftp-server2:
+      data:
+        CentOS Linux-7:
+        - tftp-server: CIS-2.1.6
+      description: Ensure tftp server is not enabled
     talk-client:
       data:
         CentOS Linux-7:
@@ -706,9 +754,6 @@ pkg:
         CentOS Linux-7:
         - aide: CIS-1.3.1
       description: Ensure AIDE is installed
-    firewalld:
-      data: {}
-      description: Enable firewalld (Scored)
     tcp_wrappers:
       data:
         CentOS Linux-7:
@@ -717,7 +762,7 @@ pkg:
     iptables:
       data:
         CentOS Linux-7:
-        - iptables: CIS-3.6.1_installed
+        - iptables: CIS-3.6.1
       description: Ensure iptables is installed
     syslog:
       data:
@@ -763,7 +808,7 @@ service:
       description: Ensure HTTP server is not enabled
     pop3_imap:
       data:
-        Red Hat Enterprise LInux Server-7:
+        CentOS Linux-7:
         - dovecot: CIS-2.2.11
       description: Ensure IMAP and POP3 server is not enabled
     samba:
@@ -782,31 +827,21 @@ service:
         - snmpd: CIS-2.2.14
       description: Ensure SNMP Server is not enabled
   whitelist:
-    auditd_running:
-      data:
-        CentOS Linux-7:
-        - auditd: CIS-4.1.1.1_running
-      description: auditd should be running
-    crond_running:
-      data:
-        CentOS Linux-7:
-        - crond: CIS-5.1.1_running
-      description: Ensure cron daemon is enabled
-    iptables_running:
-      data:
-        CentOS Linux-7:
-        - iptables: CIS-3.6.1_running
-      description: Ensure iptables is installed
     rsyslogd_running:
       data:
         CentOS Linux-7:
-        - rsyslog: CIS-4.2.1.1_running
+        - rsyslog: CIS-4.2.1.1
       description: Ensure rsyslog Service is enabled
     syslog-ng_running:
       data:
         CentOS Linux-7:
-        - syslog-ng: CIS-4.2.2.1_running
+        - syslog-ng: CIS-4.2.2.1
       description: Ensure syslog-ng service is enabled
+    crond_running:
+      data:
+        CentOS Linux-7:
+        - crond: CIS-5.1.1
+      description: Ensure cron daemon is enabled
 stat:
   at_cron_allow:
     data:
@@ -1034,17 +1069,6 @@ stat:
           uid: 0
           user: root
     description: Ensure permissions on /etc/ssh/sshd_config are configured
-  warning_banner_motd:
-    data:
-      CentOS Linux-7:
-      - /etc/motd:
-          gid: 0
-          group: root
-          mode: 644
-          tag: CIS-1.7.1.4
-          uid: 0
-          user: root
-    description: Ensure permissions on /etc/motd are configured
   warning_banner_issue:
     data:
       CentOS Linux-7:
@@ -1056,17 +1080,6 @@ stat:
           uid: 0
           user: root
     description: Ensure permissions on /etc/issue are configured
-  warning_banner_issue.net:
-    data:
-      CentOS Linux-7:
-      - /etc/issue.net:
-          gid: 0
-          group: root
-          mode: 644
-          tag: CIS-1.7.1.6
-          uid: 0
-          user: root
-    description: Ensure permissions on /etc/issue.net are configured
 sysctl:
   bad_error_message_protection:
     data:
