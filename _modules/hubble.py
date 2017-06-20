@@ -219,7 +219,7 @@ def audit(configs=None,
         results['Messages'] = 'No audits matched this host in the specified profiles.'
 
     for error in ret.get('Error', []):
-      if not terse_results.has_key('Error'):
+      if not results.has_key('Error'):
         results['Errors'] = []
       results['Errors'].append(error)
 
