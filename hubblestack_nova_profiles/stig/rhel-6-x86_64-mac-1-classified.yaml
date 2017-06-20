@@ -1,0 +1,2078 @@
+####################################################################################################
+# This is the Hubblestack Nova Auditing profile for the DISA SIGS:
+#
+# Source: https://www.stigviewer.com/stig/red_hat_enterprise_linux_6/2016-07-22/MAC-1_Classified/
+# OS Finger: Red Hat Enterprise Linux Server-6
+# ARCH: x86_64 (audit rules do not support b32 rules)
+# Audit Level: MAC-I Classified
+#
+# Installation/Update:
+#   1. Place this file in the stig folder under your nova_profiles location
+#   2. Remove any old / unwanted STIG profiles
+#   3. Clear minion cache: salt \* saltutil.clear_cache
+#   4. sync_all: salt \* saltutil.sync_all
+#   5. hubble.sync: salt \* hubble.sync
+#
+# Coverage:
+#   Total of 175 items in the 2016-07-22 MAC-1 Classified report
+#   170 of the 175 controls are contained in this profile.  The missing controls
+#   are related to  gconftool and the /etc/gconf/gconf.xml.mandatory file.
+#
+# Usage:
+#   To perform a hubble audit using the top.nova file:
+#     salt <tgt> hubble.audit
+#
+#   To perform a hubble audit using all profiles within a folder (sub-folder under nova_profiles):
+#     salt <tgt> hubble.audit <folder_name>
+#     e.g. salt \* hubble.audit stig
+#
+#   To perform a hubble audit for a specific Audit ID:
+#     salt <tgt> hubble.audit <folder_name> <tag>
+#     e.g. salt \* hubble.audit stig V-38491
+#
+# The Description field is structured following this scheme:
+#     (Severity) <Title> <Optional: Check type, if there is more than one performed>
+#     e.g. (MEDIUM) The system must ignore ICMPv6 redirects by default. (sysctl.conf)
+#
+# Tailoring:
+#   You may need to tailor some of these inspections to your system/site to account
+#   for:
+#     1. Your environmental configuration
+#          ex: using McAfee AV Scan vs ClamAV
+#     2. Compensating controls you may have
+#     3. Tailoring you've done for your specific system/environment
+#
+#   For control most commonly modified, we've added a comment that starts with "NOTE: "
+#
+#################################################################################################
+command:
+  no_rhosts_files_on_system:
+    data:
+      'Red Hat Enterprise Linux Server-6':
+        tag:                    V-38491
+        commands:
+          - 'find / -name ".rhosts"':
+              match_output:     .rhosts
+              fail_if_matched:  True
+    description: (HIGH) There must be no .rhosts files on the system. Run 'find / -name ".rhosts"'' to find the offending files.
+  audit_all_discretionary_access_control_modifications_using_lremovexattr:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38559
+        commands:
+          - 'grep "lremovexattr" /etc/audit/audit.rules | grep "auid>=500"':
+              match_output:          '^-a always,exit -F arch=b64 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid>=500 -F auid!=4294967295 -k perm_mod'
+              match_output_regex:    True
+          - 'grep "lremovexattr" /etc/audit/audit.rules | grep "auid=0"':
+              match_output:          '^-a always,exit -F arch=b64 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid=0 -k perm_mod'
+              match_output_regex:    True
+        aggregation: 'and'
+    description: (LOW) The audit system must be configured to audit all discretionary access control permission modifications using lremovexattr.
+  audit_all_discretionary_access_control_modifications_using_lsetxattr:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38561
+        commands:
+          - 'grep "lsetxattr" /etc/audit/audit.rules | grep "auid>=500"':
+              match_output:          '^-a always,exit -F arch=b64 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid>=500 -F auid!=4294967295 -k perm_mod'
+              match_output_regex:    True
+          - 'grep "lsetxattr" /etc/audit/audit.rules | grep "auid=0"':
+              match_output:          '^-a always,exit -F arch=b64 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid=0 -k perm_mod'
+              match_output_regex:    True
+        aggregation: 'and'
+    description: (LOW) The audit system must be configured to audit all discretionary access control permission modifications using lsetxattr.
+  audit_all_discretionary_access_control_modifications_using_setxattr:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38565
+        commands:
+          - 'grep -E "\ssetxattr\s" /etc/audit/audit.rules | grep "auid>=500"':
+              match_output:          '^-a always,exit -F arch=b64 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid>=500 -F auid!=4294967295 -k perm_mod'
+              match_output_regex:    True
+          - 'grep -E "\ssetxattr\s" /etc/audit/audit.rules | grep "auid=0"':
+              match_output:          '^-a always,exit -F arch=b64 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid=0 -k perm_mod'
+              match_output_regex:    True
+        aggregation: 'and'
+    description: (LOW) The audit system must be configured to audit all discretionary access control permission modifications using setxattr.
+  audit_all_discretionary_access_control_modifications_using_lchown:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38558
+        commands:
+          - 'grep "lchown" /etc/audit/audit.rules | grep "auid>=500"':
+              match_output:          '^-a always,exit -F arch=b64 -S chown -S fchown -S fchownat -S lchown -F auid>=500 -F auid!=4294967295 -k perm_mod'
+              match_output_regex:    True
+          - 'grep "lchown" /etc/audit/audit.rules | grep "auid=0"':
+              match_output:          '^-a always,exit -F arch=b64 -S chown -S fchown -S fchownat -S lchown -F auid=0 -k perm_mod'
+              match_output_regex:    True
+        aggregation: 'and'
+    description: (LOW) The audit system must be configured to audit all discretionary access control permission modifications using lchown.
+  audit_all_discretionary_access_control_modifications_using_fchown:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38552
+        commands:
+          - 'grep "fchown" /etc/audit/audit.rules | grep "auid>=500"':
+              match_output:          '^-a always,exit -F arch=b64 -S chown -S fchown -S fchownat -S lchown -F auid>=500 -F auid!=4294967295 -k perm_mod'
+              match_output_regex:    True
+          - 'grep "fchown" /etc/audit/audit.rules | grep "auid=0"':
+              match_output:          '^-a always,exit -F arch=b64 -S chown -S fchown -S fchownat -S lchown -F auid=0 -k perm_mod'
+              match_output_regex:    True
+        aggregation: 'and'
+    description: (LOW) The audit system must be configured to audit all discretionary access control permission modifications using fchown.
+  audit_all_discretionary_access_control_modifications_using_fchmodat:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38550
+        commands:
+          - 'grep "fchmodat" /etc/audit/audit.rules | grep "auid>=500"':
+              match_output:          '^-a always,exit -F arch=b64 -S chmod -S fchmod -S fchmodat -F auid>=500 -F auid!=4294967295 -k perm_mod'
+              match_output_regex:    True
+          - 'grep "fchmodat" /etc/audit/audit.rules | grep "auid=0"':
+              match_output:          '^-a always,exit -F arch=b64 -S chmod -S fchmod -S fchmodat -F auid=0 -k perm_mod'
+              match_output_regex:    True
+        aggregation: 'and'
+    description: (LOW) The audit system must be configured to audit all discretionary access control permission modifications using fchmodat.
+  audit_all_discretionary_access_control_modifications_using_chmod:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38543
+        commands:
+          - 'grep -E "\schmod\s" /etc/audit/audit.rules | grep "auid>=500"':
+              match_output:          '^-a always,exit -F arch=b64 -S chmod -S fchmod -S fchmodat -F auid>=500 -F auid!=4294967295 -k perm_mod'
+              match_output_regex:    True
+          - 'grep -E "\schmod\s" /etc/audit/audit.rules | grep "auid=0"':
+              match_output:          '^-a always,exit -F arch=b64 -S chmod -S fchmod -S fchmodat -F auid=0 -k perm_mod'
+              match_output_regex:    True
+        aggregation: 'and'
+    description: (LOW) The audit system must be configured to audit all discretionary access control permission modifications using chmod.
+  audit_all_discretionary_access_control_modifications_using_fchmod:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38547
+        commands:
+          - 'grep -E "\sfchmod\s" /etc/audit/audit.rules | grep "auid>=500"':
+              match_output:          '^-a always,exit -F arch=b64 -S chmod -S fchmod -S fchmodat -F auid>=500 -F auid!=4294967295 -k perm_mod'
+              match_output_regex:    True
+          - 'grep -E "\sfchmod\s" /etc/audit/audit.rules | grep "auid=0"':
+              match_output:          '^-a always,exit -F arch=b64 -S chmod -S fchmod -S fchmodat -F auid=0 -k perm_mod'
+              match_output_regex:    True
+        aggregation: 'and'
+    description: (LOW) The audit system must be configured to audit all discretionary access control permission modifications using fchmod.
+  audit_all_discretionary_access_control_modifications_using_fsetxattr:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38557
+        commands:
+          - 'grep "fsetxattr" /etc/audit/audit.rules | grep "auid>=500"':
+              match_output:          '^-a always,exit -F arch=b64 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid>=500 -F auid!=4294967295 -k perm_mod'
+              match_output_regex:    True
+          - 'grep "fsetxattr" /etc/audit/audit.rules | grep "auid=0"':
+              match_output:          '^-a always,exit -F arch=b64 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid=0 -k perm_mod'
+              match_output_regex:    True
+        aggregation: 'and'
+    description: (LOW) The audit system must be configured to audit all discretionary access control permission modifications using fsetxattr.
+  audit_all_discretionary_access_control_modifications_using_fremovexattr:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38556
+        commands:
+          - 'grep "fremovexattr" /etc/audit/audit.rules | grep "auid>=500"':
+              match_output:          '^-a always,exit -F arch=b64 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid>=500 -F auid!=4294967295 -k perm_mod'
+              match_output_regex:    True
+          - 'grep "fremovexattr" /etc/audit/audit.rules | grep "auid=0"':
+              match_output:          '^-a always,exit -F arch=b64 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid=0 -k perm_mod'
+              match_output_regex:    True
+        aggregation: 'and'
+    description: (LOW) The audit system must be configured to audit all discretionary access control permission modifications using fremovexattr.
+  audit_all_discretionary_access_control_modifications_using_removexattr:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38563
+        commands:
+          - 'grep -E "\sremovexattr\s" /etc/audit/audit.rules | grep "auid>=500"':
+              match_output:          '^-a always,exit -F arch=b64 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid>=500 -F auid!=4294967295 -k perm_mod'
+              match_output_regex:    True
+          - 'grep -E "\sremovexattr\s" /etc/audit/audit.rules | grep "auid=0"':
+              match_output:          '^-a always,exit -F arch=b64 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid=0 -k perm_mod'
+              match_output_regex:    True
+        aggregation: 'and'
+    description: (LOW) The audit system must be configured to audit all discretionary access control permission modifications using removexattr.
+  audit_all_discretionary_access_control_modifications_using_fchownat:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38554
+        commands:
+          - 'grep "fchownat" /etc/audit/audit.rules | grep "auid>=500"':
+              match_output:          '^-a always,exit -F arch=b64 -S chown -S fchown -S fchownat -S lchown -F auid>=500 -F auid!=4294967295 -k perm_mod'
+              match_output_regex:    True
+          - 'grep "fchownat" /etc/audit/audit.rules | grep "auid=0"':
+              match_output:          '^-a always,exit -F arch=b64 -S chown -S fchown -S fchownat -S lchown -F auid=0 -k perm_mod'
+              match_output_regex:    True
+        aggregation: 'and'
+    description: (LOW) The audit system must be configured to audit all discretionary access control permission modifications using fchownat.
+  audit_all_discretionary_access_control_modifications_using_chown:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38545
+        commands:
+          - 'grep -E "\schown\s" /etc/audit/audit.rules | grep "auid>=500"':
+              match_output:          '^-a always,exit -F arch=b64 -S chown -S fchown -S fchownat -S lchown -F auid>=500 -F auid!=4294967295 -k perm_mod'
+              match_output_regex:    True
+          - 'grep -E "\schown\s" /etc/audit/audit.rules | grep "auid=0"':
+              match_output:          '^-a always,exit -F arch=b64 -S chown -S fchown -S fchownat -S lchown -F auid=0 -k perm_mod'
+              match_output_regex:    True
+        aggregation: 'and'
+    description: (LOW) The audit system must be configured to audit all discretionary access control permission modifications using chown.
+  audit_clock_settime:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38527
+        commands:
+          - 'grep "clock_settime" /etc/audit/audit.rules':
+              match_output:          '^-a always,exit -F arch=b64 -S adjtimex -S settimeofday -S clock_settime -k audit_time_rules'
+              match_output_regex:    True
+    description: (LOW) The audit system must be configured to audit all attempts to alter system time through clock_settime.
+  audit_stime:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38525
+        commands:
+          - 'grep "settimeofday" /etc/audit/audit.rules':
+              match_output:          '^-a always,exit -F arch=b64 -S adjtimex -S settimeofday -S clock_settime -k audit_time_rules'
+              match_output_regex:    True
+    description: (LOW) The audit system must be configured to audit all attempts to alter system time through stime. On a 64-bit system, the "-S stime" is not necessary.
+  audit_settimeofday:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38522
+        commands:
+          - 'grep "settimeofday" /etc/audit/audit.rules':
+              match_output:          '^-a always,exit -F arch=b64 -S adjtimex -S settimeofday -S clock_settime -k audit_time_rules'
+              match_output_regex:    True
+    description: (LOW) The audit system must be configured to audit all attempts to alter system time through settimeofday.
+  audit_adjtimex:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38635
+        commands:
+          - 'grep "adjtimex" /etc/audit/audit.rules':
+              match_output:          '^-a always,exit -F arch=b64 -S adjtimex -S settimeofday -S clock_settime -k audit_time_rules'
+              match_output_regex:    True
+    description: (LOW) The audit system must be configured to audit all attempts to alter system time through adjtimex.
+  audit_account_disabling_actions:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38536
+        commands:
+          - 'grep -E "^-w\s+/etc/group" /etc/audit/audit.rules':
+              match_output:          '^-w /etc/group -p wa -k audit_account_changes'
+              match_output_regex:    True
+          - 'grep -E "^-w\s+/etc/passwd" /etc/audit/audit.rules':
+              match_output:          '^-w /etc/passwd -p wa -k audit_account_changes'
+              match_output_regex:    True
+          - 'grep -E "^-w\s+/etc/shadow" /etc/audit/audit.rules':
+              match_output:          '^-w /etc/shadow -p wa -k audit_account_changes'
+              match_output_regex:    True
+          - 'grep -E "^-w\s+/etc/gshadow" /etc/audit/audit.rules':
+              match_output:          '^-w /etc/gshadow -p wa -k audit_account_changes'
+              match_output_regex:    True
+          - 'grep -E "^-w\s+/etc/security/opasswd" /etc/audit/audit.rules':
+              match_output:          '^-w /etc/security/opasswd -p wa -k audit_account_changes'
+              match_output_regex:    True
+        aggregation: 'and'
+    description: (LOW) The operating system must automatically audit account disabling actions.
+  audit_account_termination_actions:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38538
+        commands:
+          - 'grep -E "^-w\s+/etc/group" /etc/audit/audit.rules':
+              match_output:          '^-w /etc/group -p wa -k audit_account_changes'
+              match_output_regex:    True
+          - 'grep -E "^-w\s+/etc/passwd" /etc/audit/audit.rules':
+              match_output:          '^-w /etc/passwd -p wa -k audit_account_changes'
+              match_output_regex:    True
+          - 'grep -E "^-w\s+/etc/shadow" /etc/audit/audit.rules':
+              match_output:          '^-w /etc/shadow -p wa -k audit_account_changes'
+              match_output_regex:    True
+          - 'grep -E "^-w\s+/etc/gshadow" /etc/audit/audit.rules':
+              match_output:          '^-w /etc/gshadow -p wa -k audit_account_changes'
+              match_output_regex:    True
+          - 'grep -E "^-w\s+/etc/security/opasswd" /etc/audit/audit.rules':
+              match_output:          '^-w /etc/security/opasswd -p wa -k audit_account_changes'
+              match_output_regex:    True
+        aggregation: 'and'
+    description: (LOW) The operating system must automatically audit account termination.
+  audit_account_creation_actions:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38531
+        commands:
+          - 'grep -E "^-w\s+/etc/group" /etc/audit/audit.rules':
+              match_output:          '^-w /etc/group -p wa -k audit_account_changes'
+              match_output_regex:    True
+          - 'grep -E "^-w\s+/etc/passwd" /etc/audit/audit.rules':
+              match_output:          '^-w /etc/passwd -p wa -k audit_account_changes'
+              match_output_regex:    True
+          - 'grep -E "^-w\s+/etc/shadow" /etc/audit/audit.rules':
+              match_output:          '^-w /etc/shadow -p wa -k audit_account_changes'
+              match_output_regex:    True
+          - 'grep -E "^-w\s+/etc/gshadow" /etc/audit/audit.rules':
+              match_output:          '^-w /etc/gshadow -p wa -k audit_account_changes'
+              match_output_regex:    True
+          - 'grep -E "^-w\s+/etc/security/opasswd" /etc/audit/audit.rules':
+              match_output:          '^-w /etc/security/opasswd -p wa -k audit_account_changes'
+              match_output_regex:    True
+        aggregation: 'and'
+    description: (LOW) The operating system must automatically audit account creation.
+  audit_account_modification_actions:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38534
+        commands:
+          - 'grep -E "^-w\s+/etc/group" /etc/audit/audit.rules':
+              match_output:          '^-w /etc/group -p wa -k audit_account_changes'
+              match_output_regex:    True
+          - 'grep -E "^-w\s+/etc/passwd" /etc/audit/audit.rules':
+              match_output:          '^-w /etc/passwd -p wa -k audit_account_changes'
+              match_output_regex:    True
+          - 'grep -E "^-w\s+/etc/shadow" /etc/audit/audit.rules':
+              match_output:          '^-w /etc/shadow -p wa -k audit_account_changes'
+              match_output_regex:    True
+          - 'grep -E "^-w\s+/etc/gshadow" /etc/audit/audit.rules':
+              match_output:          '^-w /etc/gshadow -p wa -k audit_account_changes'
+              match_output_regex:    True
+          - 'grep -E "^-w\s+/etc/security/opasswd" /etc/audit/audit.rules':
+              match_output:          '^-w /etc/security/opasswd -p wa -k audit_account_changes'
+              match_output_regex:    True
+        aggregation: 'and'
+    description: (LOW) The operating system must automatically audit account modification.
+  audit_selinux_modification_actions:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38541
+        commands:
+          - 'grep -E "^-w\s+/etc/selinux/" /etc/audit/audit.rules':
+              match_output:          '^-w /etc/selinux/ -p wa -k MAC-policy'
+              match_output_regex:    True
+    description: (LOW) The audit system must be configured to audit modifications to the systems Mandatory Access Control (MAC) configuration (SELinux).
+  audit_sudoers_modification_actions:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38578
+        commands:
+          - 'grep -E "^-w\s+/etc/sudoers" /etc/audit/audit.rules':
+              match_output:          '^-w /etc/sudoers -p wa -k actions'
+              match_output_regex:    True
+    description: (LOW) The audit system must be configured to audit changes to the /etc/sudoers file.
+  audit_localtime_modification_actions:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38530
+        commands:
+          - 'grep -E "^-w\s+/etc/localtime" /etc/audit/audit.rules':
+              match_output:          '^-w /etc/localtime -p wa -k audit_time_rules'
+              match_output_regex:    True
+    description: (LOW) The audit system must be configured to audit all attempts to alter system time through /etc/localtime.
+  audit_user_deletions_of_files_programs:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag:  V-38575
+        commands:
+          - 'grep "unlink" /etc/audit/audit.rules | grep "auid>=500"':
+              match_output:          '^-a always,exit -F arch=b64 -S unlink -S unlinkat -S rename -S renameat -F auid>=500 -F auid!=4294967295 -k delete'
+              match_output_regex:    True
+          - 'grep "unlink" /etc/audit/audit.rules | grep "auid=0"':
+              match_output:          '^-a always,exit -F arch=b64 -S unlink -S unlinkat -S rename -S renameat -F auid=0 -k delete'
+              match_output_regex:    True
+        aggregation: 'and'
+    description: (LOW) The audit system must be configured to audit user deletions of files and programs.
+  audit_successful_file_system_mounts:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38568
+        commands:
+          - 'grep -E "\-S mount" /etc/audit/audit.rules | grep "auid>=500"':
+              match_output:          '^-a always,exit -F arch=b64 -S mount -S umount2 -F auid>=500 -F auid!=4294967295 -k export'
+              match_output_regex:    True
+          - 'grep -E "\-S mount" /etc/audit/audit.rules | grep "auid=0"':
+              match_output:          '^-a always,exit -F arch=b64 -S mount -S umount2 -F auid=0 -k export'
+              match_output_regex:    True
+        aggregation: 'and'
+    description: (LOW) The audit system must be configured to audit successful file system mounts.
+  audit_loading_unloading_dynamic_kernel_modules:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38580
+        commands:
+          - 'grep "^-w /sbin/insmod" /etc/audit/audit.rules':
+              match_output:          '^-w /sbin/insmod -p x -k modules'
+              match_output_regex:    True
+          - 'grep "^-w /sbin/rmmod" /etc/audit/audit.rules':
+              match_output:          '^-w /sbin/rmmod -p x -k modules'
+              match_output_regex:    True
+          - 'grep "^-w /sbin/modprobe" /etc/audit/audit.rules':
+              match_output:          '^-w /sbin/modprobe -p x -k modules'
+              match_output_regex:    True
+          - 'grep -E "\-S init_module" /etc/audit/audit.rules':
+              match_output:          '^-a always,exit -F arch=b64 -S init_module -S delete_module -S finit_module -k modules'
+              match_output_regex:    True
+        aggregation: 'and'
+    description: (MEDIUM) The audit system must be configured to audit the loading and unloading of dynamic kernel modules.
+  cryptographically_verify_packages_repos:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38487
+        commands:
+          - 'grep "gpgcheck" /etc/yum.repos.d/*':
+              match_output:          ^.*\:gpgcheck=0
+              match_output_regex:    True
+              match_output_by_line:  True
+    description: (LOW) The system package management tool must cryptographically verify the authenticity of all software packages during installation. (repos.d directory files)
+  rds_protocol_disabled:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38516
+        commands:
+          - 'grep -E "^install\s+rds\s+/bin/true" /etc/modprobe.d/*':
+              match_output:          ^.*\:install rds /bin/true
+              match_output_regex:    True
+              match_output_by_line:  True
+    description: (LOW) The Reliable Datagram Sockets (RDS) protocol must be disabled unless required.
+  disable_usb_devices:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38490
+        commands:
+          - 'grep -E "^install\s+usb-storage\s+/bin/true" /etc/modprobe.d/*':
+              match_output:          ^.*\:install usb-storage /bin/true
+              match_output_regex:    True
+              match_output_by_line:  True
+    description: (MEDIUM) The operating system must enforce requirements for the connection of mobile devices to operating systems.
+  disable_ipv6_modprobe:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38546
+        commands:
+          - 'grep -E "^options\s+ipv6\s+disable" /etc/modprobe.d/*':
+              match_output:          ^.*\:options\s+ipv6\s+disable\s*=\s*1
+              match_output_regex:    True
+              match_output_by_line:  True
+    description: (MEDIUM) The IPv6 protocol handler must not be bound to the network stack unless needed. (modprobe)
+  disable_tipc_modprobe:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38517
+        commands:
+          - 'grep -E "^install\s+tipc\s+/bin/true" /etc/modprobe.d/*':
+              match_output:          ^.*\:install tipc /bin/true
+              match_output_regex:    True
+              match_output_by_line:  True
+    description: (MEDIUM) The Transparent Inter-Process Communication (TIPC) protocol must be disabled unless required. (modprobe)
+  disable_sctp_modprobe:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38515
+        commands:
+          - 'grep -E "^install\s+sctp\s+/bin/true" /etc/modprobe.d/*':
+              match_output:          ^.*\:install sctp /bin/true
+              match_output_regex:    True
+              match_output_by_line:  True
+    description: (MEDIUM) The Stream Control Transmission Protocol (SCTP) must be disabled unless required. (modprobe)
+  disable_dccp_modprobe:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38514
+        commands:
+          - 'grep -E "^install\s+dccp\s+/bin/true" /etc/modprobe.d/*':
+              match_output:          ^.*\:install dccp /bin/true
+              match_output_regex:    True
+              match_output_by_line:  True
+    description: (MEDIUM) The Datagram Congestion Control Protocol (DCCP) must be disabled unless required. (modprobe)
+  enable_auditing_at_boot_time:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38438
+        commands:
+          - 'grep -E "^[^#]\s*kernel.*" /boot/grub/grub.conf':
+              match_output:          ^[^#]\s*kernel.*audit=1.*
+              match_output_regex:    True
+              match_output_by_line:  True
+    description: (LOW) Auditing must be enabled at boot by setting a kernel parameter.
+  no_hashes_in_etc_passwd:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38499
+        commands:
+          - 'grep -v -i "^\S[^:]*:x:" /etc/passwd':
+              match_output:          .*
+              match_output_regex:    True
+              fail_if_matched:       True
+    description: (MEDIUM) The /etc/passwd file must not contain password hashes.
+  only_one_acct_with_uid_of_0:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38500
+        commands:
+          - 'grep -i "^\S[^:]*:x:0:" /etc/passwd | wc -l':
+              match_output:          '1'
+              match_output_regex:    True
+    description: (MEDIUM) The root account must be the only account having a UID of 0.
+  backup_audit_records:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38520
+        commands:
+          - 'grep -E "^\*\.\*\s+" /etc/rsyslog.conf':
+              match_output:           ^\*\.\*\s+(@|@@|:omrelp:)\S*.*
+              match_output_regex:     True
+              match_output_by_line:   True
+    description: (MEDIUM) The operating system must back up audit records on an organization defined frequency onto a different system or media than the system being audited.
+  backup_audit_records_2:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38521
+        commands:
+          - 'grep -E "^\*\.\*\s+" /etc/rsyslog.conf':
+              match_output:           ^\*\.\*\s+(@|@@|:omrelp:)\S*.*
+              match_output_regex:     True
+              match_output_by_line:   True
+    description: (MEDIUM) The operating system must back up audit records on an organization defined frequency onto a different system or media than the system being audited.
+  dhcp_disabled:
+    # NOTE: may need to tailor this control is dhcp is needed
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38679
+        commands:
+          - 'grep -E "^BOOTPROTO" /etc/sysconfig/network-scripts/ifcfg-*':
+              match_output:          ^.*\:BOOTPROTO\s*=\s*none
+              match_output_regex:    True
+              match_output_by_line:  True
+    description: (MEDIUM) The DHCP client must be disabled if not needed.
+  disable_accounts_3_consec_unsuccessful_logons:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38573
+        commands:
+          - 'grep -E "^auth\s+required\s+pam_faillock\.so\s+preauth" /etc/pam.d/system-auth':
+              match_output:          ^auth\s+required\s+pam_faillock\.so\s+preauth\s+silent\s+deny=3\s+unlock_time=900\s+fail_interval=900.*
+              match_output_regex:    True
+          - 'grep -E "^auth\s+\[default=die\]\s+pam_faillock\.so" /etc/pam.d/system-auth':
+              match_output:          ^auth\s+\[default=die\]\s+pam_faillock\.so\s+authfail\s+deny=3\s+unlock_time=900\s+fail_interval=900.*
+              match_output_regex:    True
+          - 'grep -E "^account\s+required\s+pam_faillock\.so" /etc/pam.d/system-auth':
+              match_output:          ^account\s+required\s+pam_faillock\.so.*
+              match_output_regex:    True
+        aggregation: 'and'
+    description:    (MEDIUM) The system must disable accounts after three consecutive unsuccessful logon attempts.
+  require_admin_action_after_3_consec_unsuccessful_logons:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38592
+        commands:
+          - 'grep -E "^auth\s+required\s+pam_faillock\.so\s+preauth" /etc/pam.d/system-auth':
+              match_output:          ^auth\s+required\s+pam_faillock\.so\s+preauth\s+silent\s+deny=3\s+unlock_time=900\s+fail_interval=900.*
+              match_output_regex:    True
+          - 'grep -E "^auth\s+\[default=die\]\s+pam_faillock\.so" /etc/pam.d/system-auth':
+              match_output:          ^auth\s+\[default=die\]\s+pam_faillock\.so\s+authfail\s+deny=3\s+unlock_time=900\s+fail_interval=900.*
+              match_output_regex:    True
+          - 'grep -E "^account\s+required\s+pam_faillock\.so" /etc/pam.d/system-auth':
+              match_output:          ^account\s+required\s+pam_faillock\.so.*
+              match_output_regex:    True
+        aggregation: 'and'
+    description:    (MEDIUM) The system must require administrator action to unlock an account locked by excessive failed login attempts.
+  disable_for_15_min_unsuccessful_logons:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38501
+        commands:
+          - 'grep -E "^auth\s+required\s+pam_faillock\.so\s+preauth" /etc/pam.d/system-auth':
+              match_output:          ^auth\s+required\s+pam_faillock\.so\s+preauth\s+silent\s+deny=3\s+unlock_time=900\s+fail_interval=900.*
+              match_output_regex:    True
+          - 'grep -E "^auth\s+\[default=die\]\s+pam_faillock\.so" /etc/pam.d/system-auth':
+              match_output:          ^auth\s+\[default=die\]\s+pam_faillock\.so\s+authfail\s+deny=3\s+unlock_time=900\s+fail_interval=900.*
+              match_output_regex:    True
+          - 'grep -E "^account\s+required\s+pam_faillock\.so" /etc/pam.d/system-auth':
+              match_output:          ^account\s+required\s+pam_faillock\.so.*
+              match_output_regex:    True
+        aggregation: 'and'
+    description:    (MEDIUM) The system must disable accounts after excessive login failures within a 15-minute interval.
+  rsyslog_gen_files_owned_by_root:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38518
+        commands:
+          - 'grep "^\$FileOwner.*" /etc/rsyslog.conf':
+              match_output:       ^\$FileOwner\s+root.*
+              match_output_regex: True
+    description: (MEDIUM) All rsyslog-generated log files must be owned by root.
+  rlogind_not_running_chkconfig:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38602
+        commands:
+          - 'chkconfig --list rlogind':
+              match_output:       ^rlogind.*:on\s+.*
+              match_output_regex: True
+              fail_if_matched:    False
+    description: (HIGH) The rlogind service must not be running. (chkconfig)
+  rshd_not_running_chkconfig:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38594
+        commands:
+          - 'chkconfig --list rsh':
+              match_output:       ^rsh.*:on\s+.*
+              match_output_regex: True
+              fail_if_matched:    True
+    description: (HIGH) The rshd service must not be running. (chkconfig)
+  rexecd_not_running_chkconfig:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38598
+        commands:
+          - 'chkconfig --list rexec':
+              match_output:       ^rexec.*:on\s+.*
+              match_output_regex: True
+              fail_if_matched:    True
+    description: (HIGH) The rexecd service must not be running. (chkconfig)
+  telnet_not_running_chkconfig:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38589
+        commands:
+          - 'chkconfig --list telnet':
+              match_output:       ^telnet.*:on\s+.*
+              match_output_regex: True
+              fail_if_matched:    True
+    description: (HIGH) The telnet daemon must not be running. (chkconfig)
+  qpidd_not_running_chkconfig:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38648
+        commands:
+          - 'chkconfig --list qpidd':
+              match_output:       ^qpidd.*:on\s+.*
+              match_output_regex: True
+              fail_if_matched:    True
+    description: (LOW) The qpidd service must not be running. (chkconfig)
+  atd_not_running_chkconfig:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38641
+        commands:
+          - 'chkconfig --list atd':
+              match_output:       ^atd.*:on\s+.*
+              match_output_regex: True
+              fail_if_matched:    True
+    description: (LOW) The atd service must not be running. (chkconfig)
+  abrtd_not_running_chkconfig:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38640
+        commands:
+          - 'chkconfig --list abrtd':
+              match_output:       ^abrtd.*:on\s+.*
+              match_output_regex: True
+              fail_if_matched:    True
+    description: (LOW) The Automatic Bug Reporting Tool (abrtd) service must not be running. (chkconfig)
+  oddjobd_not_running_chkconfig:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38646
+        commands:
+          - 'chkconfig --list oddjobd':
+              match_output:       ^oddjobd.*:on\s+.*
+              match_output_regex: True
+              fail_if_matched:    True
+    description: (LOW) The oddjobd service must not be running. (chkconfig)
+  ntpdate_not_running_chkconfig:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38644
+        commands:
+          - 'chkconfig --list ntpdate':
+              match_output:       ^ntpdate.*:on\s+.*
+              match_output_regex: True
+              fail_if_matched:    True
+    description: (LOW) The ntpdate service must not be running. (chkconfig)
+  rdisc_not_running_chkconfig:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38650
+        commands:
+          - 'chkconfig --list rdisc':
+              match_output:       ^rdisc.*:on\s+.*
+              match_output_regex: True
+              fail_if_matched:    True
+    description: (LOW) The rdisc service must not be running. (chkconfig)
+  netconsole_not_running_chkconfig:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38672
+        commands:
+          - 'chkconfig --list netconsole':
+              match_output:       ^netconsole.*:on\s+.*
+              match_output_regex: True
+              fail_if_matched:    True
+    description: (LOW) The netconsole service must not be running. (chkconfig)
+  avahi-daemon_not_running_chkconfig:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38618
+        commands:
+          - 'chkconfig --list avahi-daemon':
+              match_output:       ^avahi-daemon.*:on\s+.*
+              match_output_regex: True
+              fail_if_matched:    True
+    description: (LOW) The avahi service must not be running. (chkconfig)
+  autofs_not_running_chkconfig:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38437
+        commands:
+          - 'chkconfig --list autofs':
+              match_output:       ^autofs.*:on\s+.*
+              match_output_regex: True
+              fail_if_matched:    True
+    description: (LOW) Automated file system mounting tools must not be enabled unless needed. (chkconfig)
+  ypbind_not_running_chkconfig:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38604
+        commands:
+          - 'chkconfig --list ypbind':
+              match_output:       ^ypbind.*:on\s+.*
+              match_output_regex: True
+              fail_if_matched:    True
+    description: (MEDIUM) The ypbind service must not be running. (chkconfig)
+  bluetooth_not_running_chkconfig:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38691
+        commands:
+          - 'chkconfig --list bluetooth':
+              match_output:       ^bluetooth.*:on\s+.*
+              match_output_regex: True
+              fail_if_matched:    True
+    description: (MEDIUM) The bluetooth service must be disabled. (chkconfig)
+  xinetd_not_running_chkconfig:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38582
+        commands:
+          - 'chkconfig --list xinetd':
+              match_output:       ^xinetd.*:on\s+.*
+              match_output_regex: True
+              fail_if_matched:    True
+    description: (MEDIUM) The xinetd service must be disabled if no network services utilizing it are enabled. (chkconfig)
+  postfix_enabled_chkconfig:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38669
+        commands:
+          - 'chkconfig --list postfix':
+              match_output:       ^postfix.*3:on\s+4:on\s+5:on\s+.*
+              match_output_regex: True
+              fail_if_matched:    False
+    description: (LOW) The postfix service must be running for mail delivery. (chkconfig)
+  vpn_enabled_chkconfig:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38687
+        commands:
+          - 'chkconfig --list ipsec':
+              match_output:       ^ipsec.*3:on\s+4:on\s+5:on\s+.*
+              match_output_regex: True
+              fail_if_matched:    False
+    description: (LOW) The system must provide VPN connectivity for communications over untrusted networks. (chkconfig)
+  iptables_enabled_chkconfig:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38555
+        commands:
+          - 'chkconfig --list iptables':
+              match_output:       ^iptables.*3:on\s+4:on\s+5:on\s+.*
+              match_output_regex: True
+              fail_if_matched:    False
+    description: (MEDIUM) The system must employ a local IPv4 firewall. (chkconfig)
+  cron_enabled_chkconfig:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38605
+        commands:
+          - 'chkconfig --list crond':
+              match_output:       ^crond.*3:on\s+4:on\s+5:on\s+.*
+              match_output_regex: True
+              fail_if_matched:    False
+    description: (MEDIUM) The cron service must be running. (chkconfig)
+  ntpd_enabled_chkconfig:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        tag: V-38620
+        commands:
+          - 'chkconfig --list ntpd':
+              match_output:       ^ntpd.*3:on\s+4:on\s+5:on\s+.*
+              match_output_regex: True
+              fail_if_matched:    False
+    description: (MEDIUM) The system clock must be synchronized continuously, or at least daily. (chkconfig)
+
+grep:
+  blacklist:
+    rpm_cryptographically_verify_packages:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - /etc/rpmrc:
+              pattern:      nosignature
+              tag:          V-38462
+          - /usr/lib/rpm/rpmrc:
+              pattern:      nosignature
+              tag:          V-38462
+          - /usr/lib/rpm/redhat/rpmrc:
+              pattern:      nosignature
+              tag:          V-38462
+          - /root/.rpmrc:
+              pattern:      nosignature
+              tag:          V-38462
+      description: (HIGH) The RPM package management tool must cryptographically verify the authenticity of all software packages during installation.
+    null_passwords_cannot_be_used:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - /etc/pam.d/system-auth:
+              tag:          V-38497
+              pattern:      nullok
+          - /etc/pam.d/system-auth-ac:
+              tag:          V-38497
+              pattern:      nullok
+          - /etc/pam.d/password-auth:
+              tag:          V-38497
+              pattern:      nullok
+          - /etc/pam.d/password-auth-ac:
+              tag:          V-38497
+              pattern:      nullok
+          - /etc/pam.d/sshd:
+              tag:          V-38497
+              pattern:      nullok
+      description: (HIGH) The system must not allow null passwords to be used.
+    nfs_no_insecure_file_locking:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - /etc/exports:
+              tag:          V-38677
+              pattern:      insecure_locks
+      description: (HIGH) The NFS server must not have the insecure file locking option enabled.
+    etc_hosts_equiv_should_not_exist:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - /etc/hosts.equiv:
+              tag:                    V-38491
+              pattern:                .*
+              match_on_file_missing:  False
+      description: (HIGH) There must be no /etc/hosts.equiv file on the system.
+    prevent_root_login_serial_consoles:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - /etc/securetty:
+              tag:                    V-38494
+              pattern:                ^ttyS\d*
+              match_on_file_missing:  False
+      description: (LOW) The system must prevent the root account from logging in from serial consoles.
+    prevent_root_login_virtual_consoles:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - /etc/securetty:
+              tag:                    V-38492
+              pattern:                ^vc/\d*
+              match_on_file_missing:  False
+      description: (MEDIUM) The system must prevent the root account from logging in from virtual consoles.
+    must_user_selinux_at_boot_time:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - /boot/grub/grub.conf:
+              tag:                    V-51337
+              pattern:                ^[^#].*kernel.*selinux=0.*
+              match_on_file_missing:  False
+      description: (MEDIUM) The system must use a Linux Security Module at boot time.
+    boot_loader_must_require_authentication:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - /boot/grub/grub.conf:
+              tag:                    V-38585
+              pattern:                ^[^#]password\s+--encrypted.*
+              match_on_file_missing:  False
+      description: (MEDIUM) The system boot loader must require authentication.
+
+  whitelist:
+    x86_ctrl_alt_del_disabled:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - /etc/init/control-alt-delete.override:
+              tag:          V-38668
+              pattern:      ^exec /usr/bin/logger
+              match_output: security.info "Control-Alt-Delete pressed"
+      description: (HIGH) The x86 Ctrl-Alt-Delete key sequence must be disabled.
+    sshd_use_only_SSHv2_protocol:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - /etc/ssh/sshd_config:
+              tag:                V-38607
+              pattern:            ^Protocol
+              match_output:       ^Protocol\s+2
+              match_output_regex: True
+              grep_args:
+                - '-E'
+                - '-i'
+      description: (HIGH) The SSH daemon must be configured to use only the SSHv2 protocol.
+    sshd_no_empty_passwords:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - /etc/ssh/sshd_config:
+              tag:                V-38614
+              pattern:            ^PermitEmptyPasswords
+              match_output:       ^PermitEmptyPasswords\s+no
+              match_output_regex: True
+              grep_args:
+                - '-E'
+                - '-i'
+      description:        (HIGH) The SSH daemon must not allow authentication using an empty password.
+    sshd_no_user_env_settings:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - /etc/ssh/sshd_config:
+              tag:                V-38616
+              pattern:            ^PermitUserEnvironment
+              match_output:       ^PermitUserEnvironment\s+no
+              match_output_regex: True
+              grep_args:
+                - '-E'
+                - '-i'
+      description:        (LOW) The SSH daemon must not permit user environment settings.
+    sshd_timeout_count_idle_sessions:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - /etc/ssh/sshd_config:
+              tag:                V-38610
+              pattern:            ^ClientAliveCountMax
+              match_output:       ^ClientAliveCountMax\s+0
+              match_output_regex: True
+              grep_args:
+                - '-E'
+                - '-i'
+      description:        (LOW) The SSH daemon must set a timeout count on idle sessions.
+    sshd_timeout_idle_sessions:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/ssh/sshd_config':
+             tag:                   V-38608
+             pattern:               ^ClientAliveInterval.*
+             match_output:          ^ClientAliveInterval\s+900.*
+             match_output_regex:    True
+             grep_args:
+               - '-E'
+               - '-i'
+      description:    (LOW) The SSH daemon must set a timeout interval on idle sessions.
+    sshd_ignore_rhosts_files:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/ssh/sshd_config':
+             tag:                   V-38611
+             pattern:               ^IgnoreRhosts.*
+             match_output:          ^IgnoreRhosts\s+yes.*
+             match_output_regex:    True
+             grep_args:
+               - '-E'
+               - '-i'
+      description:    (MEDIUM) The SSH daemon must ignore .rhosts files.
+    sshd_not_allow_host-based_auth:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/ssh/sshd_config':
+             tag:                   V-38612
+             pattern:               ^HostbasedAuthentication.*
+             match_output:          ^HostbasedAuthentication\s+no.*
+             match_output_regex:    True
+             grep_args:
+               - '-E'
+               - '-i'
+      description:    (MEDIUM) The SSH daemon must not allow host-based authentication.
+    tftp_daemon_operate_in_secure_mode:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - /etc/xinetd.d/tftp:
+              tag:                    V-38701
+              pattern:                ^server_args
+              match_output:           -s
+              match_on_file_missing:  True
+      description: (HIGH) The TFTP daemon must operate in secure mode which provides access only to a single directory on the host file system.
+    csh_default_umask:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/csh.cshrc':
+             tag:                   V-38649
+             pattern:               ^umask 077
+             match_on_file_missing: True
+      description:    (LOW) The system default umask for the csh shell must be 077.
+    default_daemon_umask:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/init.d/functions':
+             tag:                   V-38642
+             pattern:               ^umask
+             match_output:          ^umask (022|027)
+             match_output_regex:    True
+             match_on_file_missing: True
+      description:    (LOW) The system default umask for daemons must be 022 or 027.
+    etc_profile_default_umask:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/profile':
+             tag:                   V-38647
+             pattern:               ^umask 077
+             match_on_file_missing: True
+      description:    (LOW) The system default umask in /etc/profile must be 077.
+    default_login_defs_umask:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/login.defs':
+             tag:                   V-38645
+             pattern:               ^UMASK
+             match_output:          ^UMASK.*077
+             match_output_regex:    True
+      description:    (LOW) The system default umask in /etc/login.defs must be 077.
+    selinux_policy:
+      # NOTE: This check may need to be tailored to your organization/system needs
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/selinux/config':
+             tag:                   V-51369
+             pattern:               ^SELINUXTYPE.*
+             match_output:          ^.*targeted|^.*mls
+             match_output_regex:    True
+      description: (LOW) The system must use a Linux Security Module configured to limit the privleges of system services.
+    enforce_selinux_policy:
+      # NOTE: This check may need to be tailored to your organization/system needs
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/selinux/config':
+             tag:                   V-51363
+             pattern:               ^SELINUX=.*
+             match_output:          ^SELINUX\s*=\senforcing
+             match_output_regex:    True
+      description: (MEDIUM) The system must use a Linux Security Module configured to enforce limits on system services.
+    etc_bashrc_default_umask:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/bashrc':
+             tag:                   V-38651
+             pattern:               '^umask 077'
+             match_on_file_missing: True
+      description:    (LOW) The system default umask for the bash shell must be 077.
+    smb_client_signing:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/samba/smb.conf':
+             tag:                   V-38656
+             pattern:               '^client signing'
+             match_output:          ^.*mandatory
+             match_output_regex:    True
+             match_on_file_missing: True
+      description:    (LOW) The system must use SMB client signing for connecting to samba servers using smbclient.
+    password_warn_age:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/login.defs':
+             tag:                   V-38480
+             pattern:               '^PASS_WARN_AGE'
+             match_output:          ^PASS_WARN_AGE\s*7$
+             match_output_regex:    True
+             match_on_file_missing: False
+      description:    (LOW) Users must be warned 7 days in advance of password expiration.
+    password_min_days:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/login.defs':
+             tag:                   V-38477
+             pattern:               '^PASS_MIN_DAYS'
+             match_output:          ^PASS_MIN_DAYS\s+1$
+             match_output_regex:    True
+             match_on_file_missing: False
+      description:    (MEDIUM) The system must require passwords to contain a minimum of 15 characters. (login.defs)
+    password_max_days:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/login.defs':
+             tag:                   V-38479
+             pattern:               '^PASS_MAX_DAYS'
+             match_output:          ^PASS_MAX_DAYS\s+60$
+             match_output_regex:    True
+             match_on_file_missing: False
+      description:    (MEDIUM) User passwords must be changed at least every 60 days.
+    password_min_length_login_defs:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/login.defs':
+             tag:                   V-38475
+             pattern:               '^PASS_MIN_LEN'
+             match_output:          ^PASS_MIN_LEN\s+15$
+             match_output_regex:    True
+             match_on_file_missing: False
+      description:    (MEDIUM) The system must require passwords to contain a minimum of 15 characters. (login.defs)
+    require_num_in_password_pam_d:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/pam.d/system-auth':
+             tag:                   V-38475
+             pattern:               '^password.*pam_cracklib\.so'
+             match_output:          ^password.*pam_cracklib\.so.*minlen=15.*
+             match_output_regex:    True
+             match_on_file_missing: False
+      description:    (MEDIUM) The system must require passwords to contain at least one numeric character. (pam module)
+    require_num_in_password:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/pam.d/system-auth':
+             tag:                   V-38482
+             pattern:               '^password.*pam_cracklib\.so'
+             match_output:          ^password.*pam_cracklib\.so.*dcredit=-1.*
+             match_output_regex:    True
+             match_on_file_missing: False
+      description:    (LOW) The system must require passwords to contain at least one numeric character.
+    require_lower_case_in_password:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/pam.d/system-auth':
+             tag:                   V-38571
+             pattern:               '^password.*pam_cracklib\.so'
+             match_output:          ^password.*pam_cracklib\.so.*lcredit=-1.*
+             match_output_regex:    True
+             match_on_file_missing: False
+      description:    (LOW) The system must require passwords to contain at least one lower-case alphabetic character.
+    require_special_char_in_password:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/pam.d/system-auth':
+             tag:                   V-38570
+             pattern:               '^password.*pam_cracklib\.so'
+             match_output:          ^password.*pam_cracklib\.so.*ocredit=-1.*
+             match_output_regex:    True
+             match_on_file_missing: False
+      description:    (LOW) The system must require passwords to contain at least one special character.
+    require_diff_char_during_password_change:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/pam.d/system-auth':
+             tag:                   V-38572
+             pattern:               '^password.*pam_cracklib\.so'
+             match_output:          ^password.*pam_cracklib\.so.*difok=8.*
+             match_output_regex:    True
+             match_on_file_missing: False
+      description:    (LOW) The system must require at least eight characters be changed between the old and new passwords during a password change.
+    require_upper_in_password:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/pam.d/system-auth':
+             tag:                   V-38569
+             pattern:               ^password.*pam_cracklib\.so
+             match_output:          ^password.*pam_cracklib\.so.*ucredit=-1.*
+             match_output_regex:    True
+             match_on_file_missing: False
+      description:    (LOW) The system must require passwords to contain at least one uppercase alphabetic character.
+    remember_passwords:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/pam.d/system-auth':
+             tag:                   V-38658
+             pattern:               ^password.*pam_pwhistory\.so
+             match_output:          ^password.*pam_pwhistory\.so.*remember=5.*
+             match_output_regex:    True
+             match_on_file_missing: False
+      description:    (MEDIUM) The system must prohibit the reuse of passwords within five iterations.
+    showfailed_logons:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/pam.d/system-auth':
+             tag:                   V-51875
+             pattern:               ^session.*pam_lastlog\.so
+             match_output:          ^session.*pam_lastlog\.so.*showfailed.*
+             match_output_regex:    True
+             match_on_file_missing: False
+      description:    (MEDIUM) The operating system, upon successful logon/access, must display to the user the number of unsuccessful logon/access attempts since the last successful logon/access.
+    showfailed_logons:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/pam.d/system-auth':
+             tag:                   V-51875
+             pattern:               ^session.*pam_lastlog\.so
+             match_output:          ^session.*pam_lastlog\.so.*showfailed.*
+             match_output_regex:    True
+             match_on_file_missing: False
+      description:    (MEDIUM) The operating system, upon successful logon/access, must display to the user the number of unsuccessful logon/access attempts since the last successful logon/access.
+    fips_140_2_crypto_system-auth:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/pam.d/system-auth':
+             tag:                   V-38574
+             pattern:               ^password.*pam_unix\.so
+             match_output:          ^password.*pam_unix\.so.*sha512.*
+             match_output_regex:    True
+             match_on_file_missing: False
+      description:    (MEDIUM) The system must use a FIPS 140-2 approved cryptographic hashing algorithm for generating account password hashes (system-auth).
+    fips_140_2_crypto_libuser:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/libuser.conf':
+             tag:                   V-38577
+             pattern:               ^crypt_style.*
+             match_output:          ^crypt_style\s*=\s*sha512.*
+             match_output_regex:    True
+             match_on_file_missing: False
+      description:    (MEDIUM) The system must use a FIPS 140-2 approved cryptographic hashing algorithm for generating account password hashes (libuser.conf).
+    fips_140_2_crypto_logindefs:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/login.defs':
+             tag:                   V-38576
+             pattern:               ^ENCRYPT_METHOD.*
+             match_output:          ^ENCRYPT_METHOD\s+SHA512.*
+             match_output_regex:    True
+             match_on_file_missing: False
+      description:    (MEDIUM) The system must use a FIPS 140-2 approved cryptographic hashing algorithm for generating account password hashes (login.defs).
+    audit_partition:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/fstab':
+             tag:                   V-38467
+             pattern:               ^[^#].*/var/log/audit.*
+             match_output:          ^[^#]\S*\s*/var/log/audit
+             match_output_regex:    True
+      description:    (LOW) The system must use a separate file system for the system audit data path.
+    log_partition:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/fstab':
+             tag:                   V-38463
+             pattern:               ^[^#].*/var/log\s*.*
+             match_output:          ^[^#]\S*\s*/var/log\s*.*
+             match_output_regex:    True
+      description:    (LOW) The system must use a separate file system for /var/log.
+    home_partition:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/fstab':
+             tag:                   V-38473
+             pattern:               ^[^#].*/home\s*.*
+             match_output:          ^[^#]\S*\s*/home\s*.*
+             match_output_regex:    True
+      description:    (LOW) The system must use a separate file system for /var/home.
+    var_partition:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/fstab':
+             tag:                   V-38456
+             pattern:               ^[^#].*/var\s*.*
+             match_output:          ^[^#]\S*\s*/var\s*.*
+             match_output_regex:    True
+      description:    (LOW) The system must use a separate file system for /var.
+    tmp_partition:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/fstab':
+             tag:                   V-38455
+             pattern:               ^[^#].*/tmp\s*.*
+             match_output:          ^[^#]\S*\s*/tmp\s*.*
+             match_output_regex:    True
+      description:    (LOW) The system must use a separate file system for /tmp.
+    disable_core_dumps:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/security/limits.conf':
+             tag:                   V-38675
+             pattern:               ^[^#].*core.*
+             match_output:          ^\*\s+hard\s+core\s+0.*
+             match_output_regex:    True
+      description:    (LOW) Process core dumps must be disabled unless needed.
+    limit_users_to_10_logins:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/security/limits.conf':
+             tag:                   V-38684
+             pattern:               ^[^#].*maxlogins.*
+             match_output:          ^\*\s+hard\s+maxlogins\s+10.*
+             match_output_regex:    True
+      description:    (LOW) The system must limit users to 10 simultaneous system logins, or a site-defined number, in accordance with operational requirements.
+    disable_user_after_inactivity:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/default/useradd':
+             tag:                   V-38694
+             pattern:               ^INACTIVE.*
+             match_output:          ^INACTIVE\s*=\s*35
+             match_output_regex:    True
+      description:    (LOW) The operating system must manage information system identifiers for users and devices by disabling the user identifier after an organization defined time period of inactivity.
+    lock_user_after_inactivity:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/default/useradd':
+             tag:                   V-38692
+             pattern:               ^INACTIVE.*
+             match_output:          ^INACTIVE\s*=\s*35
+             match_output_regex:    True
+      description:    (LOW) Accounts must be locked upon 35 days of inactivity.
+    log_martian_packets_grep:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/sysctl.conf':
+              tag:                V-38528
+              pattern:            ^net\.ipv4\.conf\.all\.log_martians.*
+              match_output:       ^net\.ipv4\.conf\.all\.log_martians\s*=\s*1
+              match_output_regex: True
+      description:    (LOW) The system must log Martian packets. (sysctl.conf)
+    ignore_ICMPv4_redirect_grep:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/sysctl.conf':
+              tag:                V-38533
+              pattern:            ^net\.ipv4\.icmp_echo_ignore_broadcasts.*
+              match_output:       ^net\.ipv4\.icmp_echo_ignore_broadcasts\s*=\s*1
+              match_output_regex: True
+      description:    (LOW) The system must not respond to ICMPv4 sent to a broadcast address. (sysctl.conf)
+    ignore_ICMPv4_broadcast_grep:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/sysctl.conf':
+              tag:                V-38535
+              pattern:            ^net\.ipv4\.conf\.default\.accept_redirects.*
+              match_output:       ^net\.ipv4\.conf\.default\.accept_redirects\s*=\s*0
+              match_output_regex: True
+      description:    (LOW) The system must ignore ICMPv4 redirect messages by default. (sysctl.conf)
+    ignore_ICMPv4_bogus_error_responses_grep:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/sysctl.conf':
+              tag:                V-38537
+              pattern:            ^net\.ipv4\.icmp_ignore_bogus_error_responses.*
+              match_output:       ^net\.ipv4\.icmp_ignore_bogus_error_responses\s*=\s*1
+              match_output_regex: True
+      description:    (LOW) The system must ignore ICMPv4 bogus error responses. (sysctl.conf)
+    not_accept_icmpv4_secure_redirect_grep:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/sysctl.conf':
+              tag:                V-38526
+              pattern:            ^net\.ipv4\.conf\.all\.secure_redirects.*
+              match_output:       ^net\.ipv4\.conf\.all\.secure_redirects\s*=\s*0
+              match_output_regex: True
+      description:    (MEDIUM) The system must not accept ICMPv4 secure redirect packets on any interface. (sysctl.conf)
+    not_accept_icmpv4_secure_redirect_default_grep:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/sysctl.conf':
+              tag:                V-38532
+              pattern:            ^net\.ipv4\.conf\.default\.secure_redirects.*
+              match_output:       ^net\.ipv4\.conf\.default\.secure_redirects\s*=\s*0
+              match_output_regex: True
+      description:    (MEDIUM) The system must not accept ICMPv4 secure redirect packets on any interface. (sysctl.conf)
+    not_accept_icmpv4_redirect_grep:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/sysctl.conf':
+              tag:                V-38524
+              pattern:            ^net\.ipv4\.conf\.all\.accept_redirects.*
+              match_output:       ^net\.ipv4\.conf\.all\.accept_redirects\s*=\s*0
+              match_output_regex: True
+      description:    (MEDIUM) The system must not accept ICMPv4 redirect packets on any interface. (sysctl.conf)
+    not_send_icmpv4_redirect_grep:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/sysctl.conf':
+              tag:                V-38601
+              pattern:            ^net\.ipv4\.conf\.all\.send_redirects.*
+              match_output:       ^net\.ipv4\.conf\.all\.send_redirects\s*=\s*0
+              match_output_regex: True
+      description:    (MEDIUM) The system must not send ICMPv4 redirect packets from any interface. (sysctl.conf)
+    not_send_icmpv4_redirect_default_grep:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/sysctl.conf':
+              tag:                V-38600
+              pattern:            ^net\.ipv4\.conf\.default\.send_redirects.*
+              match_output:       ^net\.ipv4\.conf\.default\.send_redirects\s*=\s*0
+              match_output_regex: True
+      description:    (MEDIUM) The system must not send ICMPv4 redirect packets by default. (sysctl.conf)
+    not_accept_icmpv4_source-routed_sysctl_grep:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/sysctl.conf':
+              tag:                V-38523
+              pattern:            ^net\.ipv4\.conf\.all\.accept_source_route.*
+              match_output:       ^net\.ipv4\.conf\.all\.accept_source_route\s*=\s*0
+              match_output_regex: True
+      description:    (MEDIUM) The system must not accept ICMPv4 source-routed packets on any interface. (sysctl.conf)
+    not_accept_icmpv4_source-routed_default_grep:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/sysctl.conf':
+              tag:                V-38529
+              pattern:            ^net\.ipv4\.conf\.default\.accept_source_route.*
+              match_output:       ^net\.ipv4\.conf\.default\.accept_source_route\s*=\s*0
+              match_output_regex: True
+      description:    (MEDIUM) The system must not accept ICMPv4 source-routed packets by default. (sysctl.conf)
+    reverse-path_filter_for_all_ipv4_traffic:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/sysctl.conf':
+              tag:                V-38542
+              pattern:            ^net\.ipv4\.conf\.all\.rp_filter.*
+              match_output:       ^net\.ipv4\.conf\.all\.rp_filter\s*=\s*1.*
+              match_output_regex: True
+      description:    (MEDIUM) The system must use a reverse-path filter for IPv4 network traffic when possible on all interfaces. (sysctl.conf)
+    reverse-path_filter_for_ipv4_traffic_default:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/sysctl.conf':
+              tag:                V-38544
+              pattern:            ^net\.ipv4\.conf\.default\.rp_filter.*
+              match_output:       ^net\.ipv4\.conf\.default\.rp_filter\s*=\s*1.*
+              match_output_regex: True
+      description:    (MEDIUM) The system must use a reverse-path filter for IPv4 network traffic when possible by default. (sysctl.conf)
+    ip_forwarding_not_enabled_config:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/sysctl.conf':
+              tag:                V-38511
+              pattern:            ^net\.ipv4\.ip_forward.*
+              match_output:       ^net\.ipv4\.ip_forward\s*=\s*0.*
+              match_output_regex: True
+      description:    (MEDIUM) IP forwarding for IPv4 must not be enabled, unless the system is a router. (sysctl.conf)
+    do_not_use_ipv6_unless_needed_grep:
+      # NOTE: may need to be tailored
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/sysctl.conf':
+              tag:                V-38546
+              pattern:            ^net\.ipv6\.conf\.all\.disable_ipv6.*
+              match_output:       ^net\.ipv6\.conf\.all\.disable_ipv6\s*=\s*1.*
+              match_output_regex: True
+      description:    (MEDIUM) The IPv6 protocol handler must not be bound to the network stack unless needed. (sysctl.conf)
+    ignore_ICMPv6_redirects_default_grep:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/sysctl.conf':
+              tag:                V-38548
+              pattern:            ^net\.ipv6\.conf\.default\.accept_redirects.*
+              match_output:       ^net\.ipv6\.conf\.default\.accept_redirects\s*=\s*0.*
+              match_output_regex: True
+      description:    (MEDIUM) The system must ignore ICMPv6 redirects by default. (sysctl.conf)
+    use_tcp_syncookies:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/sysctl.conf':
+              tag:                V-38539
+              pattern:            ^net\.ipv4\.tcp_syncookies.*
+              match_output:       ^net\.ipv4\.tcp_syncookies\s*=\s*1.*
+              match_output_regex: True
+      description:    (MEDIUM) The system must be configured to use TCP syncookies when experiencing a TCP SYN flood. (sysctl.conf)
+    x_windows_not_enabled:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/inittab':
+              tag:                V-38674
+              pattern:            ^id.*
+              match_output:       ^id\:3\:initdefault\:.*
+              match_output_regex: True
+      description:    (MEDIUM) X Windows must not be enabled unless required.
+    audit_alert_space_left_action:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/audit/auditd.conf':
+              tag:                V-38470
+              pattern:            ^space_left_action.*
+              match_output:       ^space_left_action\s+=\s+(email|syslog|SYSLOG).*
+              match_output_regex: True
+              grep_args:
+                - '-E'
+                - '-i'
+      description:    (MEDIUM) The audit system must alert designated staff members when the audit storage volume approaches capacity.
+    audit_admin_space_left:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/audit/auditd.conf':
+              tag:                V-54381
+              pattern:            ^admin_space_left_action.*
+              match_output:       ^admin_space_left_action\s+=\s+(single|SINGLE|suspend|SUSPEND|halt|HALT).*
+              match_output_regex: True
+              grep_args:
+                - '-E'
+                - '-i'
+      description:    (MEDIUM) The audit system must switch the system to single-user mode when available audit storage volume becomes dangerously low.
+    audit_action_mail_acct:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/audit/auditd.conf':
+              tag:                V-38680
+              pattern:            ^action_mail_acct.*
+              match_output:       ^action_mail_acct\s*=\s*root.*
+              match_output_regex: True
+              grep_args:
+                - '-E'
+                - '-i'
+      description:    (MEDIUM) The audit system must identify staff members to receive notifications of audit log storage volume capacity issues.
+    audit_log_retention:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/audit/auditd.conf':
+              tag:                V-38636
+              pattern:            ^num_logs.*
+              match_output:       ^num_logs\s*=\s*\d+.*
+              match_output_regex: True
+              grep_args:
+                - '-E'
+                - '-i'
+      description: (MEDIUM) The system must retain enough rotated audit logs to cover the required log retention period.
+    audit_max_log_file_size:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/audit/auditd.conf':
+              tag:                V-38633
+              pattern:            ^max_log_file.*
+              match_output:       ^max_log_file\s*=\s*\d+.*
+              match_output_regex: True
+              grep_args:
+                - '-E'
+                - '-i'
+      description: (MEDIUM) The system must set a maximum audit log file size.
+    firewall_INPUT_chain_drop_policy:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/sysconfig/iptables':
+              tag:                V-38513
+              pattern:            ^\:INPUT.*
+              match_output:       ^\:INPUT\s+DROP\s+\[0\:0\].*
+              match_output_regex: True
+              grep_args:
+                - '-E'
+                - '-i'
+      description: (MEDIUM) The systems local IPv4 firewall must implement a deny-all, allow-by-exception policy for inbound packets.
+    sshd_login_banner:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/ssh/sshd_config':
+              tag:                V-38615
+              pattern:            ^Banner.*
+              match_output:       ^Banner\s+/etc/issue$
+              match_output_regex: True
+      description: (MEDIUM) The SSH daemon must be configured with the Department of Defense (DoD) login banner.
+    sshd_block_root_remote_login:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/ssh/sshd_config':
+              tag:                V-38613
+              pattern:            ^PermitRootLogin.*
+              match_output:       ^PermitRootLogin\s(no|NO|No)$
+              match_output_regex: True
+      description: (MEDIUM) The system must not permit root logins using remote access programs such as ssh.
+    sync_system_clock:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/ntp.conf':
+              tag:                V-38621
+              pattern:            ^server.*
+              match_output:       ^server\s+\S*
+              match_output_regex: True
+      description: (MEDIUM) The system clock must be synchronized to an authoritative DoD time source.
+    require_root_pw_in_su_mode:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/sysconfig/init':
+              tag:                V-38586
+              pattern:            ^SINGLE.*
+              match_output:       ^SINGLE\s*=\s*/sbin/sulogin
+              match_output_regex: True
+      description: (MEDIUM) The system clock must be synchronized to an authoritative DoD time source.
+    do_not_permit_interactive_boot:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/sysconfig/init':
+              tag:                V-38588
+              pattern:            ^PROMPT.*
+              match_output:       ^PROMPT\s*=\s*(no|NO|No)
+              match_output_regex: True
+      description: (MEDIUM) The system must not permit interactive boot.
+    cryptographically_verify_packages_yum_conf:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/yum.conf':
+              tag:                V-38483
+              pattern:            ^gpgcheck.*
+              match_output:       ^gpgcheck\s*=\s*1
+              match_output_regex: True
+      description: (MEDIUM) The system package management tool must cryptographically verify the authenticity of system software packages during installation. (yum.conf)
+    mail_relaying_must_be_restricted:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - '/etc/postfix/main.cf':
+              tag:                V-38622
+              pattern:            ^inet_interfaces.*
+              match_output:       ^inet_interfaces\s*=\s*localhost\s*$
+              match_output_regex: True
+      description: (MEDIUM) Mail relaying must be restricted.
+
+pkg:
+  blacklist:
+    rsh-server_not_installed:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - rsh-server:     V-38591
+      description:        (HIGH) The rsh-server package must not be installed.
+    telnet-server_not_installed:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - telnet-server:  V-38587
+          - telnet:         V-38587
+      description:        (HIGH) The telnet-server and telnet package must not be installed.
+    xorg-x11-server-common_not_installed:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - xorg-x11-server-common: V-38676
+      description:                  (LOW) The xorg-x11-server-common package must not be installed.
+    openldap-servers_not_installed:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - openldap-servers:     V-38627
+      description:                (LOW) The openldap-servers package must not be installed unless required.
+    xinetd_not_installed:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - xinetd:     V-38584
+      description:      (LOW) The xinetd service must be uninstalled if no network services utilizing it are enabled.
+    sendmail_not_installed:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - sendmail:   V-38671
+      description:      (MEDIUM) The sendmail package must be removed.
+    tftp-server_not_installed:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - tftp-server:   V-38606
+      description:         (MEDIUM) The tftp-server package must not be installed unless required.
+    ypserv_not_installed:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - ypserv:        V-38603
+      description:         (MEDIUM) The ypserv package must not be installed.
+
+  whitelist:
+    approved_virus_scan_program:
+      # NOTE: This will need to be udated for your respective organization.
+      # This particular check is validating that clamav package is installed.
+      # This is a multi-part check to verify V-38666. Under the stat section,
+      # there is a check to verify cron.daily script for clamav inspection.
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - clamav:       V-38666
+          - clamd:        V-38666
+      description:        (HIGH) The system must use and update a DoD-approved virus scan program. (pkg)
+    screen_software_must_be_installed:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - screen:       V-38590
+      description:        (LOW) The system must allow locking of the console screen in text mode. (pkg)
+    provide_vpn_for_untrusted_networks:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - openswan:     V-38687
+      description:        (LOW) The system must provide VPN connectivity for communications over untrusted networks. (pkg)
+    file_integrity_aide:
+      # NOTE: this control may need to be tailored to your environment, checking
+      # for the specific file integrity tool that you use.
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - aide:         V-38489
+      description:        (MEDIUM) A file integrity tool must be installed. (pkg)
+
+service:
+  blacklist:
+    rlogind_not_running_service:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - rlogin:         V-38602
+      description:        (High) The rlogind service must not be running. (Service)
+    rshd_not_running_service:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - rsh:            V-38594
+      description:        (High) The rshd service must not be running. (Service)
+    rexecd_not_running_service:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - rexec:          V-38598
+      description:        (High) The rexecd service must not be running. (Service)
+    telnet_not_running_service:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - telnet:       V-38589
+      description:        (High) The telnet daemon must not be running. (Service)
+    qpidd_not_running_service:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - qpidd:        V-38648
+      description:        (LOW) The qpidd service must not be running. (Service)
+    atd_not_running_service:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - atd:          V-38641
+      description:        (LOW) The atd service must not be running. (Service)
+    abrtd_not_running:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - abrtd:        V-38640
+      description:        (LOW) The Automatic Bug Reporting Tool (abrtd) service must not be running. (Service)
+    oddjobd_not_running:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - oddjobd:      V-38646
+      description:        (LOW) The oddjobd service must not be running. (Service)
+    ntpdate_not_running:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - ntpdate:      V-38644
+      description:        (LOW) The ntpdate service must not be running. (Service)
+    rdisc_not_running:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - rdisc:        V-38650
+      description:        (LOW) The rdisc service must not be running. (Service)
+    netconsole_not_running:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - netconsole:   V-38672
+      description:        (LOW) The netconsole service must not be running. (Service)
+    avahi_not_running:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - avahi-daemon: V-38618
+      description:        (LOW) The avahi service must not be running. (Service)
+    autofs_not_running:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - autofs:       V-38437
+      description:        (LOW) Automated file system mounting tools must not be enabled unless needed. (Service)
+    ypbind_not_running:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - ypbind:       V-38604
+      description:        (MEDIUM) The ypbind service must not be running. (Service)
+    bluetooth_not_running:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - bluetooth:    V-38691
+      description:        (MEDIUM) The Bluetooth service must be disabled. (Service)
+    xinetd_not_running:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - xinetd:       V-38582
+      description:        (MEDIUM) The xinetd service must be disabled if no network services utilizing it are enabled. (Service)
+
+  whitelist:
+    postfix_enabled:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - postfix:      V-38669
+      description:        (LOW) The postfix service must be running for mail delivery. (Service)
+    vpn_enabled:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - ipsec:        V-38687
+      description:        (LOW) The system must provide VPN connectivity for communications over untrusted networks. (Service)
+    iptables_enabled:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - iptables:     V-38555
+      description:        (MEDIUM) The system must employ a local IPv4 firewall. (Service)
+    iptables_enabled_2:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - iptables:     V-38512
+      description:        (MEDIUM) The operating system must prevent public IPv4 access into an organizations internal networks, except as appropriately mediated by managed interfaces employing boundary protection devices. (Service)
+    cron_enabled:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - crond:        V-38605
+      description:        (MEDIUM) The cron service must be running. (Service)
+    ntpd_enabled:
+      data:
+        Red Hat Enterprise Linux Server-6:
+          - ntpd:         V-38620
+      description:        (MEDIUM) The system clock must be synchronized continuously, or at least daily. (Service)
+
+stat:
+  cron_daily_clamscan_host:
+      # NOTE: This will need to be udated for your respective organization.
+      # This particular check is validating that clamav is run on a daily basis.
+      # This is a multi-part check to verify V-38666. Under the pkg section,
+      # there is a check to verify clam is installed.
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - /etc/cron.daily/clamscan_host.sh:
+            group:  root
+            user:   root
+            mode:   755
+            tag:    V-38666
+    description:    (HIGH) The system must use and update a DoD-approved virus scan program.
+  etc_passwd_owned_by_root:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - /etc/passwd:
+            tag:    V-38450
+            user:   root
+            uid:    0
+    description:    (MEDIUM) The /etc/passwd file must be owned by root.
+  etc_passwd_group-owned_by_root:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - /etc/passwd:
+            tag:    V-38451
+            group:  root
+            gid:    0
+    description:    (MEDIUM) The /etc/passwd file must be group-owned by root.
+  etc_passwd_permissions:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - /etc/passwd:
+            tag:    V-38457
+            mode:   644
+    description:    (MEDIUM) The /etc/passwd file must have mode 0644 or less permissive.
+  etc_group_owned_by_root:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - /etc/group:
+            tag:    V-38458
+            user:   root
+            uid:    0
+    description:    (MEDIUM) The /etc/group file must be owned by root.
+  etc_group_group-owned_by_root:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - /etc/group:
+            tag:    V-38459
+            group:  root
+            gid:    0
+    description:    (MEDIUM) The /etc/group file must be group-owned by root.
+  etc_group_permissions:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - /etc/group:
+            tag:    V-38461
+            mode:   644
+    description:    (MEDIUM) The /etc/group file must have mode 0644 or less permissive.
+  etc_gshadow_owned_by_root:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - /etc/gshadow:
+            tag:    V-38443
+            user:   root
+            uid:    0
+    description:    (MEDIUM) The /etc/gshadow file must be owned by root.
+  etc_gshadow_group-owned_by_root:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - /etc/gshadow:
+            tag:    V-38448
+            group:  root
+            gid:    0
+    description:    (MEDIUM) The /etc/gshadow file must be group-owned by root.
+  etc_gshadow_permissions:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - /etc/gshadow:
+            tag:    V-38449
+            mode:   000
+    description:    (MEDIUM) The /etc/gshadow file must have mode 0000.
+  etc_shadow_owned_by_root:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - /etc/shadow:
+            tag:    V-38502
+            user:   root
+            uid:    0
+    description:    (MEDIUM) The /etc/shadow file must be owned by root.
+  etc_shadow_group-owned_by_root:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - /etc/shadow:
+            tag:    V-38503
+            group:  root
+            gid:    0
+    description:    (MEDIUM) The /etc/shadow file must be group-owned by root.
+  etc_shadow_permissions:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - /etc/shadow:
+            tag:    V-38504
+            mode:   000
+    description:    (MEDIUM) The /etc/shadow file must have mode 0000.
+  audit_log_permissions:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - /var/log/audit/audit.log:
+            tag:    V-38498
+            mode:   600
+    description:    (MEDIUM) Audit log files must have mode 0640 or less permissive. (check set at 600)
+  audit_log_files_owned_by_root:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - /var/log/audit/audit.log:
+            tag:    V-38495
+            user:   root
+            uid:    0
+    description:    (MEDIUM) Audit log files must be owned by root.
+  bootloader_owned_by_root:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - /boot/grub/grub.conf:
+            tag:    V-38579
+            user:   root
+            uid:    0
+    description:    (MEDIUM) The system boot loader configuration file(s) must be owned by root.
+  bootloader_group-owned_by_root:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - /boot/grub/grub.conf:
+            tag:    V-38581
+            group:  root
+            gid:    0
+    description:    (MEDIUM) The system boot loader configuration file(s) must be group-owned by root.
+  bootloader_permissions:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - /boot/grub/grub.conf:
+            tag:    V-38583
+            mode:   600
+    description:    (MEDIUM) The system boot loader configuration file(s) must have mode 0600 or less permissive.
+
+sysctl:
+  # This module only checks the running config.  Each entry should also be checked
+  # via the grep module as well to very they are correctly set in /etc/sysctl.conf
+  log_martian_packets_sysctl:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - 'net.ipv4.conf.all.log_martians':
+            tag:          V-38528
+            match_output: '1'
+    description:          (LOW) The system must log Martian packets. (Running sysctl)
+  ignore_ICMPv4_redirect_sysctl:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - 'net.ipv4.conf.default.accept_redirects':
+            tag:          V-38533
+            match_output: '0'
+    description:          (LOW) The system must ignore ICMPv4 redirect messages by default. (Running sysctl)
+  ignore_ICMPv4_broadcast_sysctl:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - 'net.ipv4.icmp_echo_ignore_broadcasts':
+            tag:          V-38535
+            match_output: '1'
+    description:          (LOW) The system must not respond to ICMPv4 sent to a broadcast address. (Running sysctl)
+  ignore_ICMPv4_bogus_error_responses_sysctl:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - 'net.ipv4.icmp_ignore_bogus_error_responses':
+            tag:          V-38537
+            match_output: '1'
+    description:          (LOW) The system must ignore ICMPv4 bogus error responses. (Running sysctl)
+  not_accept_icmpv4_secure_redirect_sysctl:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - 'net.ipv4.conf.all.secure_redirects':
+            tag:          V-38526
+            match_output: '0'
+    description:          (MEDIUM) The system must not accept ICMPv4 secure redirect packets on any interface. (Running sysctl)
+  not_accept_icmpv4_redirect_sysctl:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - 'net.ipv4.conf.all.accept_redirects':
+            tag:          V-38524
+            match_output: '0'
+    description:          (MEDIUM) The system must not accept ICMPv4 redirect packets on any interface. (Running sysctl)
+  not_send_icmpv4_redirect_sysctl:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - 'net.ipv4.conf.all.send_redirects':
+            tag:          V-38601
+            match_output: '0'
+    description:          (MEDIUM) The system must not send ICMPv4 redirect packets from any interface. (Running sysctl)
+  not_send_icmpv4_redirect_default_sysctl:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - 'net.ipv4.conf.default.send_redirects':
+            tag:          V-38600
+            match_output: '0'
+    description:          (MEDIUM) The system must not send ICMPv4 redirect packets by default. (Running sysctl)
+  not_accept_icmpv4_source-routed_sysctl:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - 'net.ipv4.conf.all.accept_source_route':
+            tag:          V-38523
+            match_output: '0'
+    description:          (MEDIUM) The system must not accept ICMPv4 source-routed packets on any interface. (Running sysctl)
+  not_accept_icmpv4_source-routed_default_sysctl:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - 'net.ipv4.conf.default.accept_source_route':
+            tag:          V-38529
+            match_output: '0'
+    description:          (MEDIUM) The system must not accept ICMPv4 source-routed packets by default. (Running sysctl)
+  reverse-path_for_ipv4_traffic_sysctl:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - 'net.ipv4.conf.all.rp_filter':
+            tag:          V-38542
+            match_output: '1'
+    description:          (MEDIUM) The system must use a reverse-path filter for IPv4 network traffic when possible on all interfaces. (Running sysctl)
+  reverse-path_for_ipv4_traffic_default_sysctl:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - 'net.ipv4.conf.default.rp_filter':
+            tag:          V-38544
+            match_output: '1'
+    description:          (MEDIUM) The system must use a reverse-path filter for IPv4 network traffic when possible by default. (Running sysctl)
+  disable_ipv6_sysctl:
+    # NOTE: may need to be tailored.
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - 'net.ipv6.conf.all.disable_ipv6':
+            tag:          V-38546
+            match_output: '1'
+    description:          (MEDIUM) The IPv6 protocol handler must not be bound to the network stack unless needed. (Running sysctl)
+  ignore_ICMPv6_redirects_default_sysctl:
+    # NOTE: may need to be tailored.
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - 'net.ipv6.conf.default.accept_redirects':
+            tag:          V-38548
+            match_output: '0'
+    description:          (MEDIUM) The system must ignore ICMPv6 redirects by default. (Running sysctl)
+  ip_forwarding_not_enabled_sysctl:
+    # NOTE: may need to be tailored.
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - 'net.ipv4.ip_forward':
+            tag:          V-38511
+            match_output: '0'
+    description:          (MEDIUM) IP forwarding for IPv4 must not be enabled, unless the system is a router. (Running sysctl)
+  tcp_syncookies_sysctl:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - 'net.ipv4.tcp_syncookies':
+            tag:          V-38539
+            match_output: '1'
+    description:          (MEDIUM) The system must be configured to use TCP syncookies when experiencing a TCP SYN flood. (Running sysctl)
+  default_secure_redirects:
+    data:
+      Red Hat Enterprise Linux Server-6:
+        - 'net.ipv4.conf.default.secure_redirects':
+            tag:          V-38532
+            match_output: '0'
+    description:          (MEDIUM) The system must not accept ICMPv4 secure redirect packets by default. (Running sysctl)
