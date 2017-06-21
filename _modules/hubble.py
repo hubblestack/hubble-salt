@@ -45,6 +45,7 @@ def audit(configs=None,
           show_compliance=None,
           show_profile=None,
           called_from_top=None,
+          module_params=None,
           debug=None):
     '''
     Primary entry point for audit calls.
@@ -88,6 +89,11 @@ def audit(configs=None,
     called_from_top
         Ignore this argument. It is used for distinguishing between user-calls
         of this function and calls from hubble.top.
+
+    module_params
+        Any extra parameters to pass directly through to the Nova module(s).
+        This should be in json format, eg.
+            module_params='{"cmd_output": True, module_param: "Value"}'
 
     debug
         Whether to log additional information to help debug nova. Defaults to
@@ -133,7 +139,22 @@ def audit(configs=None,
     configs = [os.path.join(os.path.sep, os.path.join(*(con.split('.yaml')[0]).split('.')))
                for con in configs]
 
-    ret = _run_audit(configs, tags, debug=debug)
+    # Pass any module parameters through to the Nova module
+    module_params_dict = {}    
+    # Get values from config first (if any) and merge into module_params_dict
+    module_params_config =  __salt__['config.get']('hubblestack:nova:module_params', False)
+    if module_params_config is not False:
+        module_params_dict.update(module_params_config)
+    # Now process arguments from CLI and merge into module_params_dict
+    if module_params is not None:
+        if isinstance(module_params,dict):
+            module_params_dict.update(module_params)
+        else:
+            log.error('module_params from CLI is not a valid dict, skipping')
+
+    log.debug('module_params_dict: ' + str(module_params_dict))
+
+    ret = _run_audit(configs, tags, debug, module_params_dict)
 
     terse_results = {}
     verbose_results = {}
@@ -220,7 +241,7 @@ def audit(configs=None,
 
     return results
 
-def _run_audit(configs, tags, debug):
+def _run_audit(configs, tags, debug, module_params):
 
     results = {}
 
@@ -261,7 +282,7 @@ def _run_audit(configs, tags, debug):
     # We can revisit if this ever becomes a big bottleneck
     for key, func in __nova__._dict.iteritems():
         try:
-            ret = func(data_list, tags, debug=debug)
+            ret = func(data_list, tags, **module_params)
         except Exception as exc:
             log.error('Exception occurred in nova module:')
             log.error(traceback.format_exc())
