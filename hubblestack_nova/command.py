@@ -85,10 +85,14 @@ def __virtual__():
     return True
 
 
-def audit(data_list, tags, debug=False):
+def audit(data_list, tags, **kwargs):
     '''
     Run the command audits contained in the data_list
     '''
+    # Consume any module_params from kwargs (Setting False as a fallback)
+    debug = kwargs.get('nova_debug',False)
+    cmd_raw = kwargs.get('cmd_raw',False)
+
     __data__ = {}
     for profile, data in data_list:
         _merge_yaml(__data__, data, profile)
@@ -130,6 +134,8 @@ def audit(data_list, tags, debug=False):
 
                         found = False
                         if cmd_ret:
+                            if cmd_raw:
+                                tag_data['raw'] = cmd_ret
                             found = True
 
                         if 'match_output' in command_args:

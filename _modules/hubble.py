@@ -45,7 +45,8 @@ def audit(configs=None,
           show_compliance=None,
           show_profile=None,
           called_from_top=None,
-          debug=None):
+          debug=None,
+          **kwargs):
     '''
     Primary entry point for audit calls.
 
@@ -94,6 +95,10 @@ def audit(configs=None,
         False. Configurable via `hubblestack:nova:debug` in minion
         config/pillar.
 
+    **kwargs
+        Any parameters & values that are not explicitly defined will be passed
+        directly through to the Nova module(s).
+
     CLI Examples:
 
     .. code-block:: bash
@@ -133,7 +138,19 @@ def audit(configs=None,
     configs = [os.path.join(os.path.sep, os.path.join(*(con.split('.yaml')[0]).split('.')))
                for con in configs]
 
-    ret = _run_audit(configs, tags, debug=debug)
+    # Pass any module parameters through to the Nova module
+    nova_kwargs = {}
+    # Get values from config first (if any) and merge into nova_kwargs
+    nova_kwargs_config =  __salt__['config.get']('hubblestack:nova:nova_kwargs', False)
+    if nova_kwargs_config is not False:
+        nova_kwargs.update(nova_kwargs_config)
+    # Now process arguments from CLI and merge into nova_kwargs_dict
+    if kwargs is not None:
+        nova_kwargs.update(kwargs)
+
+    log.debug('nova_kwargs: ' + str(nova_kwargs))
+
+    ret = _run_audit(configs, tags, debug, **nova_kwargs)
 
     terse_results = {}
     verbose_results = {}
@@ -225,7 +242,7 @@ def audit(configs=None,
 
     return results
 
-def _run_audit(configs, tags, debug):
+def _run_audit(configs, tags, debug, **kwargs):
 
     results = {}
 
@@ -266,7 +283,7 @@ def _run_audit(configs, tags, debug):
     # We can revisit if this ever becomes a big bottleneck
     for key, func in __nova__._dict.iteritems():
         try:
-            ret = func(data_list, tags, debug=debug)
+            ret = func(data_list, tags, **kwargs)
         except Exception as exc:
             log.error('Exception occurred in nova module:')
             log.error(traceback.format_exc())
