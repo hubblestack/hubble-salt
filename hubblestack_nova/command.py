@@ -106,7 +106,7 @@ def audit(data_list, tags, debug=False):
 
     if __tags__ and not __salt__['config.get']('hubblestack:nova:enable_command_module',
                                                False):
-        ret['Error'] = ['command module has not been explicitly enabled in '
+        ret['Errors'] = ['command module has not been explicitly enabled in '
                         'config. Please set hubblestack:nova:enable_command_module '
                         'to True in pillar or minion config to allow this module.']
         return ret
