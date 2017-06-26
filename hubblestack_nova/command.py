@@ -82,8 +82,6 @@ log = logging.getLogger(__name__)
 
 
 def __virtual__():
-    if salt.utils.is_windows():
-        return False, 'This audit module only runs on linux'
     return True
 
 
