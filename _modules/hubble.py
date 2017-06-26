@@ -98,7 +98,6 @@ def audit(configs=None,
     **kwargs
         Any parameters & values that are not explicitly defined will be passed
         directly through to the Nova module(s).
-        This should be in json format, eg.
 
     CLI Examples:
 
