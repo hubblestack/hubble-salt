@@ -92,7 +92,7 @@ def audit(data_list, tags, **kwargs):
     Run the command audits contained in the data_list
     '''
     # Consume any module_params from kwargs (Setting False as a fallback)
-    debug = kwargs.get('debug',False)
+    debug = kwargs.get('nova_debug',False)
     cmd_raw = kwargs.get('cmd_raw',False)
 
     __data__ = {}
