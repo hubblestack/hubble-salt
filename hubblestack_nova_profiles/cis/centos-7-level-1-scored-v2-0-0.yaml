@@ -75,11 +75,11 @@ grep:
         CentOS Linux-7:
         - /etc/xinetd.d/chargen-dgram:
             pattern: disable
-            match_output: yes
+            match_output: 'yes'
             tag: CIS-2.1.1
         - /etc/xinetd.d/chargen-stream:
             pattern: disable
-            match_output: yes
+            match_output: 'yes'
             tag: CIS-2.1.1
       description: Ensure chargen services are not enabled
     daytime_disabled:
@@ -87,11 +87,11 @@ grep:
         CentOS Linux-7:
         - /etc/xinetd.d/daytime-dgram:
             pattern: disable
-            match_output: yes
+            match_output: 'yes'
             tag: CIS-2.1.2
         - /etc/xinetd.d/daytime-stream:
             pattern: disable
-            match_output: yes
+            match_output: 'yes'
             tag: CIS-2.1.2
       description: Ensure daytime services are not enabled
     discard_disabled:
@@ -99,11 +99,11 @@ grep:
         CentOS Linux-7:
         - /etc/xinetd.d/discard-dgram:
             pattern: disable
-            match_output: yes
+            match_output: 'yes'
             tag: CIS-2.1.3
         - /etc/xinetd.d/discard-stream:
             pattern: disable
-            match_output: yes
+            match_output: 'yes'
             tag: CIS-2.1.3
       description: Ensure discard services are not enabled
     echo_disabled:
@@ -111,11 +111,11 @@ grep:
         CentOS Linux-7:
         - /etc/xinetd.d/echo-dgram:
             pattern: disable
-            match_output: yes
+            match_output: 'yes'
             tag: CIS-2.1.4
         - /etc/xinetd.d/echo-stream:
             pattern: disable
-            match_output: yes
+            match_output: 'yes'
             tag: CIS-2.1.4
       description: Ensure echo services are not enabled
     time_disabled:
@@ -123,11 +123,11 @@ grep:
         CentOS Linux-7:
         - /etc/xinetd.d/time-dgram:
             pattern: disable
-            match_output: yes
+            match_output: 'yes'
             tag: CIS-2.1.5
         - /etc/xinetd.d/time-stream:
             pattern: disable
-            match_output: yes
+            match_output: 'yes'
             tag: CIS-2.1.5
       description: Ensure time services are not enabled
     configure_ntp:
