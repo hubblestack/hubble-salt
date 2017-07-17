@@ -101,6 +101,11 @@ def returner(ret):
         else:
             master = socket.gethostname()  # We *are* the master, so use our hostname
 
+        if not isinstance(data, dict):
+            log.error('Data sent to splunk_nova_return was not formed as a '
+                      'dict:\n{0}'.format(data))
+            return
+
         for fai in data.get('Failure', []):
             check_id = fai.keys()[0]
             payload = {}
