@@ -32,7 +32,7 @@ import traceback
 import salt
 import salt.utils
 from salt.exceptions import CommandExecutionError
-from loader import NovaLazyLoader
+from nova_loader import NovaLazyLoader
 
 __nova__ = {}
 __version__ = 'v2017.4.1'
