@@ -1,19 +1,19 @@
 fifteen_min:
-  - query_name: running_procs
-    query: SELECT t.unix_time AS query_time, p.name AS process, p.pid AS process_id, p.cmdline, p.cwd, p.on_disk, p.resident_size AS mem_used, p.parent, group_concat(u.username) AS user, p.path, h.md5, h.sha1, h.sha256 FROM processes AS p LEFT JOIN time AS t LEFT JOIN users AS u ON p.uid=u.uid LEFT JOIN hash AS h ON p.path=h.path GROUP BY 1, 2, 3;
-  - query_name: established_outbound
-    query: SELECT t.unix_time AS query_time, pos.family, h.*, ltrim(pos.local_address, ':f') AS src_connection_ip, pos.local_port AS src_connection_port, pos.remote_port AS dest_connection_port, ltrim(remote_address, ':f') AS dest_connection_ip, name, p.path AS file_path, cmdline, CASE pos.protocol WHEN 6 THEN 'tcp' WHEN 17 THEN 'udp' ELSE pos.protocol END as transport FROM process_open_sockets AS pos JOIN processes AS p ON p.pid=pos.pid LEFT JOIN time AS t LEFT JOIN (SELECT * FROM listening_ports) AS lp ON lp.port=pos.local_port AND lp.protocol=pos.protocol LEFT JOIN hash AS h ON h.path=p.path WHERE NOT remote_address='' AND NOT remote_address='::' AND NOT remote_address='0.0.0.0' AND NOT remote_address='127.0.0.1' AND port IS NULL;
-  - query_name: listening_procs
+  - query_name: win_running_procs
+    query: SELECT t.unix_time AS query_time, p.name AS process, p.pid AS process_id, p.cmdline, p.cwd, p.on_disk, p.resident_size AS mem_used, p.parent, p.path, h.md5, h.sha1, h.sha256 FROM processes AS p LEFT JOIN time AS t LEFT JOIN hash AS h ON p.path=h.path;
+  - query_name: win_established_outbound
+    query: SELECT t.unix_time AS query_time, pos.family, h.md5, h.sha1, h.sha256, h.directory, ltrim(pos.local_address, ':f') AS src_connection_ip, pos.local_port AS src_connection_port, pos.remote_port AS dest_connection_port, ltrim(remote_address, ':f') AS dest_connection_ip, name, p.path AS file_path, cmdline, CASE pos.protocol WHEN 6 THEN 'tcp' WHEN 17 THEN 'udp' ELSE pos.protocol END as transport FROM process_open_sockets AS pos JOIN processes AS p ON p.pid=pos.pid LEFT JOIN time AS t LEFT JOIN (SELECT * FROM listening_ports) AS lp ON lp.port=pos.local_port AND lp.protocol=pos.protocol LEFT JOIN hash AS h ON h.path=p.path WHERE NOT remote_address='' AND NOT remote_address='::' AND NOT remote_address='0.0.0.0' AND NOT remote_address='127.0.0.1' AND port IS NULL;
+  - query_name: win_listening_procs
     query: SELECT t.unix_time AS query_time, h.md5 AS md5, p.pid AS process_id, name AS process, ltrim(address, ':f') AS address, port AS dest_port, p.path AS file_path, cmdline, p.on_disk, root, parent, CASE lp.protocol WHEN 6 THEN 'tcp' WHEN 17 THEN 'udp' ELSE lp.protocol END as transport FROM listening_ports AS lp LEFT JOIN processes AS p ON lp.pid=p.pid LEFT JOIN time AS t LEFT JOIN hash AS h ON h.path=p.path;
 hour:
-  - query_name: drivers
+  - query_name: win_drivers
     query: SELECT t.unix_time AS query_time, d.*, h.md5, h.sha1, h.sha256 FROM drivers AS d LEFT JOIN time AS t LEFT JOIN hash AS h ON h.path = replace(d.path,'\SystemRoot','C:\Windows');
 day:
-  - query_name: os_info
+  - query_name: win_os_info
     query: SELECT t.unix_time AS query_time, os.* FROM os_version AS os LEFT JOIN time AS t;
-  - query_name: interface_addresses
+  - query_name: win_interface_addresses
     query: SELECT t.unix_time AS query_time, ia.interface, ia.address, id.mac FROM interface_addresses AS ia JOIN interface_details AS id ON ia.interface=id.interface LEFT JOIN time AS t WHERE NOT ia.interface='lo';
-  - query_name: uptime
+  - query_name: win_uptime
     query: SELECT t.unix_time AS query_time, total_seconds AS uptime FROM uptime LEFT JOIN time AS t;
   - query_name: win_programs
     query: SELECT t.unix_time AS query_time, p.* FROM programs AS p LEFT JOIN time AS t;
