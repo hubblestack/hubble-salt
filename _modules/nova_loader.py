@@ -1713,10 +1713,11 @@ class NovaLazyLoader(LazyLoader):
     worth it.
     '''
 
-    def __init__(self):
-        super(NovaLazyLoader, self).__init__(_hubble_dir(),
+    def __init__(self, hubble_dir):
+        super(NovaLazyLoader, self).__init__(hubble_dir,
                                              opts=__opts__,
                                              tag='nova')
+        self.hubble_dir = hubble_dir
         self.__data__ = {}
         self.__missing_data__ = {}
         self._load_all()
@@ -1756,7 +1757,7 @@ class NovaLazyLoader(LazyLoader):
                         # Python only in the modules directory, yaml only
                         # in the profiles directory. This is hacky but was a
                         # quick fix.
-                        nova_module_cache, nova_profile_cache = _hubble_dir()
+                        nova_module_cache, nova_profile_cache = hubble_dir
                         nova_module_cache = os.path.join(nova_module_cache, '')
                         nova_profile_cache = os.path.join(nova_profile_cache, '')
                         if ext == '.py' and fpath.startswith(nova_profile_cache):
