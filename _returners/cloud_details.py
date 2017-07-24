@@ -66,21 +66,3 @@ def _get_azure_details():
         # Not on an Azure box
         azure = None
     return azure
-
-
-"""
-# Import AWS and Azure details
-from aws_details import get_aws_details
-from azure_details import get_azure_details
-
-    # Get aws/azure details
-    aws = get_aws_details()
-    azure = get_azure_details()
-
-                        if aws['aws_account_id'] is not None:
-                            event.update({'aws_ami_id': aws['aws_ami_id']})
-                            event.update({'aws_instance_id': aws['aws_instance_id']})
-                            event.update({'aws_account_id': aws['aws_account_id']})
-
-                        if azure['azure_vmId'] is not None:
-                            event.update({'azure_vmId': azure['azure_vmId']})"""
