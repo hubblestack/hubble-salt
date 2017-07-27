@@ -12,6 +12,7 @@ import imp
 import sys
 import salt
 import time
+import yaml
 import logging
 import inspect
 import tempfile
