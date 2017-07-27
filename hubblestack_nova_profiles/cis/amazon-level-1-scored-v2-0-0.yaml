@@ -3,14 +3,9 @@
 #       organization's specific policy.  Search for '# NOTE: ' comments through the file.
 
 # TODO: Checks that aren't implemented yet:
-#       1.1.18
 #       3.6.5
 #       4.2.4
-#       5.4.2
-#       5.4.3
-#       6.1.10-12
-#       6.2.1
-#       6.2.5-19
+#       6.2.6-19
 
 
 
@@ -20,7 +15,9 @@ grep:
       data:
         'Amazon Linux*':
         - /etc/motd:
-            pattern: '(\\v|\\r|\\m|\\s)'
+            pattern: '"(\\\v|\\\r|\\\m|\\\s)"'
+            grep_args:
+              - '-E'
             tag: CIS-1.7.1.1
       description: Ensure message of the day is configured properly
     legacy_passwd_entries_group:
@@ -78,66 +75,6 @@ grep:
             pattern: "^PROMPT="
             tag: CIS-1.4.3
       description: Ensure interactive boot is not enabled
-    chargen_disabled:
-      data:
-        'Amazon Linux*':
-        - /etc/xinetd.d/chargen-dgram:
-            pattern: disable
-            match_output: 'yes'
-            tag: CIS-2.1.1
-        - /etc/xinetd.d/chargen-stream:
-            pattern: disable
-            match_output: 'yes'
-            tag: CIS-2.1.1
-      description: Ensure chargen services are not enabled
-    daytime_disabled:
-      data:
-        'Amazon Linux*':
-        - /etc/xinetd.d/daytime-dgram:
-            pattern: disable
-            match_output: 'yes'
-            tag: CIS-2.1.2
-        - /etc/xinetd.d/daytime-stream:
-            pattern: disable
-            match_output: 'yes'
-            tag: CIS-2.1.2
-      description: Ensure daytime services are not enabled
-    discard_disabled:
-      data:
-        'Amazon Linux*':
-        - /etc/xinetd.d/discard-dgram:
-            pattern: disable
-            match_output: 'yes'
-            tag: CIS-2.1.3
-        - /etc/xinetd.d/discard-stream:
-            pattern: disable
-            match_output: 'yes'
-            tag: CIS-2.1.3
-      description: Ensure discard services are not enabled
-    echo_disabled:
-      data:
-        'Amazon Linux*':
-        - /etc/xinetd.d/echo-dgram:
-            pattern: disable
-            match_output: 'yes'
-            tag: CIS-2.1.4
-        - /etc/xinetd.d/echo-stream:
-            pattern: disable
-            match_output: 'yes'
-            tag: CIS-2.1.4
-      description: Ensure echo services are not enabled
-    time_disabled:
-      data:
-        'Amazon Linux*':
-        - /etc/xinetd.d/time-dgram:
-            pattern: disable
-            match_output: 'yes'
-            tag: CIS-2.1.5
-        - /etc/xinetd.d/time-stream:
-            pattern: disable
-            match_output: 'yes'
-            tag: CIS-2.1.5
-      description: Ensure time services are not enabled
     configure_ntp:
       data:
         'Amazon Linux*':
@@ -153,7 +90,8 @@ grep:
             pattern: '^server'
         - /etc/sysconfig/ntpd:
             tag: CIS-2.2.1.2
-            pattern: 'ntp:ntp'
+            pattern: '^OPTIONS'
+            match_output: '-u ntp:ntp'
       description: Ensure ntp is configured
     configure_chrony:
       data:
@@ -161,9 +99,12 @@ grep:
         - /etc/chrony.conf:
             tag: CIS-2.2.1.3
             pattern: '^server'
+            match_output: 'server *'
+            match_output_regex: True
         - /etc/sysconfig/chronyd:
             tag: CIS-2.2.1.3
-            pattern: 'chrony'
+            pattern: ^OPTIONS
+            match_output: 'OPTIONS="-u chrony"'
       description: Ensure chrony is configured
     local_mail:
       data:
@@ -180,11 +121,9 @@ grep:
             pattern: umask
             match_pattern: '027'
             tag: CIS-5.4.4
-        - /etc/profile.d:
+        - /etc/profile:
             pattern: umask
             match_pattern: '027'
-            grep_args:
-              - '-r'
             tag: CIS-5.4.4
       description: Ensure default user umask is 027 or more restrictive
     disable_mount_cramfs:
@@ -381,8 +320,16 @@ grep:
       data:
         'Amazon Linux*':
         - /etc/sysconfig/iptables:
-            pattern: lo
+            pattern: '"\-A INPUT \-i lo \-j"'
             match_output: ACCEPT
+            tag: CIS-3.6.3
+        - /etc/sysconfig/iptables:
+            pattern: '"\-A OUTPUT \-o lo \-j"'
+            match_output: ACCEPT
+            tag: CIS-3.6.3
+        - /etc/sysconfig/iptables:
+            pattern: '"\-A INPUT \-s 127.0.0.0/8 \-j"'
+            match_output: DROP
             tag: CIS-3.6.3
       description: Ensure loopback traffic is configured
     rsyslog_file_perms:
@@ -507,7 +454,7 @@ grep:
         'Amazon Linux*':
         - /etc/security/limits.conf:
             match_output: '0'
-            pattern: hard core
+            pattern: '"* hard core"'
             tag: CIS-1.5.1
       description: Ensure core dumps are restricted
     sshd_approved_cipher:
@@ -516,7 +463,7 @@ grep:
         - /etc/ssh/sshd_config:
             match_output: '^Ciphers aes256-ctr,aes192-ctr,aes128-ctr$|^Ciphers aes256-ctr,aes128-ctr,aes192-ctr$|^Ciphers aes192-ctr,aes128-ctr,aes256-ctr$|^Ciphers aes192-ctr,aes256-ctr,aes128-ctr$|^Ciphers aes128-ctr,aes256-ctr,aes192-ctr$|^Ciphers aes128-ctr,aes192-ctr,aes256-ctr$'
             match_output_regex: True
-            pattern: Ciphers
+            pattern: ^Ciphers
             tag: CIS-5.2.11
       description: Ensure only approved ciphers are used
     sshd_approved_macs:
@@ -524,13 +471,14 @@ grep:
         'Amazon Linux*':
         - /etc/ssh/sshd_config:
             match_output: 'MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com'
-            pattern: MACs
+            pattern: ^MACs
             tag: CIS-5.2.12
       description: Ensure only approved MAC algorithms are used
     sshd_banner:
       data:
         'Amazon Linux*':
         - /etc/ssh/sshd_config:
+            match_output: "/etc/issue.net"
             pattern: ^Banner
             tag: CIS-5.2.16
       description: Ensure SSH warning banner is configured
@@ -583,15 +531,23 @@ grep:
         'Amazon Linux*':
         - /etc/ssh/sshd_config:
             pattern: ^AllowUsers
+            match_output: 'AllowUsers *'
+            match_output_regex: True
             tag: CIS-5.2.15
         - /etc/ssh/sshd_config:
             pattern: ^AllowGroups
+            match_output: 'AllowGroups *'
+            match_output_regex: True
             tag: CIS-5.2.15
         - /etc/ssh/sshd_config:
             pattern: ^DenyUsers
+            match_output: 'DenyUsers *'
+            match_output_regex: True
             tag: CIS-5.2.15
         - /etc/ssh/sshd_config:
             pattern: ^DenyGroups
+            match_output: 'DenyGroups *'
+            match_output_regex: True
             tag: CIS-5.2.15
       description: Ensure SSH access is limited
     sshd_loglevel_info:
@@ -834,6 +790,36 @@ service:
         'Amazon Linux*':
         - snmpd: CIS-2.2.14
       description:  Ensure SNMP Server is not enabled
+    chargen_disabled:
+      data:
+        'Amazon Linux*':
+        - chargen-dgram: CIS-2.1.1
+        - chargen-stream: CIS-2.1.1
+      description: Ensure chargen services are not enabled
+    daytime_disabled:
+      data:
+        'Amazon Linux*':
+        - daytime-dgram: CIS-2.1.2
+        - daytime-stream: CIS-2.1.2
+      description: Ensure daytime services are not enabled
+    discard_disabled:
+      data:
+        'Amazon Linux*':
+        - discard-dgram: CIS-2.1.3
+        - discard-stream: CIS-2.1.3
+      description: Ensure discard services are not enabled
+    echo_disabled:
+      data:
+        'Amazon Linux*':
+        - echo-dgram: CIS-2.1.4
+        - echo-stream: CIS-2.1.4
+      description: Ensure echo services are not enabled
+    time_disabled:
+      data:
+        'Amazon Linux*':
+        - time-dgram: CIS-2.1.5
+        - time-stream: CIS-2.1.5
+      description: Ensure time services are not enabled
   whitelist:
     crond_running:
       data:
@@ -999,7 +985,7 @@ stat:
       - /etc/passwd-:
           gid: 0
           group: root
-          mode: 644
+          mode: 600
           tag: CIS-6.1.6
           uid: 0
           user: root
@@ -1010,7 +996,7 @@ stat:
       - /etc/shadow-:
           gid: 0
           group: root
-          mode: 000
+          mode: 600
           tag: CIS-6.1.7
           uid: 0
           user: root
@@ -1021,7 +1007,7 @@ stat:
       - /etc/group-:
           gid: 0
           group: root
-          mode: 644
+          mode: 600
           tag: CIS-6.1.8
           uid: 0
           user: root
@@ -1032,7 +1018,7 @@ stat:
       - /etc/gshadow-:
           gid: 0
           group: root
-          mode: 0
+          mode: 600
           tag: CIS-6.1.9
           uid: 0
           user: root
@@ -1215,3 +1201,53 @@ sysctl:
           match_output: '1'
           tag: CIS-3.2.8
     description: Ensure TCP SYN Cookies is enabled
+
+misc:
+  ensure_password_fields_non_empty:
+    data:
+      'Amazon*Linux*2016*':
+       tag: CIS-6.2.1
+       function: check_password_fields_not_empty
+       description: Ensure password fields are not empty
+  no_ungrouped_file_or_directories:
+    data:
+      'Amazon*Linux*2016*':
+       tag: CIS-6.1.12
+       function: ungrouped_files_or_dir
+       description: Ensure no ungrouped files or directories exist
+  no_unowned_file_or_directories:
+    data:
+      'Amazon*Linux*2016*':
+       tag: CIS-6.1.11
+       function: unowned_files_or_dir
+       description: Ensure no unowned files or directories exist
+  default_group_for_root_account:
+    data:
+      'Amazon*Linux*2016*':
+       tag: CIS-5.4.3
+       function: default_group_for_root
+       description: Ensure default group for the root account is GID 0
+  no_world_writable_file:
+    data:
+      'Amazon*Linux*2016*':
+       tag: CIS-6.1.10
+       function: world_writable_file
+       description: Ensure no world writable files exist
+  system_account_non_login:
+    data:
+      'Amazon*Linux*2016*':
+       tag: CIS-5.4.2
+       function: system_account_non_login
+       description: Ensure system accounts are non-login
+  sticky_bit_on_world_writable_directories:
+    data:
+      'Amazon*Linux*2016*':
+       tag: CIS-1.1.18
+       function: sticky_bit_on_world_writable_dirs
+       description: Ensure sticky bit is set on all world-writable directories
+  root_is_only_uid_0_account:
+    data:
+      'Amazon*Linux*2016*':
+       tag: CIS-6.2.5
+       function: root_is_only_uid_0_account
+       description: Ensure root is the only UID 0 account

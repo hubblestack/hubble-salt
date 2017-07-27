@@ -657,40 +657,37 @@ service:
     auditd_running:
       data:
         '*CoreOS*':
-        - auditd: CIS-4.1.1.1_running
+        - auditd: CIS-4.1.1.1
       description: auditd should be running
     crond_running:
       data:
         '*CoreOS*':
-        - crond: CIS-5.1.1_running
+        - crond: CIS-5.1.1
       description: Ensure cron daemon is enabled
     iptables_running:
       data:
         '*CoreOS*':
-        - iptables: CIS-3.6.1_running
+        - iptables: CIS-3.6.1
       description: Ensure iptables is installed
     rsyslogd_running:
       data:
         '*CoreOS*':
-        - rsyslog: CIS-4.2.1.1_running
+        - rsyslog: CIS-4.2.1.1
       description: Ensure rsyslog Service is enabled
     syslog-ng_running:
       data:
         '*CoreOS*':
-        - syslog-ng: CIS-4.2.2.1_running
+        - syslog-ng: CIS-4.2.2.1
       description: Ensure syslog-ng service is enabled
+    sshd_approved_macs:
+      data:
+        '*CoreOS*':
+        - /etc/ssh/sshd_config:
+            match_output: 'MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com'
+            pattern: ^MACs
+            tag: CIS-5.2.12
+      description: Ensure only approved MAC algorithms are used
 stat:
-  at_allow:
-    data:
-      '*CoreOS*':
-      - /etc/at.allow:
-          gid: 0
-          group: root
-          mode: 600
-          tag: CIS-5.1.8
-          uid: 0
-          user: root
-    description: /etc/at.allow must be owned by root and have persmissions 600 (Scored)
   at_cron_allow:
     data:
       '*CoreOS*':
@@ -1063,3 +1060,21 @@ sysctl:
           match_output: '1'
           tag: CIS-3.2.8
     description: Ensure TCP SYN Cookies is enabled
+  reverse_path_filtering:
+    data:
+      '*CoreOS*':
+      - net.ipv4.conf.all.rp_filter:
+          match_output: '1'
+          tag: CIS-3.2.7
+      - net.ipv4.conf.default.rp_filter:
+          match_output: '1'
+          tag: CIS-3.2.7
+    description: Ensure Reverse Path Filtering is enabled
+
+misc:
+  check_all_ports_firewall_rules:
+    data:
+      '*CoreOS*':
+       tag: CIS-3.6.5
+       function: check_all_ports_firewall_rules
+       description: Ensure firewall rules exist for all open ports

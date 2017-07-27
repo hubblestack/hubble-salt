@@ -627,7 +627,7 @@ sysctl:
   bogus_errors:
     data:
       Ubuntu-16.04:
-      - icmp_ignore_bogus_error_responses:
+      - net.ipv4.icmp_echo_ignore_bogus_error_responses:
           match_output: '1'
           tag: CIS-7.2.6
     description: Enable Bad Error Message Protection
