@@ -1822,14 +1822,17 @@ class NovaLazyLoader(LazyLoader):
     worth it.
     '''
 
-    def __init__(self, hubble_dir, opts):
+    def __init__(self, hubble_dir, opts, grains, pillar, salt):
+        self.hubble_dir = hubble_dir
+        self.__grains__ = grains
+        self.__pillar__ = pillar
+        self.__salt__ = salt
+        self.__opts__ = opts
+        self.__data__ = {}
+        self.__missing_data__ = {}
         super(NovaLazyLoader, self).__init__(hubble_dir,
                                              opts=opts,
                                              tag='nova')
-        self.hubble_dir = hubble_dir
-        self.__opts__ = {}
-        self.__data__ = {}
-        self.__missing_data__ = {}
         self._load_all()
 
     def refresh_file_mapping(self):
@@ -1957,10 +1960,10 @@ class NovaLazyLoader(LazyLoader):
         finally:
             sys.path.pop()
 
-        mod.__grains__ = __grains__
-        mod.__pillar__ = __pillar__
+        mod.__grains__ = self.__grains__
+        mod.__pillar__ = self.__pillar__
         mod.__opts__ = self.__opts__
-        mod.__salt__ = __salt__
+        mod.__salt__ = self.__salt__
 
         # pack whatever other globals we were asked to
         for p_name, p_value in six.iteritems(self.pack):
