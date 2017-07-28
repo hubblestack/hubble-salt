@@ -427,6 +427,7 @@ def _dict_update(dest, upd, recursive_update=True, merge_lists=False):
                     dest[key] = upd[key]
             else:
                 dest[key] = upd[key]
+
         return dest
     else:
         try:
