@@ -1,4 +1,4 @@
-# NOTE: This CIS Profile only includes Level 1 Scored Items for Amazon Linux AMI-2014.
+# NOTE: This CIS Profile only includes Level 1 Scored Items for Amazon Linux AMI-2014 09.
 # NOTE: Within this file, there are a few sections that should be tailored to your
 #       organization's specific policy.  Search for '# NOTE: ' comments through the file.
 
@@ -691,7 +691,8 @@ grep:
           - '/etc/ssh/sshd_config':
               tag: 'CIS-6.2.11'
               pattern: "Ciphers"
-              match_output: "Ciphers aes128-ctr,aes192-ctr,aes256-ctr"
+              match_output: "^Ciphers aes256-ctr,aes192-ctr,aes128-ctr$|^Ciphers aes256-ctr,aes128-ctr,aes192-ctr$|^Ciphers aes192-ctr,aes128-ctr,aes256-ctr$|^Ciphers aes192-ctr,aes256-ctr,aes128-ctr$|^Ciphers aes128-ctr,aes256-ctr,aes192-ctr$|^Ciphers aes128-ctr,aes192-ctr,aes256-ctr$"
+              match_output_regex: True
       description: 'Use Only Approved Cipher in Counter Mode (Scored)'
 
     sshd_idle_timeout:

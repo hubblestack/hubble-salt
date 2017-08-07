@@ -50,6 +50,7 @@ from distutils.version import LooseVersion
 
 log = logging.getLogger(__name__)
 
+__virtualname__ = 'stat'
 
 def __virtual__():
     if salt.utils.is_windows():
@@ -57,7 +58,7 @@ def __virtual__():
     return True
 
 
-def audit(data_list, tags, debug=False):
+def audit(data_list, tags, debug=False, **kwargs):
     '''
     Run the stat audits contained in the YAML files processed by __virtual__
     '''

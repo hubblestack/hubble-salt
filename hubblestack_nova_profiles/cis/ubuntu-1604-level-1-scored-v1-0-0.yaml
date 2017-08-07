@@ -278,7 +278,8 @@ grep:
         Ubuntu-16.04:
         - /etc/ssh/sshd_config:
             pattern: Ciphers
-            match: 'aes128-ctr,aes192-ctr,aes256-ctr'
+            match: '^Ciphers aes256-ctr,aes192-ctr,aes128-ctr$|^Ciphers aes256-ctr,aes128-ctr,aes192-ctr$|^Ciphers aes192-ctr,aes128-ctr,aes256-ctr$|^Ciphers aes192-ctr,aes256-ctr,aes128-ctr$|^Ciphers aes128-ctr,aes256-ctr,aes192-ctr$|^Ciphers aes128-ctr,aes192-ctr,aes256-ctr$'
+            match_output_regex: True
             tag: CIS-9.3.11
       description: Use Only Approved Cipher in Counter Mode
     ssh_idle_timeout:
@@ -626,7 +627,7 @@ sysctl:
   bogus_errors:
     data:
       Ubuntu-16.04:
-      - icmp_ignore_bogus_error_responses:
+      - net.ipv4.icmp_echo_ignore_bogus_error_responses:
           match_output: '1'
           tag: CIS-7.2.6
     description: Enable Bad Error Message Protection

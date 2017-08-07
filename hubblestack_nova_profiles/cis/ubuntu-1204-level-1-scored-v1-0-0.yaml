@@ -1,34 +1,11 @@
-# NOTE: This CIS Profile only includes Level 1 Scored Items for Ubuntu 14.04
-# NOTE: Within this file, there are a few sections that should be tailored to your
-#       organization's specific policy.  Search for '# NOTE: ' comments through the file.
-
-# TODO: Checks that aren't implemented yet:
-#       2.17
-#       2.25
-#       3.3
-#       5.1.4
-#       5.2-6
-#       6.16
-#       6.17
-#       8.2.2
-#       8.2.4
-#       9.1.1
-#       9.1.8
-#       10.2
-#       10.3
-#       10.5
-#       11.1
-#       11.2
-#       12.8
-#       12.9
-#       13.1
-#       13.5-20
+# This is mostly a copy from the 14.04 profile, until we have time to do
+# a proper profile
 
 grep:
   whitelist:
     fstab_dev_shm_partition_nodev:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/fstab:
             match_output: nodev
             pattern: /dev/shm
@@ -36,7 +13,7 @@ grep:
       description: Add nodev Option to /run/shm Partition
     fstab_dev_shm_partition_noexec:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/fstab:
             match_output: noexec
             pattern: /dev/shm
@@ -44,7 +21,7 @@ grep:
       description: Add noexec Option to /run/shm Partition
     fstab_dev_shm_partition_nosuid:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/fstab:
             match_output: nosuid
             pattern: /dev/shm
@@ -52,14 +29,14 @@ grep:
       description: Add nosuid Option to /run/shm Partition
     fstab_home_partition:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/fstab:
             pattern: /home
             tag: CIS-2.9
       description: Create Separate Partition for /home
     fstab_home_partition_nodev:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/fstab:
             match_output: nodev
             pattern: /home
@@ -67,14 +44,14 @@ grep:
       description: Add nodev Option to /home
     fstab_tmp_partition:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/fstab:
             pattern: /tmp
             tag: CIS-2.1
       description: Create Separate Partition for /tmp
     fstab_tmp_partition_nodev:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/fstab:
             match_output: nodev
             pattern: /tmp
@@ -82,7 +59,7 @@ grep:
       description: Set nodev option for /tmp Partition
     fstab_tmp_partition_noexec:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/fstab:
             match_output: nosuid
             pattern: /tmp
@@ -90,7 +67,7 @@ grep:
       description: Set noexec option for /tmp Partition
     fstab_tmp_partition_nosuid:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/fstab:
             match_output: nosuid
             pattern: /tmp
@@ -98,28 +75,28 @@ grep:
       description: Set nosuid option for /tmp Partition
     fstab_var_log_audit_partition:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/fstab:
             pattern: /var/log/audit
             tag: CIS-2.8
       description: Create Separate Partition for /var/log/audit
     fstab_var_log_partition:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/fstab:
             pattern: /var/log
             tag: CIS-2.7
       description: Create Separate Partition for /var/log
     fstab_var_partition:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/fstab:
             pattern: /var
             tag: CIS-2.5
       description: Create Separate Partition for /var
     fstab_var_tmp_bind_mount:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/fstab:
             match_output: /var/tmp
             pattern: /var
@@ -127,14 +104,14 @@ grep:
       description: Bind Mount the /var/tmp directory to /tmp
     grub_password:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /boot/grub/grub.cfg:
             pattern: password
             tag: CIS-3.3
       description: Set Boot Loader Password
     core_hard_limit:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/security/limits.conf:
             match_output: '0'
             pattern: hard core
@@ -142,7 +119,7 @@ grep:
       description: Restrict Core Dumps
     ntp_restrict_default:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/ntp.conf:
             pattern: '^restrict'
             match_output: default
@@ -159,7 +136,7 @@ grep:
       description: Configure Network Time Protocol (NTP)
     local_mta:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
           - /etc/postfix/main.cf:
               pattern: '^inet_interfaces'
               match_output: localhost
@@ -167,7 +144,7 @@ grep:
       description: Configure Mail Transfer Agent for Local-Only Mode
     rsync:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/default/rsync:
             pattern: ^RSYNC_ENABLE
             match_output: 'false'
@@ -175,7 +152,7 @@ grep:
       description: Ensure rsync service is not enabled
     rsyslog_file_perms:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/rsyslog.conf:
             pattern: '^\$FileCreateMode'
             match_output: '0640'
@@ -183,14 +160,14 @@ grep:
       description: Create and Set Permissions on rsyslog Log Files
     rsyslog_remote_logging:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/rsyslog.conf:
             pattern: ^*.*[^I][^I]*@
             tag: CIS-8.2.5
       description: Configure rsyslog to Send Logs to a Remote Log Host
     pam_cracklib_settings:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/pam.d/common-password:
             pattern: pam_cracklib
             match_output: 'retry=3'
@@ -218,7 +195,7 @@ grep:
       description: Set Password Creation Requirement Parameters Using pam_cracklib
     pam_password_reuse:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/pam.d/common-password:
             pattern: remember
             match_output: 'remember=5'
@@ -226,7 +203,7 @@ grep:
       description: Limit Password Reuse
     ssh_version_2:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/ssh/sshd_config:
             pattern: Protocol
             match_output: '2'
@@ -234,7 +211,7 @@ grep:
       description: Set SSH Protocol to 2
     ssh_log_level:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/ssh/sshd_config:
             pattern: LogLevel
             match_output: INFO
@@ -242,7 +219,7 @@ grep:
       description: Set LogLevel to INFO
     ssh_disable_xforward:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/ssh/sshd_config:
             pattern: XForwarding
             match: 'no'
@@ -250,7 +227,7 @@ grep:
       description: Disable SSH X11 Forwarding
     ssh_auth_retries:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/ssh/sshd_config:
             pattern: MaxAuthTries
             match: '4'
@@ -258,7 +235,7 @@ grep:
       description: Set SSH MaxAuthTries to 4 or Less
     ssh_ignore_rhosts:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/ssh/sshd_config:
             pattern: IgnoreRhosts
             match: 'yes'
@@ -266,7 +243,7 @@ grep:
       description: Set SSH IgnoreRhosts to Yes
     ssh_hostbased_auth:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/ssh/sshd_config:
             pattern: HostbasedAuthentication
             match: 'no'
@@ -274,7 +251,7 @@ grep:
       description: Set SSH HostbasedAuthentication to No
     ssh_permit_root:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/ssh/sshd_config:
             pattern: PermitRootLogin
             match: 'no'
@@ -282,7 +259,7 @@ grep:
       description: Disable SSH Root Login
     ssh_permit_empty_pw:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/ssh/sshd_config:
             pattern: PermitEmptyPasswords
             match: 'no'
@@ -290,7 +267,7 @@ grep:
       description: Set SSH PermitEmptyPasswords to No
     ssh_permit_user_env:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/ssh/sshd_config:
             pattern: PermitUserEnvironment
             match: 'no'
@@ -298,7 +275,7 @@ grep:
       description: Do Not Allow Users to Set Environment Options
     ssh_restrict_cipher:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/ssh/sshd_config:
             pattern: Ciphers
             match: '^Ciphers aes256-ctr,aes192-ctr,aes128-ctr$|^Ciphers aes256-ctr,aes128-ctr,aes192-ctr$|^Ciphers aes192-ctr,aes128-ctr,aes256-ctr$|^Ciphers aes192-ctr,aes256-ctr,aes128-ctr$|^Ciphers aes128-ctr,aes256-ctr,aes192-ctr$|^Ciphers aes128-ctr,aes192-ctr,aes256-ctr$'
@@ -307,7 +284,7 @@ grep:
       description: Use Only Approved Cipher in Counter Mode
     ssh_idle_timeout:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/ssh/sshd_config:
             pattern: ClientAliveInterval
             match: '300'
@@ -319,7 +296,7 @@ grep:
       description: Set Idle Timeout Interval for User Login
     ssh_limit_access:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/ssh/sshd_config:
             pattern: AllowUsers
             tag: CIS-9.3.13
@@ -335,7 +312,7 @@ grep:
       description:  Limit Access via SSH
     ssh_set_banner:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/sshd_conf:
             pattern: Banner
             match: issue
@@ -343,7 +320,7 @@ grep:
       description: Set SSH Banner
     limit_su_access:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/pam.d/su:
             pattern: pam_wheel.so
             match_output: use_uid
@@ -354,7 +331,7 @@ grep:
       description: Restrict Access to the su Command
     password_max_days:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/login.defs:
             pattern: PASS_MAX_DAYS
             match_output: '90'
@@ -362,7 +339,7 @@ grep:
       description: Set Password Expiration Days
     password_min_days:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/login.defs:
             pattern: PASS_MIN_DAYS
             match_output: '7'
@@ -370,7 +347,7 @@ grep:
       description: Set Password Change Minimum Number of Days
     password_warn_days:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/login.defs:
             pattern: PASS_WARN_AGE
             match_output: '7'
@@ -378,7 +355,7 @@ grep:
       description: Set Password Expiring Warning Days
     umask:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/login.defs:
             pattern: UMASK
             match_output: '077'
@@ -387,14 +364,14 @@ grep:
   blacklist:
     root_passwd_set:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/passwd:
             pattern: '^root:[*\!]:'
             tag: CIS-3.4
       description: Require Authentication for Single-User Mode
     rsh_inet:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/inetd.conf:
             pattern: '^shell'
             tag: CIS-5.1.2
@@ -407,7 +384,7 @@ grep:
       description: Ensure rsh server is not enabled
     talk:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/inetd.conf:
             pattern: '^talk'
             tag: CIS-5.1.4
@@ -417,56 +394,56 @@ grep:
       description: Ensure talk server is not enabled
     telnet:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/inetd.conf:
             pattern: '^telnet'
             tag: CIS-5.1.6
       description: Ensure Telnet Server is not Enabled
     tftp:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/inetd.conf:
             pattern: '^tftp'
             tag: CIS-5.1.7
       description: Ensure tftp-server is not enabled
     chargen:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/inetd.conf:
             pattern: '^chargen'
             tag: CIS-5.2
       description: Ensure Chargen is not Enabled
     daytime:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/inetd.conf:
             pattern: '^daytime'
             tag: CIS-5.3
       description: Ensure daytime is not Enabled
     echo:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/inetd.conf:
             pattern: '^echo'
             tag: CIS-5.4
       description: Ensure echo is not Enabled
     discard:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/inetd.conf:
             pattern: '^discard'
             tag: CIS-5.5
       description: Ensure discard is not Enabled
     time:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/inetd.conf:
             pattern: '^time'
             tag: CIS-5.6
       description: Ensure time is not Enabled
     banner_os_info_motd:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/motd:
             pattern: '\v'
             tag: CIS-11.2
@@ -482,7 +459,7 @@ grep:
       description: Remove OS Information from Login Warning Banners
     banner_os_info_issue:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/issue:
             pattern: '\v'
             tag: CIS-11.2
@@ -498,7 +475,7 @@ grep:
       description: Remove OS Information from Login Warning Banners
     banner_os_info_issue_net:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/issue.net:
             pattern: '\v'
             tag: CIS-11.2
@@ -514,21 +491,21 @@ grep:
       description: Remove OS Information from Login Warning Banners
     legacy_entries_passwd:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/passwd:
             pattern: '^+'
             tag: CIS-13.2
       description: Verify No Legacy "+" Entries Exist in /etc/passwd File
     legacy_entries_shadow:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/shadow:
             pattern: '^+'
             tag: CIS-13.3
       description: Verify No Legacy "+" Entries Exist in /etc/shadow File
     legacy_entries_group:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - /etc/group:
             pattern: '^+'
             tag: CIS-13.4
@@ -538,132 +515,132 @@ service:
   blacklist:
     autofs:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - autofs: CIS-2.25
       description: Disable Automounting
     apport:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - apport: CIS-4.1
       description: Restrict Core Dumps
     whoopsie:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - whoopsie: CIS-4.1
       description: Restrict Core Dumps
     xinetd:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
           - xinetd: CIS-5.1.8
       description: Ensure xinetd is not enabled
     avahi_daemon:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
           - avahi-daemon: CIS-6.2
       description: Ensure Avahi Server is not enabled
     cups:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
           - cups: CIS-6.3
       description: Ensure print server is not enabled
     dhcp-server:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
           - isc-dhcp-server: CIS-6.4
       description: Ensure DHCP Server is not enabled
   whitelist:
     rsyslog:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
           - rsyslog: CIS-8.2.2
       description: Ensure the rsyslog Service is activated
     cron:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
           - cron: CIS-9.1.1
       description: Enable cron Daemon
 
 sysctl:
   disable_suid_dumpable:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - fs.suid_dumpable:
           match_output: '0'
           tag: CIS-4.1
     description: Restrict Core Dumps
   randomize_va_space:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - kernel.randomize_va_space:
           match_output: '2'
           tag: CIS-4.3
     description: Enable Randomized Virtual Memory Region Placement
   disable_ip4_ip_forward:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - net.ipv4.ip_forward:
           match_output: '0'
           tag: CIS-7.1.1
     description: Disable IP Forwarding
   disable_packet_redirect:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - net.ipv4.conf.all.send_redirects:
           match_output: '0'
           tag: CIS-7.1.2
     description: Disable Send Packet Redirects
   disable_source_routed_packets:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - net.ipv4.conf.all.accept_source_route:
           match_output: '0'
           tag: CIS-7.2.1
     description: Disable Source Routed Packet Acceptance
   disable_icmp_redirect:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - net.ipv4.conf.all.accept_redirects:
           match_output: '0'
           tag: CIS-7.2.2
     description: Disable ICMP Redirect Acceptance
   disable_secure_icmp_redirect:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - net.ipv4.conf.all.secure_redirects:
           match_output: '0'
           tag: CIS-7.2.3
     description: Disable Secure ICMP Redirect Acceptance
   log_martians:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - net.ipv4.conf.all.log_martians:
           match_output: '1'
           tag: CIS-7.2.4
     description: Log Suspicious Packets
   ignore_broadcast:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - net.ipv4.icmp_echo_ignore_broadcasts:
           match_output: '1'
           tag: CIS-7.2.5
     description: Enable Ignore Broadcast Requests
   bogus_errors:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - icmp_ignore_bogus_error_responses:
           match_output: '1'
           tag: CIS-7.2.6
     description: Enable Bad Error Message Protection
   rp_filter:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - net.ipv4.conf.all.rp_filter:
           match_output: '1'
           tag: CIS-7.2.7
     description: Enable RFC-recommended Source Route Validation
   tcp_syncookies:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - net.ipv4.tcp_syncookies:
           match_output: '1'
           tag: CIS-7.2.8
@@ -673,50 +650,50 @@ pkg:
   blacklist:
     prelink:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - prelink: CIS-4.4
       description: Disable Prelink
     nis:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - nis: CIS-5.1.1
       description: Ensure NIS is not installed
     talk:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - talk: CIS-5.1.5
       description: Ensure Talk Client is not installed
     xserver:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - xserver-xorg-core\*: CIS-6.1
       description: Ensure the X Window system is not installed
     biosdevname:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - biosdevname: CIS-6.17
       description: Ensure biosdevname is not enabled
   whitelist:
     ntp:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - ntp: CIS-6.5
       description: Configure Network Time Protocol (NTP)
     tcpd:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - tcpd: CIS-7.4.1
       description: Install TCP Wrappers
     rsyslog:
       data:
-        Ubuntu-14.04:
+        Ubuntu-12.04:
         - rsyslog: CIS-8.2.1
       description: Install the rsyslog package
 
 stat:
   grub_cfg_owner:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - /boot/grub/grub.cfg:
           gid: 0
           group: root
@@ -726,28 +703,28 @@ stat:
     description: Set User/Group Owner on bootloader config
   grub_cfg_perms:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - /boot/grub/grub.cfg:
           mode: 600
           tag: CIS-3.2
     description: Set Permissions on bootloader config
   hosts_allow_perms:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - /etc/hosts.allow:
           mode: 644
           tag: CIS-7.4.3
     description: Verify Permissions on /etc/hosts.allow
   hosts_deny_perms:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - /etc/hosts.deny:
           mode: 644
           tag: CIS-7.4.5
     description: Verify Permissions on /etc/hosts.deny
   crontab_own_perms:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - /etc/crontab:
           gid: 0
           group: root
@@ -758,7 +735,7 @@ stat:
     description:  Set User/Group Owner and Permission on /etc/crontab
   cron_hourly_own_perms:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - /etc/cron.hourly:
           gid: 0
           group: root
@@ -769,7 +746,7 @@ stat:
     description:  Set User/Group Owner and Permission on /etc/cron.hourly
   cron_daily_own_perms:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - /etc/cron.daily:
           gid: 0
           group: root
@@ -780,7 +757,7 @@ stat:
     description:  Set User/Group Owner and Permission on /etc/cron.daily
   cron_weekly_own_perms:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - /etc/cron.weekly:
           gid: 0
           group: root
@@ -791,7 +768,7 @@ stat:
     description:  Set User/Group Owner and Permission on /etc/cron.weekly
   cron_monthly_own_perms:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - /etc/cron.monthly:
           gid: 0
           group: root
@@ -802,7 +779,7 @@ stat:
     description:  Set User/Group Owner and Permission on /etc/cron.monthly
   cron_d_own_perms:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - /etc/cron.d:
           gid: 0
           group: root
@@ -813,7 +790,7 @@ stat:
     description:  Set User/Group Owner and Permission on /etc/cron.d
   at_cron_allow:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - /etc/cron.deny:
           gid: null
           group: null
@@ -845,7 +822,7 @@ stat:
     description: Restrict at/cron to authorized users
   sshd_config:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - /etc/ssh/sshd_config:
           uid: 0
           gid: 0
@@ -856,7 +833,7 @@ stat:
     description: Set Permissions on /etc/ssh/sshd_config
   banner_files:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - /etc/motd:
           uid: 0
           gid: 0
@@ -881,28 +858,28 @@ stat:
     description: Set Warning Banner for Standard Login Services
   passwd_perms:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - /etc/passwd:
           mode: 644
           tag: CIS-12.1
     description: Verify Permissions on /etc/passwd
   shadow_perms:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - /etc/shadow:
           mode: 640
           tag: CIS-12.2
     description: Verify Permissions on /etc/shadow
   group_perms:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - /etc/group:
           mode: 644
           tag: CIS-12.3
     description: Verify Permissions on /etc/group
   passwd_owner_group:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - /etc/passwd:
           uid: 0
           gid: 0
@@ -912,7 +889,7 @@ stat:
     description: Verify User/Group Ownership on /etc/passwd
   shadow_owner_group:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - /etc/shadow:
           uid: 0
           gid: 42
@@ -922,7 +899,7 @@ stat:
     description: Verify User/Group Ownership on /etc/shadow
   group_user_group:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
       - /etc/group:
           uid: 0
           gid: 0
@@ -934,7 +911,7 @@ stat:
 command:
   rsh_client:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
         tag: CIS-5.1.3
         commands:
           - 'dpkg -s rsh-client':
@@ -944,7 +921,7 @@ command:
     description: Ensure RSH Client is not Installed
   ufw_active:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
         tag: CIS-7.7
         commands:
           - 'ufw status':
@@ -952,7 +929,7 @@ command:
     description: Ensure Firewall is active
   disable_system_accts:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
         tag: CIS-10.2
         commands:
           - ?
@@ -966,7 +943,7 @@ command:
     description: Disable System Accounts
   default_root_group:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
         tag: CIS-10.3
         commands:
           - 'grep "^root:" /etc/passwd | cut -f4 -d:':
@@ -974,7 +951,7 @@ command:
     description: Set Default Group for root Account
   inactive_users:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
         tag: CIS-10.5
         commands:
           - 'useradd -D | grep INACTIVE':
@@ -982,7 +959,7 @@ command:
     description: Lock Inactive User Accounts
   empty_passwd_field:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
         tag: CIS-13.1
         commands:
           - ?
@@ -994,7 +971,7 @@ command:
     description: Ensure Password Fields are Not Empty
   uid_zero_only_root:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
         tag: CIS-13.5
         commands:
           - ?
@@ -1006,7 +983,7 @@ command:
     description: Verify No UID 0 Accounts Exist Other Than root
   root_path:
     data:
-      Ubuntu-14.04:
+      Ubuntu-12.04:
         tag: CIS-13.6
         commands:
           - ?
