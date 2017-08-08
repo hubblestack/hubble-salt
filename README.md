@@ -56,7 +56,7 @@ fileserver_backend:
   - git
 gitfs_remotes:
   - https://github.com/hubblestack/hubble-salt.git:
-    - base: v2017.8.1
+    - base: v2017.8.2
     - root: ''
 ```
 

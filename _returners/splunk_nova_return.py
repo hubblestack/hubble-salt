@@ -49,7 +49,7 @@ import time
 
 import logging
 
-__version__ = 'v2017.8.1'
+__version__ = 'v2017.8.2'
 
 _max_content_bytes = 100000
 http_event_collector_SSL_verify = False
