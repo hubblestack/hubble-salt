@@ -50,7 +50,7 @@ from datetime import datetime
 
 import logging
 
-__version__ = 'v2017.8.1'
+__version__ = 'v2017.8.2'
 
 _max_content_bytes = 100000
 http_event_collector_SSL_verify = False
@@ -145,7 +145,7 @@ def returner(ret):
                         # Potentially add metadata fields:
                         fields = {}
                         for item in index_extracted_fields:
-                            if item in payload['event'] and not isinstance(payload['event'], (list, dict, tuple)):
+                            if item in payload['event'] and not isinstance(payload['event'][item], (list, dict, tuple)):
                                 fields[item] = str(payload['event'][item])
                         if fields:
                             payload.update({'fields': fields})
