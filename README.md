@@ -42,7 +42,8 @@ https://hubblestack.io
 
 This installation method subscribes directly to our GitHub repository, pinning
 to a tag or branch. This method requires no package installation or manual
-checkouts.
+checkouts. It also will subscribe to our policy repo,
+[hubblestack_data](https://github.com/hubblestack/hubblestack_data).
 
 Requirements: GitFS support on your Salt Master. (Usually just requires
 installation of `gitpython` or `pygit2`. `pygit2` is the recommended gitfs
@@ -55,8 +56,10 @@ fileserver_backend:
   - roots
   - git
 gitfs_remotes:
+  - https://github.com/hubblestack/hubblestack_data.git:
+    - root: ''
   - https://github.com/hubblestack/hubble-salt.git:
-    - base: v2017.8.2
+    - base: v2017.8.3
     - root: ''
 ```
 
