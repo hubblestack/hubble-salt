@@ -96,9 +96,9 @@ def audit(data_list, tags, debug=False, **kwargs):
     '''
     Main audit function. See module docstring for more information on usage.
     '''
-    os_version = __grains__.get('osrelease', None)
+    os_version = __grains__.get('osmajorrelease', None)
     if os_version is None:
-        os_version = __grains__.get('osmajorrelease', None)
+        os_version = __grains__.get('osrelease', None)
     os_name = __grains__['os'].lower()
 
     log.debug("os_version: %s, os_name: %s", os_version, os_name)
@@ -269,7 +269,7 @@ def _get_cve_vulnerabilities(query_results, os_version):
 
             for pkg in report['_source']['affectedPackage']:
                 #_source:affectedPackages
-                if pkg['OSVersion'] in ['any', os_version]: #Only use matching os
+                if pkg['OSVersion'] in ['any', str(__grains__.get('osmajorrelease', None)), str(__grains__.get('osrelease', None))]: #Only use matching os
                     pkg_obj = VulnerablePkg(title, pkg['packageName'], pkg['packageVersion'], \
                                  score, pkg['operator'], reporter, href, cve_list)
                     if pkg_obj.pkg not in vulnerable_pkgs:
