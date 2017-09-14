@@ -132,7 +132,7 @@ def audit(data_list, tags, debug=False, **kwargs):
 
             # get whitelist from pillar data if exists
             whitelist = None
-            cve_scan_v2_pillar = __pillar__.get('cve_scan_v2', {})
+            cve_scan_v2_pillar = __salt__['config.get']('cve_scan_v2', {})
             if cve_scan_v2_pillar is not None:
                 whitelist = cve_scan_v2_pillar.get('whitelist', {})
             if whitelist is None:
@@ -421,4 +421,3 @@ class VulnerablePkg:
             'description': self.title,
             'nova_profile': profile
         }
-
