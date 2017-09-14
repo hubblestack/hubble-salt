@@ -112,7 +112,7 @@ def audit(configs=None,
                    show_success=show_success,
                    show_compliance=show_compliance)
 
-    if __salt__['config.get']('hubblestack:nova:autoload', True):
+    if not called_from_top and __salt__['config.get']('hubblestack:nova:autoload', True):
         load()
     if not __nova__:
         return False, 'No nova modules/data have been loaded.'
@@ -465,9 +465,14 @@ def top(topfile='top.nova',
         else:
             if 'Errors' not in results:
                 results['Errors'] = {}
-            results['Errors'][topfile] = {'error': 'topfile malformed, list '
-                                                   'entries must be strings or dicts'}
-            return results
+            error_log = 'topfile malformed, list entries must be strings or '\
+                        'dicts: {0}'.format(data)
+            results['Errors'][topfile] = {'error': error_log}
+            log.error(error_log)
+            continue
+
+    if not data_by_tag:
+        return results
 
     # Run the audits
     for tag, data in data_by_tag.iteritems():
