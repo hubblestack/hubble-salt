@@ -59,7 +59,7 @@ gitfs_remotes:
   - https://github.com/hubblestack/hubblestack_data.git:
     - root: ''
   - https://github.com/hubblestack/hubble-salt.git:
-    - base: v2017.8.3
+    - base: v2017.9.0
     - root: ''
 ```
 

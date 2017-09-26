@@ -28,7 +28,7 @@ __virtualname__ = 'pulsar'
 CONFIG = None
 CONFIG_STALENESS = 0
 
-__version__ = 'v2017.8.3'
+__version__ = 'v2017.9.0'
 
 
 def __virtual__():
@@ -158,9 +158,10 @@ def process(configfile='salt://hubblestack_pulsar/hubblestack_pulsar_win_config.
     # Validate ACLs on watched folders/files and add if needed
     if update_acls:
         for path in config:
-            if path == 'win_notify_interval' or path == 'return' or path == 'batch' or path == 'checksum' or path == 'stats':
+            if path in ['win_notify_interval', 'return', 'batch', 'checksum', 'stats', 'paths', 'verbose']:
                 continue
             if not os.path.exists(path):
+                log.info('The folder path {0} does not exist'.format(path))
                 continue
             if isinstance(config[path], dict):
                 mask = config[path].get('mask', DEFAULT_MASK)
@@ -221,6 +222,21 @@ def process(configfile='salt://hubblestack_pulsar/hubblestack_pulsar_win_config.
     ret = new_ret
 
     return ret
+
+
+def canary(change_file=None):
+    '''
+    Simple module to change a file to trigger a FIM event (daily, etc)
+
+    THE SPECIFIED FILE WILL BE CREATED AND DELETED
+
+    Defaults to CONF_DIR/fim_canary.tmp, i.e. /etc/hubble/fim_canary.tmp
+    '''
+    if change_file is None:
+        conf_dir = os.path.dirname(__opts__['conf_file'])
+        change_file = os.path.join(conf_dir, 'fim_canary.tmp')
+    __salt__['file.touch'](change_file)
+    __salt__['file.remove'](change_file)
 
 
 def _check_acl(path, mask, wtype, recurse):
@@ -551,3 +567,39 @@ def _dict_update(dest, upd, recursive_update=True, merge_lists=False):
             for k in upd:
                 dest[k] = upd[k]
         return dest
+
+
+def top(topfile='salt://hubblestack_pulsar/win_top.pulsar',
+        verbose=False):
+
+    configs = get_top_data(topfile)
+
+    configs = ['salt://hubblestack_pulsar/' + config.replace('.','/') + '.yaml'
+               for config in configs]
+
+    return process(configs, verbose=verbose)
+
+
+def get_top_data(topfile):
+
+    topfile = __salt__['cp.cache_file'](topfile)
+
+    try:
+        with open(topfile) as handle:
+            topdata = yaml.safe_load(handle)
+    except Exception as e:
+        raise CommandExecutionError('Could not load topfile: {0}'.format(e))
+
+    if not isinstance(topdata, dict) or 'pulsar' not in topdata or \
+            not(isinstance(topdata['pulsar'], dict)):
+        raise CommandExecutionError('Pulsar topfile not formatted correctly')
+
+    topdata = topdata['pulsar']
+
+    ret = []
+
+    for match, data in topdata.iteritems():
+        if __salt__['match.compound'](match):
+            ret.extend(data)
+
+    return ret
