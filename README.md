@@ -1,6 +1,15 @@
 Please create any issues on the [Hubble](https://github.com/hubblestack/hubble)
 repo.
 
+*NOTE FROM [@basepi](https://github.com/basepi)*: As we continue to add
+features to hubble, I'm finding more and more instances where the flexibility
+of not being tied to salt gives me the freedom to do more with hubble. As a
+result, [hubble](https://github.com/hubblestack/hubble) is slowly surpassing
+hubble-salt in available features. While I have no plans to deprecate
+hubble-salt, I do recommend checking out
+[hubble](https://github.com/hubblestack/hubble) if you're interested in these
+additional features (such as support for topfiles in pulsar).
+
 Table of Contents
 =================
 
