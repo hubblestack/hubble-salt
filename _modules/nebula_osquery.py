@@ -41,7 +41,7 @@ from salt.exceptions import CommandExecutionError
 
 log = logging.getLogger(__name__)
 
-__version__ = 'v2017.8.3'
+__version__ = 'v2017.9.0'
 __virtualname__ = 'nebula'
 
 

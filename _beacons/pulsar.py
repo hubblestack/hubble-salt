@@ -39,7 +39,7 @@ except ImportError:
     DEFAULT_MASK = None
 
 __virtualname__ = 'pulsar'
-__version__ = 'v2017.8.3'
+__version__ = 'v2017.9.0'
 CONFIG = None
 CONFIG_STALENESS = 0
 
