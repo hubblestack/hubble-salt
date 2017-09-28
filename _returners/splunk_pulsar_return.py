@@ -51,7 +51,7 @@ from collections import defaultdict
 
 import logging
 
-__version__ = 'v2017.9.1'
+__version__ = 'v2017.9.2'
 
 _max_content_bytes = 100000
 http_event_collector_SSL_verify = False
