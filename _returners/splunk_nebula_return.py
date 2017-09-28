@@ -50,7 +50,7 @@ from datetime import datetime
 
 import logging
 
-__version__ = 'v2017.9.0'
+__version__ = 'v2017.9.1'
 
 _max_content_bytes = 100000
 http_event_collector_SSL_verify = False

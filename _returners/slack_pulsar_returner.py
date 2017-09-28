@@ -69,7 +69,7 @@ import salt.ext.six.moves.http_client
 # Import Salt Libs
 import salt.returners
 
-__version__ = 'v2017.9.0'
+__version__ = 'v2017.9.1'
 
 log = logging.getLogger(__name__)
 
