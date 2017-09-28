@@ -35,7 +35,7 @@ from salt.exceptions import CommandExecutionError
 from nova_loader import NovaLazyLoader
 
 __nova__ = {}
-__version__ = 'v2017.9.0'
+__version__ = 'v2017.9.1'
 
 
 def audit(configs=None,
@@ -453,7 +453,7 @@ def top(topfile='top.nova',
     # tag.
     data_by_tag = {}
     for data in top_data:
-        if isinstance(data, str):
+        if isinstance(data, basestring):
             if '*' not in data_by_tag:
                 data_by_tag['*'] = []
             data_by_tag['*'].append(data)
@@ -466,7 +466,7 @@ def top(topfile='top.nova',
             if 'Errors' not in results:
                 results['Errors'] = {}
             error_log = 'topfile malformed, list entries must be strings or '\
-                        'dicts: {0}'.format(data)
+                        'dicts: {0} | {1}'.format(data, type(data))
             results['Errors'][topfile] = {'error': error_log}
             log.error(error_log)
             continue
