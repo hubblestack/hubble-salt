@@ -189,8 +189,8 @@ def queries(query_group,
 
         if verbose:
             tmp = copy.deepcopy(query)
-            tmp['query_result'] = query_ret
-            ret.append(tmp)
+            query_ret['query_result'] = tmp
+            ret.append({name: query_ret})
         else:
             ret.append({name: query_ret})
 
