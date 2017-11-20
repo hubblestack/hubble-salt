@@ -51,7 +51,7 @@ from collections import defaultdict
 
 import logging
 
-__version__ = 'v2017.9.2'
+__version__ = 'v2017.11.0'
 
 _max_content_bytes = 100000
 http_event_collector_SSL_verify = False
@@ -84,7 +84,7 @@ def returner(ret):
 
             # Set up the fields to be extracted at index time. The field values must be strings.
             # Note that these fields will also still be available in the event data
-            index_extracted_fields = ['aws_instance_id', 'aws_account_id', 'azure_vmId']
+            index_extracted_fields = ['aws_instance_id', 'aws_account_id', 'azure_vmId', 'azure_subscriptionId']
             try:
                 index_extracted_fields.extend(opts['index_extracted_fields'])
             except TypeError:
@@ -232,6 +232,12 @@ def returner(ret):
                 payload.update({'host': fqdn})
                 payload.update({'index': opts['index']})
                 payload.update({'sourcetype': opts['sourcetype']})
+
+                # Remove any empty fields from the event payload
+                remove_keys = [k for k in event if event[k] == ""]
+                for k in remove_keys:
+                    del event[k]
+
                 payload.update({'event': event})
 
                 # Potentially add metadata fields:
