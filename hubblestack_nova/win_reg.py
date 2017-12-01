@@ -18,6 +18,7 @@ import salt.utils
 log = logging.getLogger(__name__)
 __virtualname__ = 'win_reg'
 
+
 def __virtual__():
     if not salt.utils.is_windows():
         return False, 'This audit module only runs on windows'
@@ -179,7 +180,6 @@ def _reg_path_splitter(reg_path):
     return dict_return
 
 
-
 def _find_option_value_in_reg(reg_hive, reg_key, reg_value):
     '''
     helper function to retrieve Windows registry settings for a particular
@@ -216,6 +216,7 @@ def _find_option_value_in_reg(reg_hive, reg_key, reg_value):
         else:
             return False
 
+
 def _translate_value_type(current, value, evaluator):
     try:
         current = int(current)
@@ -242,4 +243,3 @@ def _translate_value_type(current, value, evaluator):
     if 'user' in value:
         log.debug("HKEY_Users is still a work in progress")
         return True
-

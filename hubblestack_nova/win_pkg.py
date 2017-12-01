@@ -19,6 +19,7 @@ from salt.exceptions import CommandExecutionError
 log = logging.getLogger(__name__)
 __virtualname__ = 'win_pkg'
 
+
 def __virtual__():
     if not salt.utils.is_windows():
         return False, 'This audit module only runs on windows'
@@ -66,7 +67,7 @@ def audit(data_list, tags, debug=False, **kwargs):
                 # Whitelisted audit (must include)
                 if 'whitelist' in audit_type:
                     if name in __pkgdata__:
-                        audit_value = __pkgdata__['name']
+                        audit_value = __pkgdata__[name]
                         tag_data['found_value'] = audit_value
                         secret = _translate_value_type(audit_value, tag_data['value_type'], match_output)
                         if secret:
