@@ -54,9 +54,13 @@ to a tag or branch. This method requires no package installation or manual
 checkouts. It also will subscribe to our policy repo,
 [hubblestack_data](https://github.com/hubblestack/hubblestack_data).
 
-Requirements: GitFS support on your Salt Master. (Usually just requires
+Requirements:
+
+* GitFS support on your Salt Master. (Usually just requires
 installation of `gitpython` or `pygit2`. `pygit2` is the recommended gitfs
 provider.)
+* `requests` and `six` python libraries. These should be included with your
+salt installation, but in certain cases (such as SLES) they may be missing.
 
 */etc/salt/master.d/hubblestack-nova.conf*
 
