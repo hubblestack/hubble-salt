@@ -132,7 +132,7 @@ def _get_tags(data):
                             ret[tag] = []
                         formatted_data = {'name': name,
                                           'tag': tag,
-                                          'module': 'win_auditpol',
+                                          'module': 'win_gp',
                                           'type': toplist}
                         formatted_data.update(tag_data)
                         formatted_data.update(audit_data)
