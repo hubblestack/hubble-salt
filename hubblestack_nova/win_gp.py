@@ -62,16 +62,9 @@ def audit(data_list, tags, debug=False, **kwargs):
                 # Whitelisted audit (must include)
                 if 'whitelist' in audit_type:
                     if name in __gpdata__:
-                        audit_value = True
-                        tag_data['found_value'] = audit_value
-                        secret = _translate_value_type(audit_value, tag_data['value_type'], match_output)
-                        if secret:
-                            ret['Success'].append(tag_data)
-                        else:
-                            ret['Failure'].append(tag_data)
+                        ret['Success'].append(tag_data)
                     else:
-                        log.debug('When trying to audit the firewall section,'
-                                  ' the yaml contained incorrect data for the key')
+                        ret['Failure'].append(tag_data)
 
     return ret
 
