@@ -143,11 +143,11 @@ def _get_tags(data):
 def _get_gp_templates():
     domain_check = __salt__['system.get_domain_workgroup']()
     if 'Workgroup' in domain_check:
-        return False
-    else:
-        domain_check = domain_check['Domain']
+        return []
+
     list = __salt__['cmd.run']('Get-ChildItem //{0}/SYSVOL/{0}/Policies/PolicyDefinitions | Format-List '
-                               '-Property Name, SID'.format(domain_check), shell='powershell', python_shell=True)
+                               '-Property Name, SID'.format(domain_check['Domain']),
+                               shell='powershell', python_shell=True)
     return list
 
 
