@@ -92,7 +92,7 @@ def _get_tags(data):
     Retrieve all the tags for this distro from the yaml
     '''
     ret = {}
-    distro = __grains__.get('osfullname')
+    distro = __grains__.get('osfinger')
     for toplist, toplevel in data.get(__virtualname__, {}).iteritems():
         # secedit:whitelist
         for audit_dict in toplevel:
