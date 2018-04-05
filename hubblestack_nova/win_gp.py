@@ -50,7 +50,6 @@ def audit(data_list, tags, debug=False, **kwargs):
                     continue
                 name = tag_data['name']
                 audit_type = tag_data['type']
-                match_output = tag_data['match_output'].lower()
 
                 # Blacklisted audit (do not include)
                 if 'blacklist' in audit_type:
