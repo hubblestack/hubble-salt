@@ -23,6 +23,8 @@ __virtualname__ = 'win_firewall'
 def __virtual__():
     if not salt.utils.is_windows():
         return False, 'This audit module only runs on windows'
+    if not salt.utils.powershell.module_exists('NetSecurity'):
+        return False, 'This audit module requires the NetSecurity module'
     return True
 
 
