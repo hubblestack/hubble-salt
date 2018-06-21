@@ -1,14 +1,10 @@
-Please create any issues on the [Hubble](https://github.com/hubblestack/hubble)
-repo.
+# UPDATE June 2018
 
-*NOTE FROM [@basepi](https://github.com/basepi)*: As we continue to add
-features to hubble, I'm finding more and more instances where the flexibility
-of not being tied to salt gives me the freedom to do more with hubble. As a
-result, [hubble](https://github.com/hubblestack/hubble) is slowly surpassing
-hubble-salt in available features. While I have no plans to deprecate
-hubble-salt, I do recommend checking out
-[hubble](https://github.com/hubblestack/hubble) if you're interested in these
-additional features (such as support for topfiles in pulsar).
+Hubble has continued to diverge from hubble-salt. Additionally, we at Adobe
+have migrated all teams to hubble, away from hubble-salt. As a result we have
+little motivation to continue to update this project. Please check out
+[hubble](https://github.com/hubblestack/hubble) -- we think that even for users
+of salt, it is the superior version.
 
 Table of Contents
 =================
