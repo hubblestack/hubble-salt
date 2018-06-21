@@ -32,12 +32,15 @@ import copy
 import json
 import logging
 import os
-import sys
+import time
 import yaml
 import collections
 
 import salt.utils
+import salt.utils.platform
 from salt.exceptions import CommandExecutionError
+from hubblestack import __version__
+import hubblestack.splunklogging
 
 log = logging.getLogger(__name__)
 
@@ -78,10 +81,10 @@ def queries(query_group,
     query_data = {}
     MAX_FILE_SIZE = 104857600
     if query_file is None:
-        if salt.utils.is_windows():
-            query_file = 'salt://hubblestack_nebula/hubblestack_nebula_win_queries.yaml'
+        if salt.utils.platform.is_windows():
+            query_file = 'salt://hubblestack_nebula_v2/hubblestack_nebula_win_queries.yaml'
         else:
-            query_file = 'salt://hubblestack_nebula/hubblestack_nebula_queries.yaml'
+            query_file = 'salt://hubblestack_nebula_v2/hubblestack_nebula_queries.yaml'
     if not isinstance(query_file, list):
         query_file = [query_file]
     for fh in query_file:
@@ -139,37 +142,17 @@ def queries(query_group,
             log.debug('osquery not installed on this host. Skipping.')
             return None
 
-    if salt.utils.is_windows():
-        win_version = __grains__['osfullname']
-        if '2008' not in win_version and '2012' not in win_version and '2016' not in win_version:
-            log.error('osquery does not run on windows versions earlier than Server 2008 and Windows 7')
-            if query_group == 'day':
-                ret = []
-                ret.append(
-                    {'fallback_osfinger': {
-                     'data': [{'osfinger': __grains__.get('osfinger', __grains__.get('osfullname')),
-                               'osrelease': __grains__.get('osrelease', __grains__.get('lsb_distrib_release'))}],
-                     'result': True
-                     }}
-                )
-                ret.append(
-                    {'fallback_error': {
-                     'data': 'osqueryi is installed but not compatible with this version of windows',
-                             'result': True
-                     }}
-                )
-                return ret
-            else:
-                return None
-
-    query_data = query_data.get(query_group, [])
+    query_data = query_data.get(query_group, {})
 
     if not query_data:
         return None
 
     ret = []
-    for query in query_data:
-        name = query.get('query_name')
+    timing = {}
+    schedule_time = time.time()
+    success = True
+    for name, query in query_data:
+        query['query_name'] = name
         query_sql = query.get('query')
         if not query_sql:
             continue
@@ -180,10 +163,14 @@ def queries(query_group,
         }
 
         cmd = [__grains__['osquerybinpath'], '--read_max', MAX_FILE_SIZE, '--json', query_sql]
+        t0 = time.time()
         res = __salt__['cmd.run_all'](cmd)
+        t1 = time.time()
+        timing[name] = t1-t0
         if res['retcode'] == 0:
             query_ret['data'] = json.loads(res['stdout'])
         else:
+            success = False
             query_ret['result'] = False
             query_ret['error'] = res['stderr']
 
@@ -193,6 +180,37 @@ def queries(query_group,
             ret.append(tmp)
         else:
             ret.append({name: query_ret})
+
+    if success is False and salt.utils.platform.is_windows():
+        log.error('osquery does not run on windows versions earlier than Server 2008 and Windows 7')
+        if query_group == 'day':
+            ret = []
+            ret.append(
+                {'fallback_osfinger': {
+                 'data': [{'osfinger': __grains__.get('osfinger', __grains__.get('osfullname')),
+                           'osrelease': __grains__.get('osrelease', __grains__.get('lsb_distrib_release'))}],
+                 'result': True
+                 }}
+            )
+            ret.append(
+                {'fallback_error': {
+                 'data': 'osqueryi is installed but not compatible with this version of windows',
+                         'result': True
+                 }}
+            )
+            return ret
+        else:
+            return None
+
+    if __salt__['config.get']('splunklogging', False):
+        log.info('Logging osquery timing data to splunk')
+        hubblestack.splunklogging.__grains__ = __grains__
+        hubblestack.splunklogging.__salt__ = __salt__
+        hubblestack.splunklogging.__opts__ = __opts__
+        handler = hubblestack.splunklogging.SplunkHandler()
+        timing_data = {'query_run_length': timing,
+                       'schedule_time' : schedule_time}
+        handler.emit_data(timing_data)
 
     if query_group == 'day' and report_version_with_day:
         ret.append(hubble_versions())
@@ -281,16 +299,16 @@ def hubble_versions():
 
 
 def top(query_group,
-        topfile='salt://hubblestack_nebula/top.nebula',
+        topfile='salt://hubblestack_nebula_v2/top.nebula',
         verbose=False,
         report_version_with_day=True):
 
-    if salt.utils.is_windows():
-        topfile = 'salt://hubblestack_nebula/win_top.nebula'
+    if salt.utils.platform.is_windows():
+        topfile = 'salt://hubblestack_nebula_v2/win_top.nebula'
 
     configs = get_top_data(topfile)
 
-    configs = ['salt://hubblestack_nebula/' + config.replace('.', '/') + '.yaml'
+    configs = ['salt://hubblestack_nebula_v2/' + config.replace('.', '/') + '.yaml'
                for config in configs]
 
     return queries(query_group,
