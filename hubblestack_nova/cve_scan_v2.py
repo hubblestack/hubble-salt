@@ -98,15 +98,16 @@ from zipfile import ZipFile
 
 import salt
 import salt.utils
+import salt.utils.platform
 
 log = logging.getLogger(__name__)
 
 
 def __virtual__():
-    return not salt.utils.is_windows()
+    return not salt.utils.platform.is_windows()
 
 
-def audit(data_list, tags, debug=False, **kwargs):
+def audit(data_list, tags, labels, debug=False, **kwargs):
     '''
     Main audit function. See module docstring for more information on usage.
     '''

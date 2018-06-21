@@ -46,6 +46,7 @@ def audit(configs=None,
           show_profile=None,
           called_from_top=None,
           debug=None,
+          labels=None,
           **kwargs):
     '''
     Primary entry point for audit calls.
@@ -95,6 +96,10 @@ def audit(configs=None,
         False. Configurable via `hubblestack:nova:debug` in minion
         config/pillar.
 
+    labels
+        Tests with matching labels are executed. If multiple labels are passed,
+        then tests which have all those labels are executed.
+
     **kwargs
         Any parameters & values that are not explicitly defined will be passed
         directly through to the Nova module(s).
@@ -110,8 +115,11 @@ def audit(configs=None,
     if configs is None:
         return top(verbose=verbose,
                    show_success=show_success,
-                   show_compliance=show_compliance)
-
+                   show_compliance=show_compliance,
+                   labels=labels)
+    if labels:
+        if not isinstance(labels, list):
+            labels=labels.split(',')
     if not called_from_top and __salt__['config.get']('hubblestack:nova:autoload', True):
         load()
     if not __nova__:
@@ -150,7 +158,7 @@ def audit(configs=None,
 
     log.debug('nova_kwargs: ' + str(nova_kwargs))
 
-    ret = _run_audit(configs, tags, debug, **nova_kwargs)
+    ret = _run_audit(configs, tags, debug, labels, **nova_kwargs)
 
     terse_results = {}
     verbose_results = {}
@@ -243,7 +251,7 @@ def audit(configs=None,
     return results
 
 
-def _run_audit(configs, tags, debug, **kwargs):
+def _run_audit(configs, tags, debug, labels, **kwargs):
 
     results = {}
 
@@ -284,7 +292,7 @@ def _run_audit(configs, tags, debug, **kwargs):
     # We can revisit if this ever becomes a big bottleneck
     for key, func in __nova__._dict.iteritems():
         try:
-            ret = func(data_list, tags, **kwargs)
+            ret = func(data_list, tags, labels, **kwargs)
         except Exception as exc:
             log.error('Exception occurred in nova module:')
             log.error(traceback.format_exc())
@@ -355,7 +363,8 @@ def top(topfile='top.nova',
         show_success=None,
         show_compliance=None,
         show_profile=None,
-        debug=None):
+        debug=None,
+        labels=None):
     '''
     Compile and run all yaml data from the specified nova topfile.
 
@@ -482,7 +491,8 @@ def top(topfile='top.nova',
                     verbose=verbose,
                     show_success=True,
                     show_compliance=False,
-                    called_from_top=True)
+                    called_from_top=True,
+                    labels=labels)
 
         # Merge in the results
         for key, val in ret.iteritems():

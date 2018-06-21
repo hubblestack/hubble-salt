@@ -13,6 +13,7 @@ import copy
 import fnmatch
 import logging
 import salt.utils
+import salt.utils.platform
 
 
 log = logging.getLogger(__name__)
@@ -20,12 +21,32 @@ __virtualname__ = 'win_reg'
 
 
 def __virtual__():
-    if not salt.utils.is_windows():
+    if not salt.utils.platform.is_windows():
         return False, 'This audit module only runs on windows'
     return True
 
+def apply_labels(__data__, labels):
+    '''
+    Filters out the tests whose label doesn't match the labels given when running audit and returns a new data structure with only labelled tests.
+    '''
+    labelled_data = {}
+    if labels:
+        labelled_data[__virtualname__] = {}
+        for topkey in ('blacklist', 'whitelist'):
+            if topkey in __data__.get(__virtualname__, {}):
+                labelled_test_cases=[]
+                for test_case in __data__[__virtualname__].get(topkey, []):
+                    # each test case is a dictionary with just one key-val pair. key=test name, val=test data, description etc
+                    if isinstance(test_case, dict) and test_case:
+                        test_case_body = test_case.get(next(iter(test_case)))
+                        if set(labels).issubset(set(test_case_body.get('labels',[]))):
+                            labelled_test_cases.append(test_case)
+                labelled_data[__virtualname__][topkey]=labelled_test_cases
+    else:
+        labelled_data = __data__
+    return labelled_data
 
-def audit(data_list, tags, debug=False, **kwargs):
+def audit(data_list, tags, labels, debug=False, **kwargs):
     '''
     Runs salt reg query on the local machine and audits the return data
     with the CIS yaml processed by __virtual__
@@ -33,6 +54,7 @@ def audit(data_list, tags, debug=False, **kwargs):
     __data__ = {}
     for profile, data in data_list:
         _merge_yaml(__data__, data, profile)
+    __data__ = apply_labels(__data__, labels)
     __tags__ = _get_tags(__data__)
     if debug:
         log.debug('registry audit __data__:')
@@ -59,6 +81,12 @@ def audit(data_list, tags, debug=False, **kwargs):
                 if 'blacklist' in audit_type:
                     secret = _find_option_value_in_reg(reg_dict['hive'], reg_dict['key'], reg_dict['value'])
                     if secret:
+                        tag_data['failure_reason'] = "Value of blacklisted registry key '{0}:{1}:{2}' " \
+                                                     "is set to value '{3}'. It should not be configured." \
+                                                     .format(reg_dict['hive'],
+                                                             reg_dict['key'],
+                                                             reg_dict['value'],
+                                                             secret)
                         ret['Failure'].append(tag_data)
                     else:
                         ret['Success'].append(tag_data)
@@ -68,7 +96,7 @@ def audit(data_list, tags, debug=False, **kwargs):
                     current = _find_option_value_in_reg(reg_dict['hive'], reg_dict['key'], reg_dict['value'])
                     if isinstance(current, dict):
                         tag_data['value_found'] = current
-                        if False in current.values():
+                        if any(x is False for x in current.values()):
                             ret['Failure'].append(tag_data)
                         else:
                             answer_list = []
@@ -76,6 +104,15 @@ def audit(data_list, tags, debug=False, **kwargs):
                                 answer_list.append(_translate_value_type(current[item], tag_data['value_type'], match_output))
 
                             if False in answer_list:
+                                tag_data['failure_reason'] = "Value of registry key '{0}:{1}:{2}' should" \
+                                                             " be set to '{4}({5})'. It is set to some other" \
+                                                             " value for one or more SID(s)". \
+                                                             format(reg_dict['hive'],
+                                                                    reg_dict['key'],
+                                                                    reg_dict['value'],
+                                                                    current,
+                                                                    match_output,
+                                                                    tag_data['value_type'])
                                 ret['Failure'].append(tag_data)
                             else:
                                 ret['Success'].append(tag_data)
@@ -86,11 +123,26 @@ def audit(data_list, tags, debug=False, **kwargs):
                                 tag_data['value_found'] = current
                                 ret['Success'].append(tag_data)
                             else:
+                                tag_data['failure_reason'] = "Value of registry key '{0}:{1}:{2}' is set to " \
+                                                             "value '{3}'. It should be set to '{4}({5})'." \
+                                                             .format(reg_dict['hive'],
+                                                                     reg_dict['key'],
+                                                                     reg_dict['value'],
+                                                                     current,
+                                                                     match_output,
+                                                                     tag_data['value_type'])
                                 tag_data['value_found'] = current
                                 ret['Failure'].append(tag_data)
 
                         else:
                             tag_data['value_found'] = None
+                            tag_data['failure_reason'] = "Value of registry key '{0}:{1}:{2}' could not be " \
+                                                         "found. It should be set to '{3}({4})'." \
+                                                         .format(reg_dict['hive'],
+                                                                 reg_dict['key'],
+                                                                 reg_dict['value'],
+                                                                 match_output,
+                                                                 tag_data['value_type'])
                             ret['Failure'].append(tag_data)
 
     return ret
@@ -195,8 +247,8 @@ def _find_option_value_in_reg(reg_hive, reg_key, reg_value):
         for sid in key_list:
             if len(sid) <= 15 or '_Classes' in sid:
                 continue
-            reg_key = reg_key.replace('<SID>', sid)
-            reg_result = __salt__['reg.read_value'](reg_hive, reg_key, reg_value)
+            temp_reg_key = reg_key.replace('<SID>', sid)
+            reg_result = __salt__['reg.read_value'](reg_hive, temp_reg_key, reg_value)
             if reg_result['success']:
                 if reg_result['vdata'] == '(value not set)':
                     ret_dict[sid] = False
